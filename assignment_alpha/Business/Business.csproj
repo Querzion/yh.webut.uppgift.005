@@ -10,4 +10,12 @@
       <ProjectReference Include="..\Data\Data.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DTOs\" />
+      <Folder Include="Factories\" />
+      <Folder Include="Interfaces\" />
+      <Folder Include="Models\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
+
 </Project>
