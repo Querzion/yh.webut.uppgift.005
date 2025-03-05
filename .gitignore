@@ -1,0 +1,46 @@
+# Ignore node_modules and dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Ignore environment and secrets files
+.env
+.env.local
+.env.*.local
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+logs/
+
+# Ignore build and output directories
+dist/
+build/
+out/
+coverage/
+
+# Ignore editor-specific files
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore Git-specific files
+.git/
+.gitignore
+
+# Ignore temporary files
+*.tmp
+*.bak
+
+# Ignore macOS files
+._*
+
+# Ignore Python virtual environment
+venv/
+__pycache__/
