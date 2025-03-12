@@ -18,4 +18,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Presentation.WebApp\Presentation.WebApp.csproj" />
+    </ItemGroup>
+
 </Project>
