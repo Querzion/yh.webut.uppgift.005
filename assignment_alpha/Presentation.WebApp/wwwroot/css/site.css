@@ -1,25 +1,58 @@
-/* FONTS */
+/* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
 
-/* VARIABLE SCHEME */
+/* variable scheme */
 :root {
+    /* font families */
+    /* 200-900 */
     --font-standard: "Nunito", sans-serif;
+    /* 300-700 */
     --font-logo: "Comfortaa", sans-serif;
+
+    /* font thickness */
+    --font-extralight: 200;
+    --font-light: 300;
     --font-regular: 400;
     --font-medium: 500;
     --font-semibold: 600;
     --font-bold: 700;
     --font-extrabold: 800;
     --font-black: 900;
-    /* SCREEN SIZE */
+
+    /* font sizes */
+    --font-size-default: 16px;
+    --font-size-h1: 36px;
+    --font-size-h2: 32px;
+    --font-size-h3: 28px;
+    --font-size-h4: 24px;
+    --font-size-h5: 20px;
+    --font-size-h6: 18px;
+    --font-size-logo: 26px;
+
+    /* resolutions */
     --size-tablet: 768px;
     --size-desktop: 1400px;
-    /* COLOR SCHEME */
+
+    /* opacity */
+    --op-100: 1;
+    --op-90: 0.9;
+    --op-80: 0.8;
+    --op-70: 0.7;
+    --op-60: 0.6;
+    --op-50: 0.5;
+    --op-40: 0.4;
+    --op-30: 0.3;
+    --op-20: 0.2;
+    --op-10: 0.1;
+    --op-0: 0;
+
+    /* colors */
     --white-100: #FFFFFF;
     --white-200: #F5F7FA;
     --white-300: #F1F3F7;
     --white-400: #F0F1F5;
+
     --gray-100: #E8EAED;
     --gray-200: #EBEEF2;
     --gray-300: #E3E5E8;
@@ -27,13 +60,15 @@
     --gray-500: #DEDEDE;
     --gray-600: #C6C8CC;
     --gray-700: #9E9E9E;
-    --gray-800: #637985;
+    --gray-800: #637085; /* Minna #637985 */
+
     --dark-100: #1A1926;
     --dark-200: #1C1D1F;
     --dark-300: #202123;
     --dark-400: #28263B;
     --dark-500: #333333;
     --dark-600: #38383B;
+
     --yellow: #FFD422;
     --yellow-dark: #FCBB42;
     --orange: #FF9640;
@@ -42,30 +77,88 @@
     --red-dark: #E94D3F;
     --green: #31D482;
     --green-dark: #24B26B;
-    --blue: #2CD9D9;
+    --blue-1: #2CD9D9;
+    --blue-2: #2D99FF;
     --blue-dark: #2D7DCC;
-    --blue-accent: #2D99FF;
-    --blue-accent-10: #2d99ff1a;
+    --blue-accent: var(--blue-2);
     --blue-accent-dark: #2682D9;
     --purple: #826AF9;
     --purple-dark: #634CD4;
-    /* TEXT, BACKGROUND, BORDER */
+
+    /* opacity colors */
+    --blue-accent-10: #2e9aff1a;
+    --green-opacity-10: #31d3821a;
+    --red-opacity-10: #ff68421a;
+    --purple-opacity-10: #846cf91a;
+
+    /* theme colors */
     --text-color: var(--dark-400);
     --headline-color: var(--dark-100);
     --background-color: var(--white-300);
-    --background-color-dark: #151517;
+    --auth-background-color: var(--gray-100);
     --border-color: var(--gray-500);
-    --surface-color: var(--white-100);
-    /* BUTTONS */
-    --btn-blue-background-color: var(--blue-accent);
-    --btn-blue-hover-color: var(--blue-accent-dark);
-    --btn-blue-border-color: var(--white-100);
+
+    /* buttons */
     --btn-blue-text-color: var(--white-100);
-    --btn-gray-background-color: var(--gray-200);
-    --btn-gray-hover-color: var(--gray-400);
-    --btn-gray-border-color: var(--white-300);
+    --btn-blue-text-hover-color: var(--white-100);
+    --btn-blue-border-color: var(--white-100);
+    --btn-blue-border-hover-color: var(--white-100);
+    --btn-blue-background-color: var(--blue-accent);
+    --btn-blue-background-hover-color: var(--blue-dark);
+
     --btn-gray-text-color: var(--dark-100);
-    /* NAVLINKS */
+    --btn-gray-text-hover-color: var(--dark-100);
+    --btn-gray-border-color: var(--white-200);
+    --btn-gray-border-hover-color: var(--white-200);
+    --btn-gray-background-color: var(--white-200);
+    --btn-gray-background-hover-color: var(--gray-300);
+
+    /* nav links */
+    --navlink-text-color: var(--text-color);
+    --navlink-text-hover-color: var(--blue-accent);
+    --navlink-text-active-color: var(--blue-accent);
+    --navlink-background-color: transparent;
+    --navlink-background-hover-color: var(--blue-accent-10);
+    --navlink-background-active-color: var(--blue-accent-10);
+
+    /* box shadow */
+    /* box-shadow: 2px 12px 16px 2px var(--box-shadow-color); */
+    --box-sh-prim-horisontal: 2px;
+    --box-sh-prim-vertical: 12px;
+    --box-sh-prim-blur: 16px;
+    --box-sh-prim-spread: 2px;
+    --box-sh-prim-color: rgba(82, 81, 81, 0.1);
+
+    /* From the Figma File for Alpha Portal */
+    --heading-color: var(--dark-100);
+    --body-light: var(--gray-800);
+    --body-dark: var(--dark-400);
+    --grey-100: var(--white-200);
+    --grey-200: var(--white-400);
+    --grey-300: var(--gray-100);
+    --grey-400: var(--gray-300);
+    --border-100: var(--gray-200);
+    --border-200: var(--gray-300);
+    --border-300: var(--gray-600);
+    --bg-color: var(--white-300);
+    --surface-color: var(--white-100);
+    --blue-accent-color: var(--blue-2);
+}
+[data-theme="dark"] {
+
+    /* dark theme colors */
+    --text-color: var(--white-100);
+    --headline-color: var(--white-100);
+    --background-color: var(--dark-200);
+    --auth-background-color: var(--dark-300);
+    --border-color: var(--dark-600);
+
+    /* dark buttons */
+    --btn-blue-border-color: var(--heading-color);
+    --btn-gray-text-color: var(--surface-color);
+    --btn-gray-background-color: var(--dark-200);
+
+    /* dark nav links */
     --navlink-text-color: var(--text-color);
     --navlink-text-hover-color: var(--blue-accent);
     --navlink-text-active-color: var(--blue-accent);
@@ -73,36 +166,23 @@
     --navlink-background-hover-color: var(--blue-accent-10);
     --navlink-background-active-color: var(--blue-accent-10);
 }
-[data-theme="dark"] {
-    --text-color: var(--gray-400);
-    --headline-color: var(--white-100);
-    --background-color: var(--background-color-dark);
-    --border-color: var(--dark-300);
-    --surface-color: var(--dark-300);
-    --btn-blue-border-color: var(--dark-300);
-    --btn-blue-text-color: var(--white-100);
-    --btn-gray-background-color: var(--dark-500);
-    --btn-gray-hover-color: var(--dark-600);
-    --btn-gray-border-color: var(--dark-300);
-    --btn-gray-text-color: var(--white-100);
-}
 
-/* BASE */
+/* base */
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
 html, body {
     margin: 0;
-    font-size: 16px;
-    font-family: var(--font-standard);
+    font-size: var(--font-size-default);
     font-weight: var(--font-regular);
+    font-family: var(--font-standard), sans-serif;
     font-style: normal;
     color: var(--text-color);
     background-color: var(--background-color);
 }
 
-/* STRUCTURE */
+/* structure */
 .center-screen {
     display: flex;
     justify-content: center;
@@ -118,172 +198,194 @@ html, body {
 }
 
 .surface {
-    padding: 2rem;
-    border-radius: 16px;
     background-color: var(--surface-color);
-    box-shadow: 0 4px 4px 3px rgba(160, 160, 160, 0.1);
+    /* Default box-shadow: is >> 2px 12px 16px 2px var(--box-shadow-color); */
+    box-shadow: var(--box-sh-prim-horisontal)
+    var(--box-sh-prim-vertical)
+    var(--box-sh-prim-blur)
+    var(--box-sh-prim-spread)
+    var(--box-sh-prim-color);
+    border-radius: 16px;
+    padding: 2rem;
 }
 
 .portal {
     display: grid;
-    grid-template-columns: minmax(50px, 280px) 1fr;
+    grid-template-columns: minmax(50px, 270px) 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas: "logo top" "side main";
     height: 100dvh;
-}
 
-    .portal > .logotype {
+    .logotype {
         grid-area: logo;
         border-right: 1px solid var(--border-color);
         padding: 1rem 2rem;
     }
 
-    .portal > .side {
+    .side {
         grid-area: side;
         border-right: 1px solid var(--border-color);
         padding: 1rem;
+        display: grid;
     }
 
-    .portal > .top {
+    .top {
         grid-area: top;
         border-bottom: 1px solid var(--border-color);
         padding: 1rem 2rem;
         display: grid;
         grid-template-columns: 1fr auto;
-        gap: 5rem;
         align-items: center;
+        gap: 5rem;
     }
 
-    .portal > .main {
+    .main {
         grid-area: main;
         padding: 2rem;
     }
+}
 
-/* TYPOGRAPHY */
+.d-flex {
+    display: flex;
+    gap: 1rem;
+}
+
+/* typography */
 h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-standard);
+    font-family: var(--font-standard), sans-serif;
     margin: 0;
     padding: 0;
 }
 
 h1 {
-    font-size: 36px;
     font-weight: var(--font-bold);
+    font-size: var(--font-size-h1);
 }
 
 h2 {
-    font-size: 32px;
     font-weight: var(--font-bold);
+    font-size: var(--font-size-h2);
 }
 
 h3 {
-    font-size: 28px;
     font-weight: var(--font-bold);
+    font-size: var(--font-size-h3);
 }
 
 h4 {
-    font-size: 24px;
     font-weight: var(--font-semibold);
+    font-size: var(--font-size-h4);
 }
 
 h5 {
-    font-size: 20px;
     font-weight: var(--font-semibold);
+    font-size: var(--font-size-h5);
 }
 
 h6 {
-    font-size: 18px;
     font-weight: var(--font-semibold);
+    font-size: var(--font-size-h6);
 }
 
-/* LINKS */
+/* links */
 .nav-link {
-    font-family: var(--font-standard);
+    font-size: var(--font-size-default);
+    font-family: var(--font-standard), sans-serif;
     font-weight: var(--font-semibold);
-    font-size: 16px;
 }
 
 .tab-link {
-    font-family: var(--font-standard);
+    font-size: var(--font-size-default);
+    font-family: var(--font-standard), sans-serif;
     font-weight: var(--font-bold);
-    font-size: 16px;
 }
 
-/* BUTTONS */
+/* buttons */
 .btn {
     border-radius: 14px;
-    font-size: 1em;
-    font-weight: var(--font-regular);
-    font-family: var(--font-standard);
-    padding: 0.7rem 1.6em;
+    font-size: var(--font-size-default);
+    font-weight: var(--font-semibold);
+    font-family: var(--font-standard), sans-serif;
+    padding: 0.68rem 1.5rem;
+    cursor: pointer;
+
     display: flex;
-    gap: 0.5em;
-    align-items: center;
+    gap: 0.5rem;
     justify-content: center;
+    align-items: center;
 }
 
 .btn-blue {
-    background-color: var(--btn-blue-background-color);
     color: var(--btn-blue-text-color);
     border-color: var(--btn-blue-border-color);
-}
+    background-color: var(--btn-blue-background-color);
 
-    .btn-blue:hover {
-        background-color: var(--btn-blue-background-color);
-        color: var(--btn-blue-text-color);
+    &:hover {
+        color: var(--btn-blue-text-hover-color);
+        border-color: var(--btn-blue-border-hover-color);
+        background-color: var(--btn-blue-background-hover-color);
     }
+}
 
 .btn-gray {
-    background-color: var(--btn-gray-background-color);
     color: var(--btn-gray-text-color);
     border-color: var(--btn-gray-border-color);
+    background-color: var(--btn-gray-background-color);
+
+    &:hover {
+        color: var(--btn-gray-text-hover-color);
+        border-color: var(--btn-gray-border-hover-color);
+        background-color: var(--btn-gray-background-hover-color);
+    }
 }
 
-    .btn-gray:hover {
-        background-color: var(--btn-gray-hover-color);
-        color: var(--btn-gray-text-color);
-    }
+/* list */
 
-/* LIST */
-
-
-/* COMPONENTS */
+/* components */
 .alpha-logotype {
-    font-size: 26px;
+    font-size: var(--font-size-logo);
     font-weight: var(--font-bold);
-    font-family: var(--font-logo);
+    font-family: var(--font-logo), sans-serif;
     text-decoration: none;
     color: var(--text-color);
+    padding: 0 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
 .nav-links {
-    margin: 2rem 0;
-}
+    margin: 1rem 0;
 
-    .nav-links > .nav-link {
-        font-size: 1em;
-        font-family: var(--font-standard);
+    .nav-link {
+        font-size: var(--font-size-default);
+        font-family: var(--font-standard), sans-serif;
         font-weight: var(--font-semibold);
-        text-decoration: none;
         color: var(--navlink-text-color);
         background-color: var(--navlink-background-color);
-        border-radius: 1rem;
-        padding: 1rem 1.5rem;
-        margin-bottom: 10px;
+        text-decoration: none;
+        padding: 1rem 2rem;
+        border-radius: .6rem;
+        transition: background-color 0.3s ease;
+        margin-bottom: .3rem;
+
         display: flex;
         align-items: center;
         gap: 1.2rem;
-    }
 
-        .nav-links > .nav-link:hover {
+
+        &:hover {
             color: var(--navlink-text-hover-color);
             background-color: var(--navlink-background-hover-color);
         }
 
-        .nav-links > .nav-link.active {
+        &.active {
             color: var(--navlink-text-active-color);
             background-color: var(--navlink-background-active-color);
         }
+    }
+}
+
+/* sections */
+
+/* views/pages */
