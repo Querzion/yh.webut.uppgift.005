@@ -16,24 +16,12 @@
 </head>
 <body>
 
-<div class="portal">
+    <div class="portal">
         <div class="logotype">
-            <a class="alpha-logotype" href="#">
-                <img src="images/alpha-logo.svg" alt="Alpha Portal">
-                <span>alpha</span>
-            </a>
+            @await Html.PartialAsync("Partials/Components/_AlphaLogotype")
         </div>
         <div class="side">
-            <nav class="nav-links">
-                <a href="#" class="nav-link">
-                    <i class="fa-duotone fa-solid fa-briefcase"></i>
-                    <span>Projects</span>
-                </a>
-                <a href="#" class="nav-link active">
-                    <i class="fa-duotone fa-solid fa-users"></i>
-                    <span>Team Members</span>
-                </a>
-            </nav>
+            @await Html.PartialAsync("Partials/Components/_NavLinks")
         </div>
         <div class="top">
             <div class="border">search</div>
@@ -43,7 +31,9 @@
                 <div>div 3</div>
             </div>
         </div>
-        <div class="main">main</div>
+        <div class="main">
+            @RenderBody()
+        </div>
     </div>
 
 @* Bootstrap Javascript CDN *@

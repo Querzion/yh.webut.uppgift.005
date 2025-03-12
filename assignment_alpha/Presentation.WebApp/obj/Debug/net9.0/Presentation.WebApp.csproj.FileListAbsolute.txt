@@ -63,9 +63,7 @@
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/Presentation.WebApp.RazorAssemblyInfo.cs
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/Presentation.WebApp.sourcelink.json
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/bundle/Presentation.WebApp.styles.css
-/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-0aoym1u88g.gz
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/4lerwrt3gp-y9z0mrfjqo.gz
-/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/6o04n7w6ys-4gulfgzaid.gz
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-3r8b2a0bt1.gz
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/staticwebassets.build.json
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/staticwebassets.development.json
@@ -82,3 +80,5 @@
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/Presentation.WebApp.pdb
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/Presentation.WebApp.genruntimeconfig.cache
 /home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/ref/Presentation.WebApp.dll
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-x5f1nf653h.gz
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/9ztadg5v30-4gulfgzaid.gz
