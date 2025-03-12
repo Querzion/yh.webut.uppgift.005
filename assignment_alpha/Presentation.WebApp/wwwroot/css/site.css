@@ -73,7 +73,6 @@
     --navlink-background-hover-color: var(--blue-accent-10);
     --navlink-background-active-color: var(--blue-accent-10);
 }
-
 [data-theme="dark"] {
     --text-color: var(--gray-400);
     --headline-color: var(--white-100);
