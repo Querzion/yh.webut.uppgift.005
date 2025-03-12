@@ -1,39 +1,39 @@
 {
   "Files": [
     {
-      "Id": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/css/site.css",
-      "PackagePath": "staticwebassets/css/site.css"
+      "Id": "C:\\Projects\\ASP.NET\\yh.webut.uppgift.005\\assignment_alpha\\Presentation.WebApp\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/favicon.ico",
-      "PackagePath": "staticwebassets/favicon.ico"
+      "Id": "C:\\Projects\\ASP.NET\\yh.webut.uppgift.005\\assignment_alpha\\Presentation.WebApp\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/alpha-logo.svg",
-      "PackagePath": "staticwebassets/images/alpha-logo.svg"
+      "Id": "C:\\Projects\\ASP.NET\\yh.webut.uppgift.005\\assignment_alpha\\Presentation.WebApp\\wwwroot\\images\\alpha-logo.svg",
+      "PackagePath": "staticwebassets\\images\\alpha-logo.svg"
     },
     {
-      "Id": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/js/site.js",
-      "PackagePath": "staticwebassets/js/site.js"
+      "Id": "C:\\Projects\\ASP.NET\\yh.webut.uppgift.005\\assignment_alpha\\Presentation.WebApp\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.Presentation.WebApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Presentation.WebApp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.Presentation.WebApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Presentation.WebApp.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.build.Presentation.WebApp.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.Presentation.WebApp.props",
       "PackagePath": "build\\Presentation.WebApp.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.Presentation.WebApp.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.Presentation.WebApp.props",
       "PackagePath": "buildMultiTargeting\\Presentation.WebApp.props"
     },
     {
-      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.Presentation.WebApp.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.Presentation.WebApp.props",
       "PackagePath": "buildTransitive\\Presentation.WebApp.props"
     }
   ],
