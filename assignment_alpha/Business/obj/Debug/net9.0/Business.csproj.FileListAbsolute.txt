@@ -1,0 +1,16 @@
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/bin/Debug/net9.0/Business.deps.json
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/bin/Debug/net9.0/Business.dll
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/bin/Debug/net9.0/Business.pdb
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/bin/Debug/net9.0/Data.dll
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/bin/Debug/net9.0/Data.pdb
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/Business.csproj.AssemblyReference.cache
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/Business.GeneratedMSBuildEditorConfig.editorconfig
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/Business.AssemblyInfoInputs.cache
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/Business.AssemblyInfo.cs
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/Business.csproj.CoreCompileInputs.cache
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/Business.sourcelink.json
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/Business.csproj.Up2Date
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/Business.dll
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/refint/Business.dll
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/Business.pdb
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Business/obj/Debug/net9.0/ref/Business.dll

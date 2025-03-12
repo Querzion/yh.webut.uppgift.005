@@ -9,6 +9,7 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Partials\Components\_AlphaLogotype.cshtml" />
     </ItemGroup>
 
     <ItemGroup>

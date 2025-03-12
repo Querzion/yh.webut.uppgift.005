@@ -1,0 +1,15 @@
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/bin/Debug/net9.0/Data.deps.json
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/bin/Debug/net9.0/Data.runtimeconfig.json
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/bin/Debug/net9.0/Data.dll
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/bin/Debug/net9.0/Data.pdb
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/Data.csproj.AssemblyReference.cache
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/Data.GeneratedMSBuildEditorConfig.editorconfig
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/Data.AssemblyInfoInputs.cache
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/Data.AssemblyInfo.cs
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/Data.csproj.CoreCompileInputs.cache
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/Data.sourcelink.json
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/Data.dll
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/refint/Data.dll
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/Data.pdb
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/Data.genruntimeconfig.cache
+/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Data/obj/Debug/net9.0/ref/Data.dll
