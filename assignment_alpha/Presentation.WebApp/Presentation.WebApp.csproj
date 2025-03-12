@@ -15,6 +15,7 @@
     <ItemGroup>
       <Folder Include="Models\" />
       <Folder Include="Pages\" />
+      <Folder Include="Views\Shared\Partials\Sections\" />
     </ItemGroup>
 
     <ItemGroup>

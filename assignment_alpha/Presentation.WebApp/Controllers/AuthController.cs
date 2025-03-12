@@ -12,6 +12,8 @@ public class AuthController : Controller
 
     public IActionResult Login()
     {
-        return View();
+        // TEMPORARY REROUTE
+        return LocalRedirect("/projects");
+        // return View();
     }
 }
