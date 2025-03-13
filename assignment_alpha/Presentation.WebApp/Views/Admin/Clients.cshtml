@@ -1,0 +1,48 @@
+﻿﻿@{
+    ViewData["Title"] = "Clients";
+}
+
+<section id="clients">
+    <header>
+        <h2>Clients</h2>
+        <button type="button" class="btn btn-add btn-blue">Add Client</button>
+    </header>
+
+    <div class="client-list surface">
+        <table>
+            <thead>
+                <tr>
+                    <th class="client-check"><input type="checkbox" name="Client name" value="" /></th>
+                    <th class="client-info">Client name</th>
+                    <th class="client-location">Location</th>
+                    <th class="client-phone">Phone</th>
+                    <th class="client-date">Date</th>
+                    <th class="client-status">Status</th>
+                    <th class="client-actions"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="client-check"><input type="checkbox" /></td>
+                    <td class="client-info">
+                        <img class="client-image" src="~/images/avatars/avatar-template.svg" alt="" />
+                        <div class="client-name">EPN Sverige AB</div>
+                        <div class="client-email">info@domain.com</div>
+                    </td>
+                    <td class="client-location">Stockholm, Sweden</td>
+                    <td class="client-phone">+46 08 121 475 50</td>
+                    <td class="client-date">2025-03-13</td>
+                    <td class="client-status">
+                        <div class="badge success">
+                            active
+                        </div>
+
+                    </td>
+                    <td class="client-actions">
+                        <i class="fa-regular fa-ellipsis"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

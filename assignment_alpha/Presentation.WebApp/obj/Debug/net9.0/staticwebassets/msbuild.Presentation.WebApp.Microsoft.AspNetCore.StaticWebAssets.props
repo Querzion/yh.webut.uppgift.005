@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>x5f1nf653h</Fingerprint>
-      <Integrity>+0npTIsxn92EigwzGJ3Kp63nLR4Feurrsg3/0f0lmkI=</Integrity>
+      <Fingerprint>01569n60vl</Fingerprint>
+      <Integrity>DNxifYtNS4HaEfeilxJ+fNlurtNnMyNLa0sWABSJeRA=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</OriginalItemSpec>
@@ -48,11 +48,29 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>4gulfgzaid</Fingerprint>
-      <Integrity>nBNS0Xv68bHb6kduuMOb/Cg5BCNeUGc18wWlqzgFiMw=</Integrity>
+      <Fingerprint>d82njs2ye9</Fingerprint>
+      <Integrity>De7Vg/qIcYEIOpGKsijM7gaGSlet+6E8suAVzV77ZwU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\alpha-logo.svg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Avatars\avatar-template.svg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Presentation.WebApp</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Presentation.WebApp</BasePath>
+      <RelativePath>images/Avatars/avatar-template.svg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>1175nh8rdp</Fingerprint>
+      <Integrity>K7Jflb3cCsGoSS+g2SqB5WxYYi5e1PPq536+g/Q28h4=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\Avatars\avatar-template.svg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))">
       <SourceType>Package</SourceType>

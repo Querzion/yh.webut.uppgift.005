@@ -97,7 +97,9 @@
     --background-color: var(--white-300);
     --auth-background-color: var(--gray-100);
     --border-color: var(--gray-500);
-
+    --table-header-background-color: var(--white-200);
+    --table-header-text-color: var(--dark-400);
+    
     /* buttons */
     --btn-blue-text-color: var(--white-100);
     --btn-blue-text-hover-color: var(--white-100);
@@ -384,6 +386,43 @@ h6 {
             background-color: var(--navlink-background-active-color);
         }
     }
+}
+
+/* tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+   tr {
+        display: grid;
+        grid-template-areas: "check info location phone date status actions";
+        grid-template-columns: auto 3fr 3fr 2fr 2fr 2fr 50px;
+        align-items: center;
+        width: 100%;
+        border-radius: 16px;
+        padding: 1rem; 
+      }
+
+    thead, tbody {
+        display: contents;
+    }
+
+    thead tr {
+        background-color: var(--table-header-background-color);
+        color: var(--table-header-text-color);
+    }
+
+   th, td {
+       width: 100%;
+       padding: 0 1rem;
+       text-align: left;
+
+   }
+}
+
+input[type="checkbox"] {
+    height: 15px;
+    width: 15px;
 }
 
 /* sections */
