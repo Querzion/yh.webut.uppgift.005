@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Projects\\ASP.NET\\yh.webut.uppgift.005\\assignment_alpha\\Presentation.WebApp\\wwwroot\\images\\Avatars\\avatar-template.svg",
+      "PackagePath": "staticwebassets\\images\\Avatars\\avatar-template.svg"
+    },
+    {
       "Id": "C:\\Projects\\ASP.NET\\yh.webut.uppgift.005\\assignment_alpha\\Presentation.WebApp\\wwwroot\\images\\alpha-logo.svg",
       "PackagePath": "staticwebassets\\images\\alpha-logo.svg"
     },

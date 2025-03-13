@@ -137,7 +137,6 @@ C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\ob
 C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\Presentation.WebApp.RazorAssemblyInfo.cs
 C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\Presentation.WebApp.sourcelink.json
 C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\scopedcss\bundle\Presentation.WebApp.styles.css
-C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\compressed\bn91pp0usi-7j6mlngjtw.gz
 C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\compressed\4lerwrt3gp-y9z0mrfjqo.gz
 C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\compressed\9ztadg5v30-d82njs2ye9.gz
 C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\compressed\5qbmpqamh8-3r8b2a0bt1.gz
@@ -157,3 +156,5 @@ C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\ob
 C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\Presentation.WebApp.pdb
 C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\Presentation.WebApp.genruntimeconfig.cache
 C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\ref\Presentation.WebApp.dll
+C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\compressed\e9heaazsxu-1175nh8rdp.gz
+C:\Projects\ASP.NET\yh.webut.uppgift.005\assignment_alpha\Presentation.WebApp\obj\Debug\net9.0\compressed\bn91pp0usi-01569n60vl.gz
