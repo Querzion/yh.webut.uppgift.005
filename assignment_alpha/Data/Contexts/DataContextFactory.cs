@@ -1,8 +1,8 @@
-using Data.Helpers;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-
-namespace Data.Contexts;
+// using Data.Helpers;
+// using Microsoft.EntityFrameworkCore;
+// using Microsoft.EntityFrameworkCore.Design;
+//
+// namespace Data.Contexts;
 
 // public class DataContextFactory : IDesignTimeDbContextFactory<DataContext>
 // {

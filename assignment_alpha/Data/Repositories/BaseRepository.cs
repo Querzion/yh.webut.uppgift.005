@@ -1,11 +1,11 @@
-using System.Diagnostics;
-using System.Linq.Expressions;
-using Data.Contexts;
-using Data.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
-
-namespace Data.Repositories;
+// using System.Diagnostics;
+// using System.Linq.Expressions;
+// using Data.Contexts;
+// using Data.Interfaces;
+// using Microsoft.EntityFrameworkCore;
+// using Microsoft.EntityFrameworkCore.Storage;
+//
+// namespace Data.Repositories;
 
 // public abstract class BaseRepository<TEntity>(DataContext context) : IBaseRepository<TEntity> where TEntity : class
 // {

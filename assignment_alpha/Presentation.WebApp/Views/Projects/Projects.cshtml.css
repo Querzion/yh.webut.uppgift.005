@@ -1,0 +1,10 @@
+#projects {
+    
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+    }
+}
