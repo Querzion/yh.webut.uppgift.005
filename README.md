@@ -34,4 +34,5 @@ As of now, we're trying our best to work along side each other in order to figur
 
 ### Questions asked to ChatGPT regarding the Solution/Projects
 * Link 01 - [https://chatgpt.com/share/67d4231c-e8d8-8005-afb9-e6f78eb579d3](https://chatgpt.com/share/67d4231c-e8d8-8005-afb9-e6f78eb579d3) ( Git Update Branch Info. )
-* Link 02 - 
+* Link 02 - [https://chatgpt.com/share/67d448c7-bfbc-8005-a530-44a56a9eb01e](https://chatgpt.com/share/67d448c7-bfbc-8005-a530-44a56a9eb01e) ( Linear Gradient Color Creation. )
+* Link 03 - []() (  )
