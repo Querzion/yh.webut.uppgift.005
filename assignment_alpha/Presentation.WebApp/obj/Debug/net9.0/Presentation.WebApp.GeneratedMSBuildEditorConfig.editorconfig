@@ -48,6 +48,42 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL0NvbXBvbmVudHMvX05hdkxpbmtzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/Partials/Sections/Clients/_AddClientModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL1NlY3Rpb25zL0NsaWVudHMvX0FkZENsaWVudE1vZGFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/Partials/Sections/Clients/_ClientList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL1NlY3Rpb25zL0NsaWVudHMvX0NsaWVudExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/Partials/Sections/Clients/_EditClientModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL1NlY3Rpb25zL0NsaWVudHMvX0VkaXRDbGllbnRNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/Partials/Sections/Members/_AddMemberModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL1NlY3Rpb25zL01lbWJlcnMvX0FkZE1lbWJlck1vZGFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/Partials/Sections/Members/_EditMemberModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL1NlY3Rpb25zL01lbWJlcnMvX0VkaXRNZW1iZXJNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/Partials/Sections/Members/_MemberList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL1NlY3Rpb25zL01lbWJlcnMvX01lbWJlckxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/Partials/Sections/Projects/_AddProjectModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL1NlY3Rpb25zL1Byb2plY3RzL19BZGRQcm9qZWN0TW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/Partials/Sections/Projects/_EditProjectModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL1NlY3Rpb25zL1Byb2plY3RzL19FZGl0UHJvamVjdE1vZGFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/Partials/Sections/Projects/_ProjectList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL1BhcnRpYWxzL1NlY3Rpb25zL1Byb2plY3RzL19Qcm9qZWN0TGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/Views/Shared/_CleanLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19DbGVhbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
