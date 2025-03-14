@@ -31,4 +31,5 @@ As of now, we're trying our best to work along side each other in order to figur
 * Video 1 -
 
 ### Questions asked to ChatGPT regarding the Solution/Projects
-* Link 01 - 
+* Link 01 - [https://chatgpt.com/share/67d4231c-e8d8-8005-afb9-e6f78eb579d3](https://chatgpt.com/share/67d4231c-e8d8-8005-afb9-e6f78eb579d3) ( Git Update Branch Info. )
+* Link 02 - 
