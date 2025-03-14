@@ -694,6 +694,14 @@ input[type="checkbox"] {
 }
 
 /* sections */
+.main-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
 #team-members {
 
 }
@@ -705,7 +713,6 @@ input[type="checkbox"] {
 }
 
 #editMemberModal {
-
     .with-modal-content {
         width: 550px;
     }
@@ -722,7 +729,6 @@ input[type="checkbox"] {
 }
 
 #editProjectModal {
-
     .with-modal-content {
         width: 550px;
     }
@@ -741,7 +747,6 @@ input[type="checkbox"] {
 }
 
 #editClientModal {
-
     .with-modal-content {
         width: 550px;
     }
