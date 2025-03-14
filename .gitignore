@@ -130,9 +130,11 @@ Cargo.lock
 *.iml
 
 # Ignore the entire debug folder
-debug/
+bin/
+obj/
 
 # But keep and track these marked with !
+debug/
 !debug/README.md
 !debug/config.json
 
