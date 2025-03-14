@@ -3,8 +3,8 @@
 }
 
 @* @await Html.PartialAsync("Partials/Sections/_AddMemberModal") *@
-<partial name="Partials/Sections/_AddMemberModal"/>
-<partial name="Partials/Sections/_EditMemberModal"/>
+<partial name="Partials/Sections/Members/_AddMemberModal"/>
+<partial name="Partials/Sections/Members/_EditMemberModal"/>
 
 <section id="team-members">
     
@@ -15,7 +15,7 @@
 
     <div class="surface">
         @* @await Html.PartialAsync("Partials/Sections/_MemberList") *@
-        <partial name="Partials/Sections/_MemberList"/>
+        <partial name="Partials/Sections/Members/_MemberList"/>
     </div>
 
 </section>
