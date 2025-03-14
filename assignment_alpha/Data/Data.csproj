@@ -20,4 +20,8 @@
       <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Entities\" />
+    </ItemGroup>
+
 </Project>
