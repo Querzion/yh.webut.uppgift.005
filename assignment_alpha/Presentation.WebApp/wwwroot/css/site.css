@@ -103,6 +103,17 @@
     --red-opacity-10: #ff68421a;
     --purple-opacity-10: #846cf91a;
 
+    --linear-gradient-1: linear-gradient(to top right, #307CF4 0%, #863AF6 30%, #BC37E2 64%, #EF615C 100%);
+    --linear-gradient-2: linear-gradient(to bottom right, #98FDC6 36%, #97DEFC 100%);
+    --linear-gradient-3: linear-gradient(to bottom right, #FFD7C4 54%, #FCA67E 100%);
+    --linear-gradient-4: linear-gradient(to bottom right, #FFD080 38%, #FFBB80 100%);
+    --linear-gradient-5: linear-gradient(to bottom right, #B8A4FC 49%, #B859E4 100%);
+    --linear-gradient-6: linear-gradient(to bottom right, #F4D29F 0%, #9CF0AA 100%);
+    --linear-gradient-7: linear-gradient(to bottom right, #D9FAAF 41%, #88E397 100%);
+    --linear-gradient-8: linear-gradient(to bottom right, #FFCC73 57%, #FF93A0 100%);
+    --linear-gradient-9: linear-gradient(to bottom right, #FEC0B2 45%, #FF866B 100%);
+    
+
     /* theme colors */
     --text-color: var(--dark-400);
     --text-muted-color: var(--gray-800);
@@ -223,7 +234,8 @@ html, body {
 }
 
 .surface {
-    background-color: var(--surface-color);
+    /*background-color: var(--surface-color);*/
+    background: var(--linear-gradient-7);
     /* Default box-shadow: is >> 2px 12px 16px 2px var(--box-shadow-color); */
     box-shadow: var(--box-sh-prim-horisontal)
     var(--box-sh-prim-vertical)
