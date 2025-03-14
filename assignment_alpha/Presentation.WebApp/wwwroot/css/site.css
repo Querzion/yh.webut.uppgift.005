@@ -646,8 +646,8 @@ form {
     .field-validation-error {
         position: absolute;
         z-index: 1;
-        right: .25rem;
-        top: 4px;
+        right: .2rem;
+        top: 3px;
         font-size: .8em;
         background-color: var(--error-background-color);
         color: var(--error-text-color);
@@ -659,6 +659,12 @@ form {
         justify-content: center;
         gap: 0.5rem;
 
+        &:before {
+            content: '\f071';
+            font-family: var(--font-fa-pro), sans-serif;
+            font-size: .9rem;
+            font-weight: var(--font-regular);
+        }
     }
 }
 
