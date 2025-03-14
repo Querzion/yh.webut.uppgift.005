@@ -1,0 +1,33 @@
+/* _content/Presentation.WebApp/Views/Admin/Clients.cshtml.rz.scp.css */
+#clients[b-ba45adidby] {
+    
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+    }
+}
+/* _content/Presentation.WebApp/Views/Admin/Members.cshtml.rz.scp.css */
+#team-members[b-dzhcocyezh] {
+    
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+    }
+}
+/* _content/Presentation.WebApp/Views/Projects/Projects.cshtml.rz.scp.css */
+#projects[b-fg8gnyfzvy] {
+    
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+    }
+}

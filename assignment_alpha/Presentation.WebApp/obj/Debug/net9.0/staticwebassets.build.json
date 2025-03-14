@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TvX1z529F2vF7ZwlKUBjZue/RHBIOwxH/vPJhC81icQ=",
+  "Hash": "fxAw6YAph2At8vBnRRoLxrtDoct9qL8n2b7lBbD9UJg=",
   "Source": "Presentation.WebApp",
   "BasePath": "_content/Presentation.WebApp",
   "Mode": "Default",
@@ -38,12 +38,12 @@
       "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/favicon.ico"
     },
     {
-      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-3r8b2a0bt1.gz",
+      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-dlmwzr3qwu.gz",
       "SourceId": "Presentation.WebApp",
       "SourceType": "Discovered",
       "ContentRoot": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/Presentation.WebApp",
-      "RelativePath": "js/site#[.{fingerprint=3r8b2a0bt1}]?.js.gz",
+      "RelativePath": "js/site#[.{fingerprint=dlmwzr3qwu}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -52,11 +52,32 @@
       "RelatedAsset": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/js/site.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "7t0uxwsjr0",
-      "Integrity": "Zd+4tKe+YyWXvSCQtbmshsT5I0pKoALzyCu8fniaMWo=",
+      "Fingerprint": "2crc2ve5pd",
+      "Integrity": "nqyiVKOvFsqRw5OL89DH3TsE67ggfkxgKSfdNDZBGis=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/js/site.js"
+    },
+    {
+      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/7survucq6r-1o8mp1502g.gz",
+      "SourceId": "Presentation.WebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/Presentation.WebApp",
+      "RelativePath": "Presentation.WebApp#[.{fingerprint=1o8mp1502g}]!.bundle.scp.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/projectbundle/Presentation.WebApp.bundle.scp.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "5zpqp3yl5q",
+      "Integrity": "AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/projectbundle/Presentation.WebApp.bundle.scp.css"
     },
     {
       "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/9ztadg5v30-4gulfgzaid.gz",
@@ -80,12 +101,33 @@
       "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/alpha-logo.svg"
     },
     {
-      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vnco106q4q.gz",
+      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/a91pqq9mrr-1o8mp1502g.gz",
+      "SourceId": "Presentation.WebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/",
+      "BasePath": "_content/Presentation.WebApp",
+      "RelativePath": "Presentation.WebApp#[.{fingerprint=1o8mp1502g}]?.styles.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/bundle/Presentation.WebApp.styles.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "5zpqp3yl5q",
+      "Integrity": "AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/bundle/Presentation.WebApp.styles.css"
+    },
+    {
+      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vhkcnnwnym.gz",
       "SourceId": "Presentation.WebApp",
       "SourceType": "Discovered",
       "ContentRoot": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/Presentation.WebApp",
-      "RelativePath": "css/site#[.{fingerprint=vnco106q4q}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=vhkcnnwnym}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -94,32 +136,74 @@
       "RelatedAsset": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/css/site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "r2mdadmw2v",
-      "Integrity": "/VDq2C+fIkSD1XCFVHaeYB60PPm9J25eRqWNo/fnA9w=",
+      "Fingerprint": "6ml1ms7dr7",
+      "Integrity": "UmbneQcGYOqgjxhi5Ll3mFExq2xn43w2MUF6rIuIEuI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/css/site.css"
     },
     {
-      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e9heaazsxu-1175nh8rdp.gz",
+      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e5g6e4npy4-1175nh8rdp.gz",
       "SourceId": "Presentation.WebApp",
       "SourceType": "Discovered",
       "ContentRoot": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/Presentation.WebApp",
-      "RelativePath": "images/Avatars/avatar-template#[.{fingerprint=1175nh8rdp}]?.svg.gz",
+      "RelativePath": "images/Avatars/avatar-001-male#[.{fingerprint=1175nh8rdp}]?.svg.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-template.svg",
+      "RelatedAsset": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-001-male.svg",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
       "Fingerprint": "5xiziv1l4n",
       "Integrity": "dzfl2Qn1Tq3jWoeio8MpinlNZCG+A4ha5+E5gwdTuaY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-template.svg"
+      "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-001-male.svg"
+    },
+    {
+      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/bundle/Presentation.WebApp.styles.css",
+      "SourceId": "Presentation.WebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/bundle/",
+      "BasePath": "_content/Presentation.WebApp",
+      "RelativePath": "Presentation.WebApp#[.{fingerprint}]?.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "Fingerprint": "1o8mp1502g",
+      "Integrity": "n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/bundle/Presentation.WebApp.styles.css"
+    },
+    {
+      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/projectbundle/Presentation.WebApp.bundle.scp.css",
+      "SourceId": "Presentation.WebApp",
+      "SourceType": "Computed",
+      "ContentRoot": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/projectbundle/",
+      "BasePath": "_content/Presentation.WebApp",
+      "RelativePath": "Presentation.WebApp#[.{fingerprint}]!.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "Fingerprint": "1o8mp1502g",
+      "Integrity": "n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/projectbundle/Presentation.WebApp.bundle.scp.css"
     },
     {
       "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/css/site.css",
@@ -136,8 +220,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "vnco106q4q",
-      "Integrity": "5SjMq3BInia2MWilDi9UsVI7gABZJs0njBXv9jH4/8w=",
+      "Fingerprint": "vhkcnnwnym",
+      "Integrity": "PRoxAeHcuCjHF3sf+eDnnumpqPYxN9HL/woGq6PDy54=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/site.css"
@@ -185,12 +269,12 @@
       "OriginalItemSpec": "wwwroot/images/alpha-logo.svg"
     },
     {
-      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-template.svg",
+      "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-001-male.svg",
       "SourceId": "Presentation.WebApp",
       "SourceType": "Discovered",
       "ContentRoot": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/",
       "BasePath": "_content/Presentation.WebApp",
-      "RelativePath": "images/Avatars/avatar-template#[.{fingerprint}]?.svg",
+      "RelativePath": "images/Avatars/avatar-001-male#[.{fingerprint}]?.svg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -203,7 +287,7 @@
       "Integrity": "K7Jflb3cCsGoSS+g2SqB5WxYYi5e1PPq536+g/Q28h4=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/images/Avatars/avatar-template.svg"
+      "OriginalItemSpec": "wwwroot/images/Avatars/avatar-001-male.svg"
     },
     {
       "Identity": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/js/site.js",
@@ -220,8 +304,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3r8b2a0bt1",
-      "Integrity": "8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U=",
+      "Fingerprint": "dlmwzr3qwu",
+      "Integrity": "n8YAF/JGOVm/3G+NWAJYvihLL9Kln6qkYHALQReECaA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/site.js"
@@ -230,12 +314,12 @@
   "Endpoints": [
     {
       "Route": "css/site.css",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vnco106q4q.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vhkcnnwnym.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000407996736"
+          "Quality": "0.000266453504"
         }
       ],
       "ResponseHeaders": [
@@ -245,15 +329,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2450"
+          "Value": "3752"
         },
         {
           "Name": "ETag",
-          "Value": "\"/VDq2C+fIkSD1XCFVHaeYB60PPm9J25eRqWNo/fnA9w=\""
+          "Value": "\"UmbneQcGYOqgjxhi5Ll3mFExq2xn43w2MUF6rIuIEuI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -273,13 +357,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"5SjMq3BInia2MWilDi9UsVI7gABZJs0njBXv9jH4/8w=\""
+          "Value": "W/\"PRoxAeHcuCjHF3sf+eDnnumpqPYxN9HL/woGq6PDy54=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-5SjMq3BInia2MWilDi9UsVI7gABZJs0njBXv9jH4/8w="
+          "Value": "sha256-PRoxAeHcuCjHF3sf+eDnnumpqPYxN9HL/woGq6PDy54="
         }
       ]
     },
@@ -294,7 +378,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "10576"
+          "Value": "17020"
         },
         {
           "Name": "Content-Type",
@@ -302,11 +386,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5SjMq3BInia2MWilDi9UsVI7gABZJs0njBXv9jH4/8w=\""
+          "Value": "\"PRoxAeHcuCjHF3sf+eDnnumpqPYxN9HL/woGq6PDy54=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -316,13 +400,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-5SjMq3BInia2MWilDi9UsVI7gABZJs0njBXv9jH4/8w="
+          "Value": "sha256-PRoxAeHcuCjHF3sf+eDnnumpqPYxN9HL/woGq6PDy54="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vnco106q4q.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vhkcnnwnym.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -331,7 +415,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2450"
+          "Value": "3752"
         },
         {
           "Name": "Content-Type",
@@ -339,11 +423,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/VDq2C+fIkSD1XCFVHaeYB60PPm9J25eRqWNo/fnA9w=\""
+          "Value": "\"UmbneQcGYOqgjxhi5Ll3mFExq2xn43w2MUF6rIuIEuI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -361,18 +445,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-/VDq2C+fIkSD1XCFVHaeYB60PPm9J25eRqWNo/fnA9w="
+          "Value": "sha256-UmbneQcGYOqgjxhi5Ll3mFExq2xn43w2MUF6rIuIEuI="
         }
       ]
     },
     {
-      "Route": "css/site.vnco106q4q.css",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vnco106q4q.gz",
+      "Route": "css/site.vhkcnnwnym.css",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vhkcnnwnym.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000407996736"
+          "Quality": "0.000266453504"
         }
       ],
       "ResponseHeaders": [
@@ -382,15 +466,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2450"
+          "Value": "3752"
         },
         {
           "Name": "ETag",
-          "Value": "\"/VDq2C+fIkSD1XCFVHaeYB60PPm9J25eRqWNo/fnA9w=\""
+          "Value": "\"UmbneQcGYOqgjxhi5Ll3mFExq2xn43w2MUF6rIuIEuI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -410,13 +494,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"5SjMq3BInia2MWilDi9UsVI7gABZJs0njBXv9jH4/8w=\""
+          "Value": "W/\"PRoxAeHcuCjHF3sf+eDnnumpqPYxN9HL/woGq6PDy54=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "vnco106q4q"
+          "Value": "vhkcnnwnym"
         },
         {
           "Name": "label",
@@ -424,12 +508,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-5SjMq3BInia2MWilDi9UsVI7gABZJs0njBXv9jH4/8w="
+          "Value": "sha256-PRoxAeHcuCjHF3sf+eDnnumpqPYxN9HL/woGq6PDy54="
         }
       ]
     },
     {
-      "Route": "css/site.vnco106q4q.css",
+      "Route": "css/site.vhkcnnwnym.css",
       "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/css/site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -439,7 +523,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "10576"
+          "Value": "17020"
         },
         {
           "Name": "Content-Type",
@@ -447,11 +531,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"5SjMq3BInia2MWilDi9UsVI7gABZJs0njBXv9jH4/8w=\""
+          "Value": "\"PRoxAeHcuCjHF3sf+eDnnumpqPYxN9HL/woGq6PDy54=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -461,7 +545,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "vnco106q4q"
+          "Value": "vhkcnnwnym"
         },
         {
           "Name": "label",
@@ -469,13 +553,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-5SjMq3BInia2MWilDi9UsVI7gABZJs0njBXv9jH4/8w="
+          "Value": "sha256-PRoxAeHcuCjHF3sf+eDnnumpqPYxN9HL/woGq6PDy54="
         }
       ]
     },
     {
-      "Route": "css/site.vnco106q4q.css.gz",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vnco106q4q.gz",
+      "Route": "css/site.vhkcnnwnym.css.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/bn91pp0usi-vhkcnnwnym.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -484,7 +568,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2450"
+          "Value": "3752"
         },
         {
           "Name": "Content-Type",
@@ -492,11 +576,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/VDq2C+fIkSD1XCFVHaeYB60PPm9J25eRqWNo/fnA9w=\""
+          "Value": "\"UmbneQcGYOqgjxhi5Ll3mFExq2xn43w2MUF6rIuIEuI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -514,7 +598,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "vnco106q4q"
+          "Value": "vhkcnnwnym"
         },
         {
           "Name": "label",
@@ -522,7 +606,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-/VDq2C+fIkSD1XCFVHaeYB60PPm9J25eRqWNo/fnA9w="
+          "Value": "sha256-UmbneQcGYOqgjxhi5Ll3mFExq2xn43w2MUF6rIuIEuI="
         }
       ]
     },
@@ -1123,8 +1207,8 @@
       ]
     },
     {
-      "Route": "images/Avatars/avatar-template.1175nh8rdp.svg",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e9heaazsxu-1175nh8rdp.gz",
+      "Route": "images/Avatars/avatar-001-male.1175nh8rdp.svg",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e5g6e4npy4-1175nh8rdp.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1147,7 +1231,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1177,7 +1261,7 @@
         },
         {
           "Name": "label",
-          "Value": "images/Avatars/avatar-template.svg"
+          "Value": "images/Avatars/avatar-001-male.svg"
         },
         {
           "Name": "integrity",
@@ -1186,8 +1270,8 @@
       ]
     },
     {
-      "Route": "images/Avatars/avatar-template.1175nh8rdp.svg",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-template.svg",
+      "Route": "images/Avatars/avatar-001-male.1175nh8rdp.svg",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-001-male.svg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1208,7 +1292,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1222,7 +1306,7 @@
         },
         {
           "Name": "label",
-          "Value": "images/Avatars/avatar-template.svg"
+          "Value": "images/Avatars/avatar-001-male.svg"
         },
         {
           "Name": "integrity",
@@ -1231,8 +1315,8 @@
       ]
     },
     {
-      "Route": "images/Avatars/avatar-template.1175nh8rdp.svg.gz",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e9heaazsxu-1175nh8rdp.gz",
+      "Route": "images/Avatars/avatar-001-male.1175nh8rdp.svg.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e5g6e4npy4-1175nh8rdp.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1253,7 +1337,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1275,7 +1359,7 @@
         },
         {
           "Name": "label",
-          "Value": "images/Avatars/avatar-template.svg.gz"
+          "Value": "images/Avatars/avatar-001-male.svg.gz"
         },
         {
           "Name": "integrity",
@@ -1284,8 +1368,8 @@
       ]
     },
     {
-      "Route": "images/Avatars/avatar-template.svg",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e9heaazsxu-1175nh8rdp.gz",
+      "Route": "images/Avatars/avatar-001-male.svg",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e5g6e4npy4-1175nh8rdp.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -1308,7 +1392,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1339,8 +1423,8 @@
       ]
     },
     {
-      "Route": "images/Avatars/avatar-template.svg",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-template.svg",
+      "Route": "images/Avatars/avatar-001-male.svg",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-001-male.svg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1361,7 +1445,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1376,8 +1460,8 @@
       ]
     },
     {
-      "Route": "images/Avatars/avatar-template.svg.gz",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e9heaazsxu-1175nh8rdp.gz",
+      "Route": "images/Avatars/avatar-001-male.svg.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/e5g6e4npy4-1175nh8rdp.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1398,7 +1482,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 13 Mar 2025 10:21:33 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1421,13 +1505,13 @@
       ]
     },
     {
-      "Route": "js/site.3r8b2a0bt1.js",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-3r8b2a0bt1.gz",
+      "Route": "js/site.dlmwzr3qwu.js",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-dlmwzr3qwu.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.041666666667"
+          "Quality": "0.000712250712"
         }
       ],
       "ResponseHeaders": [
@@ -1437,15 +1521,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "23"
+          "Value": "1403"
         },
         {
           "Name": "ETag",
-          "Value": "\"Zd+4tKe+YyWXvSCQtbmshsT5I0pKoALzyCu8fniaMWo=\""
+          "Value": "\"nqyiVKOvFsqRw5OL89DH3TsE67ggfkxgKSfdNDZBGis=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 08:45:14 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1465,13 +1549,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U=\""
+          "Value": "W/\"n8YAF/JGOVm/3G+NWAJYvihLL9Kln6qkYHALQReECaA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3r8b2a0bt1"
+          "Value": "dlmwzr3qwu"
         },
         {
           "Name": "label",
@@ -1479,12 +1563,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U="
+          "Value": "sha256-n8YAF/JGOVm/3G+NWAJYvihLL9Kln6qkYHALQReECaA="
         }
       ]
     },
     {
-      "Route": "js/site.3r8b2a0bt1.js",
+      "Route": "js/site.dlmwzr3qwu.js",
       "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/js/site.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1494,7 +1578,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3"
+          "Value": "5389"
         },
         {
           "Name": "Content-Type",
@@ -1502,11 +1586,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U=\""
+          "Value": "\"n8YAF/JGOVm/3G+NWAJYvihLL9Kln6qkYHALQReECaA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 08:45:14 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1516,7 +1600,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3r8b2a0bt1"
+          "Value": "dlmwzr3qwu"
         },
         {
           "Name": "label",
@@ -1524,13 +1608,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U="
+          "Value": "sha256-n8YAF/JGOVm/3G+NWAJYvihLL9Kln6qkYHALQReECaA="
         }
       ]
     },
     {
-      "Route": "js/site.3r8b2a0bt1.js.gz",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-3r8b2a0bt1.gz",
+      "Route": "js/site.dlmwzr3qwu.js.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-dlmwzr3qwu.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1539,7 +1623,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "23"
+          "Value": "1403"
         },
         {
           "Name": "Content-Type",
@@ -1547,11 +1631,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Zd+4tKe+YyWXvSCQtbmshsT5I0pKoALzyCu8fniaMWo=\""
+          "Value": "\"nqyiVKOvFsqRw5OL89DH3TsE67ggfkxgKSfdNDZBGis=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 08:45:14 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1569,7 +1653,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3r8b2a0bt1"
+          "Value": "dlmwzr3qwu"
         },
         {
           "Name": "label",
@@ -1577,18 +1661,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Zd+4tKe+YyWXvSCQtbmshsT5I0pKoALzyCu8fniaMWo="
+          "Value": "sha256-nqyiVKOvFsqRw5OL89DH3TsE67ggfkxgKSfdNDZBGis="
         }
       ]
     },
     {
       "Route": "js/site.js",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-3r8b2a0bt1.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-dlmwzr3qwu.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.041666666667"
+          "Quality": "0.000712250712"
         }
       ],
       "ResponseHeaders": [
@@ -1598,15 +1682,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "23"
+          "Value": "1403"
         },
         {
           "Name": "ETag",
-          "Value": "\"Zd+4tKe+YyWXvSCQtbmshsT5I0pKoALzyCu8fniaMWo=\""
+          "Value": "\"nqyiVKOvFsqRw5OL89DH3TsE67ggfkxgKSfdNDZBGis=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 08:45:14 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1626,13 +1710,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U=\""
+          "Value": "W/\"n8YAF/JGOVm/3G+NWAJYvihLL9Kln6qkYHALQReECaA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U="
+          "Value": "sha256-n8YAF/JGOVm/3G+NWAJYvihLL9Kln6qkYHALQReECaA="
         }
       ]
     },
@@ -1647,7 +1731,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "3"
+          "Value": "5389"
         },
         {
           "Name": "Content-Type",
@@ -1655,11 +1739,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U=\""
+          "Value": "\"n8YAF/JGOVm/3G+NWAJYvihLL9Kln6qkYHALQReECaA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 08:45:14 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1669,13 +1753,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U="
+          "Value": "sha256-n8YAF/JGOVm/3G+NWAJYvihLL9Kln6qkYHALQReECaA="
         }
       ]
     },
     {
       "Route": "js/site.js.gz",
-      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-3r8b2a0bt1.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/5qbmpqamh8-dlmwzr3qwu.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1684,7 +1768,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "23"
+          "Value": "1403"
         },
         {
           "Name": "Content-Type",
@@ -1692,11 +1776,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Zd+4tKe+YyWXvSCQtbmshsT5I0pKoALzyCu8fniaMWo=\""
+          "Value": "\"nqyiVKOvFsqRw5OL89DH3TsE67ggfkxgKSfdNDZBGis=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 08:45:14 GMT"
+          "Value": "Fri, 14 Mar 2025 09:52:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1714,7 +1798,603 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Zd+4tKe+YyWXvSCQtbmshsT5I0pKoALzyCu8fniaMWo="
+          "Value": "sha256-nqyiVKOvFsqRw5OL89DH3TsE67ggfkxgKSfdNDZBGis="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.1o8mp1502g.bundle.scp.css",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/7survucq6r-1o8mp1502g.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003703703704"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "269"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1o8mp1502g"
+        },
+        {
+          "Name": "label",
+          "Value": "Presentation.WebApp.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.1o8mp1502g.bundle.scp.css",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/projectbundle/Presentation.WebApp.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "862"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1o8mp1502g"
+        },
+        {
+          "Name": "label",
+          "Value": "Presentation.WebApp.bundle.scp.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.1o8mp1502g.bundle.scp.css.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/7survucq6r-1o8mp1502g.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "269"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1o8mp1502g"
+        },
+        {
+          "Name": "label",
+          "Value": "Presentation.WebApp.bundle.scp.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.1o8mp1502g.styles.css",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/a91pqq9mrr-1o8mp1502g.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003703703704"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "269"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1o8mp1502g"
+        },
+        {
+          "Name": "label",
+          "Value": "Presentation.WebApp.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.1o8mp1502g.styles.css",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/bundle/Presentation.WebApp.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "862"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1o8mp1502g"
+        },
+        {
+          "Name": "label",
+          "Value": "Presentation.WebApp.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.1o8mp1502g.styles.css.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/a91pqq9mrr-1o8mp1502g.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "269"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1o8mp1502g"
+        },
+        {
+          "Name": "label",
+          "Value": "Presentation.WebApp.styles.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.bundle.scp.css",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/7survucq6r-1o8mp1502g.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003703703704"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "269"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.bundle.scp.css",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/projectbundle/Presentation.WebApp.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "862"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.bundle.scp.css.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/7survucq6r-1o8mp1502g.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "269"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.styles.css",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/a91pqq9mrr-1o8mp1502g.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003703703704"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "269"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.styles.css",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/bundle/Presentation.WebApp.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "862"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-n33n788+0pGJlGm4XKc3TdGr6M7DXw/gQchxlJlF7+w="
+        }
+      ]
+    },
+    {
+      "Route": "Presentation.WebApp.styles.css.gz",
+      "AssetFile": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/compressed/a91pqq9mrr-1o8mp1502g.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "269"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 14 Mar 2025 10:08:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AQucCe+5SkkiF0gE/dM0rAMEZwZxK3EQtsbCsKms8CA="
         }
       ]
     }

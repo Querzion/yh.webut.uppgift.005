@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/obj/Debug/net9.0/scopedcss/projectbundle/Presentation.WebApp.bundle.scp.css",
+      "PackagePath": "staticwebassets/Presentation.WebApp.1o8mp1502g.bundle.scp.css"
+    },
+    {
       "Id": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
@@ -9,8 +13,8 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
-      "Id": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-template.svg",
-      "PackagePath": "staticwebassets/images/Avatars/avatar-template.svg"
+      "Id": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/Avatars/avatar-001-male.svg",
+      "PackagePath": "staticwebassets/images/Avatars/avatar-001-male.svg"
     },
     {
       "Id": "/home/querzion/RiderProjects/yh.webut.uppgift.005/assignment_alpha/Presentation.WebApp/wwwroot/images/alpha-logo.svg",

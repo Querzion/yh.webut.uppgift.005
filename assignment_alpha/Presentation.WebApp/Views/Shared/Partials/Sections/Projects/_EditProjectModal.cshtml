@@ -1,14 +1,14 @@
 @model ProjectUpdateForm
 
-<div id="editMemberModal" class="the-local-modal">
+<div id="editProjectModal" class="the-local-modal">
     <div class="with-modal-content">
 
         <div class="and-a-modal-header">
-            <h3>Edit Member</h3>
+            <h3>Edit Project</h3>
             <button type="button" class="btn-close" data-close="true"></button>
         </div>
 
-        <form novalidate method="post" asp-action="EditMember" asp-controller="Members">
+        <form novalidate method="post" asp-action="EditProject" asp-controller="Projects">
             
             <input asp-for="Id" readonly type="hidden"/>
             
