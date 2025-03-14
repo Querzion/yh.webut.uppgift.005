@@ -641,6 +641,7 @@ form {
 
     .input-validation-error {
         border-color: var(--error-border-color);
+        color: var(--error-text-color);
     }
 
     .field-validation-error {
