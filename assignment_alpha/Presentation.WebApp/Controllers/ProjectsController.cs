@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.WebApp.Controllers;
 
-[Route("projects")]
+// [Route("projects")]
 public class ProjectsController : Controller
 {
-    [Route("")]
+    // [Route("")]
+    [Route("projects")]
     public IActionResult Projects()
     {
         return View();
