@@ -1,4 +1,21 @@
 @{
     ViewData["Title"] = "Projects";
 }
-<h2>@ViewData["Title"]</h2>
+
+@* @await Html.PartialAsync("Partials/Sections/_AddProjectModal") *@
+<partial name="Partials/Sections/_AddProjectModal"/>
+<partial name="Partials/Sections/_EditProjectModal"/>
+
+<section id="projects">
+    
+    <header>
+        <h2>Projects</h2>
+        <button type="button" data-modal="true" data-target="#addProjectModal" class="btn btn-add btn-blue">Add Project</button>
+    </header>
+
+    <div class="surface">
+        @* @await Html.PartialAsync("Partials/Sections/_ProjectList") *@
+        <partial name="Partials/Sections/_ProjectList"/>
+    </div>
+
+</section>

@@ -1,9 +1,21 @@
 @{
     ViewData["Title"] = "Team Members";
 }
+
+@* @await Html.PartialAsync("Partials/Sections/_AddMemberModal") *@
+<partial name="Partials/Sections/_AddMemberModal"/>
+<partial name="Partials/Sections/_EditMemberModal"/>
+
 <section id="team-members">
+    
     <header>
-        <h2>Team Members</h2>
-        <button type="button" class="btn btn-add btn-blue">Add Members</button>
+        <h2>Members</h2>
+        <button type="button" data-modal="true" data-target="#addMemberModal" class="btn btn-add btn-blue">Add Member</button>
     </header>
+
+    <div class="surface">
+        @* @await Html.PartialAsync("Partials/Sections/_MemberList") *@
+        <partial name="Partials/Sections/_MemberList"/>
+    </div>
+
 </section>
