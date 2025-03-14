@@ -234,8 +234,7 @@ html, body {
 }
 
 .surface {
-    /*background-color: var(--surface-color);*/
-    background: var(--linear-gradient-7);
+    background-color: var(--surface-color);
     /* Default box-shadow: is >> 2px 12px 16px 2px var(--box-shadow-color); */
     box-shadow: var(--box-sh-prim-horisontal)
     var(--box-sh-prim-vertical)
@@ -452,6 +451,48 @@ h6 {
     align-items: center;
     gap: 0.5rem;
 }
+
+.change-the-notifications {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    &::before {
+        content: "\f0f3";
+        font-family: var(--font-fa-pro), sans-serif;
+        font-size: 1rem;
+    }
+}
+
+.change-the-settings-menu {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    &::before {
+        content: "\F3E2";
+        font-family: var(--font-bootstrap), sans-serif;
+        font-size: 1rem;
+    }
+}
+
+.change-the-search-field {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    &::before {
+        content: "\f002";
+        font-family: var(--font-fa-pro), sans-serif;
+        font-size: 1rem;
+    }
+}
+
+.change-the-user-menu {
+    height: 32px;
+    width: 32px;
+}
+
 
 .nav-links {
     margin: 1rem 0;

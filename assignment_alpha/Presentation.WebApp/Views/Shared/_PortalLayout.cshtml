@@ -24,11 +24,11 @@
             @await Html.PartialAsync("Partials/Components/_NavLinks")
         </div>
         <div class="top">
-            <div class="border">search</div>
+            @await Html.PartialAsync("Partials/Components/_SearchField")
             <div class="d-flex">
-                <div>div 1</div>
-                <div>div 2</div>
-                <div>div 3</div>
+                @await Html.PartialAsync("Partials/Components/_Notifications")
+                @await Html.PartialAsync("Partials/Components/_SettingsMenu")
+                @await Html.PartialAsync("Partials/Components/_UserMenu")
             </div>
         </div>
         <div class="main">
