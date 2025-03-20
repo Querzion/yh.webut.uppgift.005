@@ -1,11 +1,41 @@
-@model UserModel
+@model LoginViewForm
 @{
     Layout = "_CleanLayout";
     ViewData["Title"] = "Login";
 }
 
 <div class="center-screen">
-    <div class="surface">
-        @ViewData["Title"]
+    <div id="signin" class="surface">
+        <h1 class="center-content">@ViewData["Title"]</h1>
+        
+        <form asp-action="Login" asp-controller="Auth" method="post" novalidate>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <div class="field-group">
+                    <input asp-for="Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <div class="field-group">
+                    <input asp-for="Password" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+            </div>
+
+            <button class="btn btn-submit btn-blue">Log In</button>
+
+                <div class="d-flex remember-me">
+                        <input asp-for="RememberMe"/>
+                    <div>
+                        <label asp-for="RememberMe"></label>
+                        <span asp-validation-for="RememberMe"></span>
+                    </div>
+                </div>
+            
+        </form>
     </div>
 </div>

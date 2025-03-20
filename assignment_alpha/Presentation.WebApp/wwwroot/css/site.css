@@ -812,4 +812,14 @@ input[type="checkbox"] {
     }
 }
 
+#signin {
+    width: 600px;
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        margin-top: 2rem;
+    }
+}
+
 /* views/pages */
