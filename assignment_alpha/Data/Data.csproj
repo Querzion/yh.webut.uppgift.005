@@ -25,6 +25,12 @@
       <Reference Include="Microsoft.AspNetCore.Http.Features">
         <HintPath>..\..\..\..\.nuget\packages\microsoft.aspnetcore.http.features\2.3.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
       </Reference>
+      <Reference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore">
+        <HintPath>..\..\..\..\.nuget\packages\microsoft.aspnetcore.identity.entityframeworkcore\9.0.3\lib\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll</HintPath>
+      </Reference>
+      <Reference Include="Microsoft.Extensions.Identity.Stores">
+        <HintPath>..\..\..\..\.nuget\packages\microsoft.extensions.identity.stores\9.0.3\lib\net9.0\Microsoft.Extensions.Identity.Stores.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
