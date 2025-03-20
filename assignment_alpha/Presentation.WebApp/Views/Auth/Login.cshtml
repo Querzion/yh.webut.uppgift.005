@@ -1,4 +1,5 @@
-@model Member
+@model MemberSignIn
+
 @{
     Layout = "_CleanLayout";
     ViewData["Title"] = "Login";
@@ -6,8 +7,9 @@
 
 <div id="login" class="center-screen">
     <div class="surface">
+        <h1 class="center-content">@ViewData["Title"]</h1>
         <form asp-action="Login" asp-controller="Auth" method="post" novalidate>
-            
+
             <div class="form-group">
                 <label asp-for="Email"></label>
                 <div class="field-group">
@@ -15,6 +17,25 @@
                     <span asp-validation-for="Email"></span>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <div class="field-group">
+                    <input asp-for="Password"/>
+                    <span asp-validation-for="Password"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-submit btn-blue">Log in</button>
+
+            <div class="form-group">
+                <label asp-for="RememberMe"></label>
+                <div class="field-group">
+                    <input asp-for="RememberMe"/>
+                    <span asp-validation-for="RememberMe"></span>
+                </div>
+            </div>
+
         </form>
     </div>
     
