@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Presentation.WebApp.Models;
 
-public class LoginViewForm
+public class LoginFormViewModel
 {
     [Required(ErrorMessage = "Required")]
     [Display(Name = "Email Address", Prompt = "Enter your email address.")]
