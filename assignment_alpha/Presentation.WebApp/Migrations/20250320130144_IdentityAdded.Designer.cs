@@ -11,7 +11,7 @@ using Presentation.WebApp.Data;
 namespace Presentation.WebApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250320105003_IdentityAdded")]
+    [Migration("20250320130144_IdentityAdded")]
     partial class IdentityAdded
     {
         /// <inheritdoc />
@@ -148,7 +148,7 @@ namespace Presentation.WebApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Presentation.WebApp.Models.AppUser", b =>
+            modelBuilder.Entity("Presentation.WebApp.Models.Member", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -231,7 +231,7 @@ namespace Presentation.WebApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Presentation.WebApp.Models.AppUser", null)
+                    b.HasOne("Presentation.WebApp.Models.Member", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -240,7 +240,7 @@ namespace Presentation.WebApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Presentation.WebApp.Models.AppUser", null)
+                    b.HasOne("Presentation.WebApp.Models.Member", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -255,7 +255,7 @@ namespace Presentation.WebApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Presentation.WebApp.Models.AppUser", null)
+                    b.HasOne("Presentation.WebApp.Models.Member", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -264,7 +264,7 @@ namespace Presentation.WebApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Presentation.WebApp.Models.AppUser", null)
+                    b.HasOne("Presentation.WebApp.Models.Member", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
