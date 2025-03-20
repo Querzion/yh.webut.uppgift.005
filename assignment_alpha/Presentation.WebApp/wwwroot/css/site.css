@@ -812,4 +812,8 @@ input[type="checkbox"] {
     }
 }
 
+#register {
+    width: 550px;
+}
+
 /* views/pages */
