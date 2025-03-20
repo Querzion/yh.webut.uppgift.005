@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Presentation.WebApp.Models;
 
-public class MemberSignUpForm
+public class RegisterViewForm
 {
     [Required(ErrorMessage = "Required")]
     [Display(Name = "First Name", Prompt = "Enter your first name.")]

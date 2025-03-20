@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Presentation.WebApp.Models;
 
-public class Member : IdentityUser
+public class UserModel : IdentityUser
 {
     [ProtectedPersonalData]
     [Column(TypeName = "nvarchar(100)")]
