@@ -24,8 +24,4 @@
       </PackageReference>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Data\Databases\" />
-    </ItemGroup>
-
 </Project>
