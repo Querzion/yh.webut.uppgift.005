@@ -13,7 +13,7 @@ public class AuthController : Controller
     public IActionResult Login()
     {
         // TEMPORARY REROUTE
-        return LocalRedirect("/projects");
-        // return View();
+        // return LocalRedirect("/projects");
+        return View();
     }
 }

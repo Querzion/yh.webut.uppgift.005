@@ -14,7 +14,7 @@ builder.Services.AddControllersWithViews();
 
     builder.Services.AddDbContext<DataContext>(x => x.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-    builder.Services.AddIdentity<AppUser, IdentityRole>(x =>
+    builder.Services.AddIdentity<Member, IdentityRole>(x =>
         {
             x.Password.RequiredLength = 8;
             x.User.RequireUniqueEmail = true;
