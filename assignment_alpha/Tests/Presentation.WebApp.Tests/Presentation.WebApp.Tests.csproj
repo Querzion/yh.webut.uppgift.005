@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Business\Business.csproj" />
+      <ProjectReference Include="..\..\Presentation.WebApp\Presentation.WebApp.csproj" />
     </ItemGroup>
 
 </Project>
