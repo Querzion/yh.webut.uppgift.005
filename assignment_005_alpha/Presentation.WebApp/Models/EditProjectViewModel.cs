@@ -1,17 +1,19 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Presentation.WebApp.Controllers;
+namespace Presentation.WebApp.Models;
 
-public class AddClientViewModel
+public class EditProjectViewModel
 {
-    [Display(Name = "Client Image", Prompt = "Select an image")]
-    [DataType(DataType.Upload)]
-    public IFormFile? ClientImage { get; set; }
+    public int Id { get; set; }
     
-    [Display(Name = "Client Name", Prompt = "Enter client name")]
+    [Display(Name = "Project Image", Prompt = "Select an image")]
+    [DataType(DataType.Upload)]
+    public IFormFile? ProjectImage { get; set; }
+    
+    [Display(Name = "Project Name", Prompt = "Enter client name")]
     [DataType(DataType.Text)]
     [Required(ErrorMessage = "Required")]
-    public string ClientName { get; set; } = null!;
+    public string ProjectName { get; set; } = null!;
     
     [Display(Name = "Email", Prompt = "Enter email address")]
     [DataType(DataType.EmailAddress)]

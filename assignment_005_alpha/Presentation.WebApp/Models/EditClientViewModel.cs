@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Presentation.WebApp.Controllers;
+namespace Presentation.WebApp.Models;
 
 public class EditClientViewModel
 {
