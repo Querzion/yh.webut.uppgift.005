@@ -67,6 +67,8 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.min.js" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.min.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+      <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
     </ItemGroup>
 
     <ItemGroup>
@@ -78,6 +80,11 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Shared\Partials\Sections\" />
+      <Folder Include="wwwroot\images\UserUploads\" />
     </ItemGroup>
 
 </Project>

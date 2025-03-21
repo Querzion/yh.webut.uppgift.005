@@ -1,0 +1,19 @@
+@model UserProfile
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+@* Don't delete this just yet, it's in part a memo thing. *@
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="profile">
+    <h2>User Profile</h2>
+    
+    <p><strong>First Name:</strong> @Model.FirstName</p>
+    <p><strong>Last Name:</strong> @Model.LastName</p>
+    <p><strong>Email:</strong> @Model.User.Email</p>
+
+    <p><strong>Full Name:</strong> @Model.FirstName @Model.LastName</p>
+</div>
