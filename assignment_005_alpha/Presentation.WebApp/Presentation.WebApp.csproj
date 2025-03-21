@@ -83,6 +83,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Pages\" />
       <Folder Include="Views\Shared\Partials\Sections\" />
       <Folder Include="wwwroot\images\UserUploads\" />
     </ItemGroup>
