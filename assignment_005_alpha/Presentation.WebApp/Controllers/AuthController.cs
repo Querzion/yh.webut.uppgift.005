@@ -1,12 +1,12 @@
+using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Presentation.WebApp.Models;
 
 namespace Presentation.WebApp.Controllers;
 
-public class AuthController(SignInManager<ApplicationUser> signInManager) : Controller
+public class AuthController(SignInManager<MemberEntity> signInManager) : Controller
 {
-    private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
+    private readonly SignInManager<MemberEntity> _signInManager = signInManager;
     
     
 }

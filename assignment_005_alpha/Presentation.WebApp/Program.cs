@@ -1,37 +1,30 @@
 using Data.Contexts;
-using Data.Helpers;
+using Data.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Presentation.WebApp.Data;
-using Presentation.WebApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
-// var connectionString = DatabaseHelper.GetConnectionString();
-var applicationConnection = builder.Configuration.GetConnectionString("ApplicationConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationConnection' not found.");
-var dataConnection = builder.Configuration.GetConnectionString("DataConnection") ?? throw new InvalidOperationException("Connection string 'DataConnection' not found.");
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(dataConnection));
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(applicationConnection));
-
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+builder.Services.AddIdentity<MemberEntity, IdentityRole>(options =>
     {
         options.Password.RequiredLength = 8;
         options.User.RequireUniqueEmail = true;
         options.SignIn.RequireConfirmedEmail = false;
     })
-    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.ConfigureApplicationCookie(x =>
-{
-    x.LoginPath = "/auth/signin";
-    x.LogoutPath = "/auth/signout";
-    x.AccessDeniedPath = "/auth/denied";
-    x.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-    x.SlidingExpiration = true;
-});
+// builder.Services.ConfigureApplicationCookie(x =>
+// {
+//     x.LoginPath = "/auth/signin";
+//     x.LogoutPath = "/auth/signout";
+//     x.AccessDeniedPath = "/auth/denied";
+//     x.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+//     x.SlidingExpiration = true;
+// });
 
 // builder.Services.AddScoped<UserService>();
 

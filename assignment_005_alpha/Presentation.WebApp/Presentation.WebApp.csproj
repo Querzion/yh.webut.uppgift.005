@@ -69,6 +69,7 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
       <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
       <_ContentIncludedByDefault Remove="wwwroot\js\site.js" />
+      <_ContentIncludedByDefault Remove="Views\User\Profile.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -83,7 +84,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Pages\" />
       <Folder Include="Views\Shared\Partials\Sections\" />
       <Folder Include="wwwroot\images\UserUploads\" />
     </ItemGroup>
