@@ -1,19 +1,18 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
-namespace Presentation.WebApp.Models;
+namespace Domain.Models;
 
-public class EditClientViewModel
+public class AddProjectForm
 {
-    public int Id { get; set; }
-    
-    [Display(Name = "Client Image", Prompt = "Select an image")]
+    [Display(Name = "Project Image", Prompt = "Select an image")]
     [DataType(DataType.Upload)]
-    public IFormFile? ClientImage { get; set; }
+    public IFormFile? ProjectImage { get; set; }
     
-    [Display(Name = "Client Name", Prompt = "Enter client name")]
+    [Display(Name = "Project Name", Prompt = "Enter client name")]
     [DataType(DataType.Text)]
     [Required(ErrorMessage = "Required")]
-    public string ClientName { get; set; } = null!;
+    public string ProjectName { get; set; } = null!;
     
     [Display(Name = "Email", Prompt = "Enter email address")]
     [DataType(DataType.EmailAddress)]

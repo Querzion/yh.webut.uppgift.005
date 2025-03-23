@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Presentation.WebApp.Models;
+namespace Domain.Models;
 
-public class LoginViewModel
+public class MemberLoginForm
 {
     [Required(ErrorMessage = "Required")]
     [Display(Name = "Email Address", Prompt = "Enter your email address.")]

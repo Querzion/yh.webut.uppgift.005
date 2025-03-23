@@ -27,4 +27,8 @@
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
 </Project>

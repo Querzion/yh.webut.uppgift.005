@@ -1,17 +1,20 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
-namespace Presentation.WebApp.Models;
+namespace Domain.Models;
 
-public class AddProjectViewModel
+public class EditMemberForm
 {
-    [Display(Name = "Project Image", Prompt = "Select an image")]
-    [DataType(DataType.Upload)]
-    public IFormFile? ProjectImage { get; set; }
+    public int Id { get; set; }
     
-    [Display(Name = "Project Name", Prompt = "Enter client name")]
+    [Display(Name = "Member Image", Prompt = "Select an image")]
+    [DataType(DataType.Upload)]
+    public IFormFile? MemberImage { get; set; }
+    
+    [Display(Name = "Member Name", Prompt = "Enter client name")]
     [DataType(DataType.Text)]
     [Required(ErrorMessage = "Required")]
-    public string ProjectName { get; set; } = null!;
+    public string MemberName { get; set; } = null!;
     
     [Display(Name = "Email", Prompt = "Enter email address")]
     [DataType(DataType.EmailAddress)]

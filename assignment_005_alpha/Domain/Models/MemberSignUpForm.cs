@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Presentation.WebApp.Models;
+namespace Domain.Models;
 
-public class RegisterViewModel
+public class MemberSignUpForm
 {
     [Required(ErrorMessage = "Required")]
     [Display(Name = "First Name", Prompt = "Enter your first name.")]
