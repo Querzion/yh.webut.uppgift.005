@@ -84,7 +84,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ViewModels\" />
       <Folder Include="Views\Shared\Partials\Sections\" />
       <Folder Include="wwwroot\images\UserUploads\" />
     </ItemGroup>

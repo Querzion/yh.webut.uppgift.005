@@ -1,15 +1,71 @@
+using Business.Interfaces;
 using Data.Entities;
+using Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.WebApp.Controllers;
 
-public class AuthController(SignInManager<MemberEntity> signInManager) : Controller
-{
-    private readonly SignInManager<MemberEntity> _signInManager = signInManager;
-    
-    
-}
+#region From the "Tips & Trix - Autentisering och Team Members" Video (https://youtu.be/PO46Yhz_ejg?si=1SHrM_Te8U_wKgPt)
+
+    public class AuthController(IAuthService authService) : Controller
+    {
+        public IActionResult Login(string returnUrl = "~/")
+        {
+            if (string.IsNullOrWhiteSpace(returnUrl))
+                returnUrl = "~/";
+
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Login(MemberLoginForm form, string returnUrl = "~/")
+        {
+            ViewBag.ErrorMessage = "";
+        
+            if (ModelState.IsValid)
+            {
+                var result = await authService.LoginAsync(form);
+                if (result)
+                    return LocalRedirect(string.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
+            }
+            
+            ViewBag.ErrorMessage = "Incorrect email or password.";
+            return View(form);
+            
+        }
+        
+        public IActionResult SignUp()
+        {
+            ViewBag.ErrorMessage = "";
+            
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> SignUp(MemberSignUpForm form)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await authService.SignUpAsync(form);
+                if (result)
+                    return LocalRedirect("~/");
+            }
+        
+            ViewBag.ErrorMessage = "";
+            return View(form);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await authService.LogoutAsync();
+            
+            return LocalRedirect("~/");
+        }
+    }
+
+#endregion
 
 #region AuthController - From the 'Add Identity Authentication Manually' Video.
 

@@ -966,17 +966,12 @@ input[type="checkbox"] {
     margin-bottom: 3rem;
 }
 
-#team-members {
 
-}
-
-#addMemberModal {
-    .with-modal-content {
-        width: 550px;
-    }
-}
 
 #editMemberModal {
+    position: relative;
+    z-index: 1000;
+    
     .with-modal-content {
         width: 550px;
     }
@@ -1054,7 +1049,7 @@ input[type="checkbox"] {
     }
 }
 
-#members {
+#team-members {
     display: grid;
     gap: 2rem;
 
@@ -1106,7 +1101,6 @@ input[type="checkbox"] {
 
     .member {
         text-align: center;
-
 
 
         .avatar {

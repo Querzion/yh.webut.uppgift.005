@@ -1,10 +1,13 @@
 using Business.DTOs;
+using Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.WebApp.Controllers;
 
-public class MembersController : Controller
+public class MembersController(IMemberService memberService) : Controller
 {
+    private readonly IMemberService _memberService = memberService;
+
     [HttpPost]
     public IActionResult AddMember(MemberRegistrationForm form)
     {
