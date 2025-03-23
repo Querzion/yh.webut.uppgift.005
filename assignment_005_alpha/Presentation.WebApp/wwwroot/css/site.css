@@ -1,7 +1,6 @@
 /* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* variable scheme */
 :root {
@@ -10,16 +9,10 @@
     --font-standard: "Nunito", sans-serif;
     /* 300-700 */
     --font-logo: "Comfortaa", sans-serif;
-    --font-admin-login-header: "Poppins", sans-serif;
     --font-fa-free: "Font Awesome 6 Free";
     --font-fa-pro: "Font Awesome 6 Pro";
     --font-bootstrap: "bootstrap-icons";
 
-    /* border-radius */
-    --border-radius-default: 1rem; /* 16px */ 
-    --border-radius-m: .8rem; /* 16px */ 
-    --border-radius-s: .6rem; /* 16px */ 
-    
     /* font thickness */
     --font-weight-extralight: 200;
     --font-weight-light: 300;
@@ -39,7 +32,6 @@
     --font-size-h5: 1.25em; /* 20px */
     --font-size-h6: 1.125em; /* 18px */
     --font-size-logo: 1.625em; /* 26px */
-    --font-size-control-panel: 4.5em; /* 72px */
 
     /* resolutions */
     --size-tablet: 768px;
@@ -72,7 +64,7 @@
     --gray-600: #C6C8CC;
     --gray-700: #9E9E9E;
     --gray-800: #637085; /* Minna #637985 */
-    
+
     --dark-opacity-20: rgba(26, 25, 38, 0.2); /* --dark-100-a */
     --dark-opacity-60: rgba(26, 25, 38, 0.6); /* --dark-100-60 */
     --dark-100: #1A1926;
@@ -90,22 +82,22 @@
     --yellow-dark: #8B7400;
     --yellow-dark-1: #FCBB42;
     --yellow-dark-2: #6A5902;
-    
+
     --orange: #FF9640;
     --orange-dark: #F09330;
     --orange-dark-1: #FF6640;
     --orange-dark-2: #E94D3F;
-    
+
     --red-light: #FFEAE4; /* Old #FEF0EC */
     --red-semilight: #FFB8A5; /* Old #ffaf99 */
     --red: #DE3434;
     --red-dark: #B83030;
-    
+
     --green-light: #D8FFDF; /* Old #EEFBF1 */
     --green-semilight: #B3FFC0;
     --green: #119B56; /* Old #31D482 */
     --green-dark: #187848; /* Old #24B26B */
-    
+
     /* MEMO CHECK ALL BLUE COLORS! THEY HAVE CHANGED NAMES! */
     --blue-light-opacity: rgba(45, 125, 204, 0.10);
     --blue-light: #DBEDFF;
@@ -113,7 +105,7 @@
     --blue: #2D99FF;
     --blue-dark: #2D7DCC;
     --blue-light-10: rgba(45, 125, 204, 0.10);
-    
+
     --blue-1: #2CD9D9;
     --blue-accent: var(--blue);
     --blue-accent-dark: #2682D9;
@@ -135,36 +127,42 @@
     --linear-gradient-7: linear-gradient(to bottom right, #D9FAAF 41%, #88E397 100%);
     --linear-gradient-8: linear-gradient(to bottom right, #FFCC73 57%, #FF93A0 100%);
     --linear-gradient-9: linear-gradient(to bottom right, #FEC0B2 45%, #FF866B 100%);
-    
+
 
     /* theme colors */
     --text-color: var(--dark-400);
     --text-muted-color: var(--gray-800);
     --text-extra-muted-color: var(--gray-700);
     --text-headline-color: var(--dark-100); /* --headline-color */
-    
+
     --background-color: var(--white-200);
     --content-background-color: var(--white-100);
     --sidebar-background-color: var(--white-100);
     --orseperator-background-color: var(--white-100);
-    
+
     --border-color: var(--gray-500);
     --border-focus-color: var(--blue-semilight); /* --blue-accent */
-    
+
     --auth-background-color: var(--gray-100);
+
+    /* border-radius */
+    --border-radius-default: 1rem; /* 16px */
+    --border-radius-l: .875rem; /* 14 */
+    --border-radius-m: .75rem; /* 12px */
+    --border-radius-s: .625rem; /* 10px */
 
     /* buttons - standard */
     --btn-border-width: 0;
     --btn-border-radius: .7rem;
     --btn-padding: 0.68rem 1.5rem;
-    
+
     --btn-text-color: var(--white-100);
     --btn-border-color: var(--white-100);
     --btn-background-color: var(--blue);
     --btn-hover-text-color: var(--white-100);
     --btn-hover-border-color: var(--white-100);
     --btn-hover-background-color: var(--blue-dark);
-    
+
     /* MEMO CHANGE THE COLOURS FROM THIS TO THE STANDARD! */
     --btn-blue-text-color: var(--white-100);
     --btn-blue-text-hover-color: var(--white-100);
@@ -183,7 +181,7 @@
     /* links */
     --link-color: var(--blue);
     --link-hover-color: var(--blue-dark);
-    
+
     /* nav links */
     --navlink-text-color: var(--dark-200);
     --navlink-text-hover-color: var(--blue);
@@ -201,28 +199,32 @@
     --error-background-color: var(--red-light);
     --error-text-color: var(--red-dark);
     --error-border-color: var(--red-semilight);
-    
+
     /* form colors */
-    --form-text-color: var(--white-100);
+    --form-text-color: var(--dark-400);
     --form-border-color: var(--white-100);
     --form-background-color: var(--white-100);
     --form-label-color: var(--dark-200);
-    
+
     --form-input-text-color: var(--dark-200);
     --form-input-placeholder-color: var(--gray-600);
     --form-input-background-color: var(--white-100);
     --form-input-border-color: var(--gray-400);
     --form-input-border-focus-color: var(--blue-semilight);
-    
+
     --form-error-input-text-color: var(--dark-200);
     --form-error-input-background-color: var(--white-100);
     --form-error-input-border-color: var(--red-semilight);
     --form-error-input-border-focus-color: var(--blue-semilight);
-    
+
     --form-error-message-text-color: var(--red-dark);
     --form-error-message-background-color: var(--red-light);
     --form-error-message-border-color: var(--red-light);
-    
+
+    --card-text-color: var(--dark-400);
+    --card-border-color: var(--white-100);
+    --card-background-color: var(--white-100);
+
     /* box shadow */
     /* box-shadow: 2px 12px 16px 2px var(--box-shadow-color); */
     --box-sh-prim-horisontal: 2px;
@@ -334,8 +336,8 @@ a {
     grid-template-rows: minmax(80px, auto) 1fr;
     grid-template-areas:    "sidebar header" 
                             "sidebar main";
-    
-    header, 
+
+    header,
     .header {
         grid-area: header;
         border-bottom: 1px solid var(--border-color);
@@ -344,7 +346,7 @@ a {
         justify-content: flex-end;
         align-items: center;
     }
-    
+
     aside,
     .sidebar {
         grid-area: sidebar;
@@ -352,12 +354,12 @@ a {
         padding: 1.5rem 2rem;
         width: 270px;
     }
-    
+
     main,
     .main {
         grid-area: main;
         padding: 1.6rem 2rem;
-    }    
+    }
 }
 
 .link-logotype {
@@ -423,30 +425,6 @@ a {
     justify-content: left;
     align-items: start;
     text-align: left;
-}
-
-/* THIS NEEDS SOME WORK! Base is kind of created for the left side, 
-but it has no DOM and is created highly theoretically. */
-.admin-control-panel {
-    width: 500px;
-    height: 300px;
-    background:
-            url("images/ControlPanel/top-layer-blur.svg") center/cover no-repeat, /* Top blurred layer */
-            url('images/ControlPanel/bottom-layer-abstract.svg') center/cover no-repeat; /* Background layer */
-    
-    .big-header {
-        font-family: var(--font-admin-login-header), sans-serif;
-        font-size: var(--font-size-control-panel);
-        font-weight: var(--font-weight-bold) ;
-        text-align: left;
-        
-        .part-one {
-            color: var(--white-100);
-        }
-        .part-two {
-            color: var(--orange);
-        }
-    }
 }
 
 /* typography */
@@ -834,7 +812,7 @@ form {
     .field-group {
         position: relative;
     }
-    
+
     label {
         font-size: var(--font-size-default);
         font-weight: var(--font-weight-medium);
@@ -889,7 +867,7 @@ form {
             font-weight: var(--font-weight-regular);
         }
     }
-    
+
     .form-footer {
         margin-top: 4rem;
     }
@@ -1053,7 +1031,7 @@ input[type="checkbox"] {
     var(--box-sh-prim-blur)
     var(--box-sh-prim-spread)
     var(--box-sh-prim-color);
-    
+
     h1 {
         margin-bottom: 2rem;
     }
@@ -1076,6 +1054,87 @@ input[type="checkbox"] {
     }
 }
 
+#members {
+    display: grid;
+    gap: 2rem;
 
+    .members-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+
+        /*@media (max-width: 768px) {*/
+        /*    grid-template-columns: 1fr;*/
+        /*}*/
+        @media (min-width: 920px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (min-width: 1200px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (min-width: 1700px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @media (min-width: 2200px) {
+            grid-template-columns: repeat(5, 1fr);
+        }
+        @media (min-width: 2700px) {
+            grid-template-columns: repeat(6, 1fr);
+        }
+        @media (min-width: 3200px) {
+            grid-template-columns: repeat(7, 1fr);
+        }
+        @media (min-width: 3700px) {
+            grid-template-columns: repeat(8, 1fr);
+        }
+        @media (min-width: 4200px) {
+            grid-template-columns: repeat(9, 1fr);
+        }
+        @media (min-width: 4500px) {
+            grid-template-columns: repeat(10, 1fr);
+        }
+    }
+
+    .card {
+        color: var(--card-text-color);
+        border: 1px solid var(--card-border-color);
+        background-color: var(--card-background-color);
+        box-shadow: var(--box-shadow);
+        padding: 2rem;
+        border-radius: var(--border-radius-m);
+    }
+
+    .member {
+        text-align: center;
+
+
+
+        .avatar {
+
+        }
+
+        .name {
+
+        }
+
+        .job-title {
+            background-color: var(--white-400);
+            border-radius: var(--border-radius-m);
+            display: inline-block;
+            align-self: center;
+            padding: .2rem .5rem;
+            margin: .5rem 0 1.5rem;
+            max-width: max-content;
+        }
+
+        .email {
+
+        }
+
+        .phone-number {
+
+        }
+    }
+}
 
 /* views/pages */
