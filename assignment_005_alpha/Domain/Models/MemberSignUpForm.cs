@@ -23,6 +23,9 @@ public class MemberSignUpForm
     [DataType(DataType.EmailAddress)]
     public string Email { get; set; } = null!;
     
+    [Display(Name = "Phone Number", Prompt = "Enter your phone number.")]
+    [DataType(DataType.PhoneNumber)]
+    public string? PhoneNumber { get; set; }
     
     [Required(ErrorMessage = "Required")]
     [Display(Name = "Password", Prompt = "Enter a password.")]
