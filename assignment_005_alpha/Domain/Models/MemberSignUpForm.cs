@@ -24,6 +24,8 @@ public class MemberSignUpForm
     public string Email { get; set; } = null!;
     
     [Display(Name = "Phone Number", Prompt = "Enter your phone number.")]
+    [RegularExpression(@"^\+?\d{1,4}\s?\d{2,4}(\s?-?\s?\d{2,4}){2,3}$", 
+        ErrorMessage = "Invalid phone number format.")]
     [DataType(DataType.PhoneNumber)]
     public string? PhoneNumber { get; set; }
     
@@ -36,12 +38,14 @@ public class MemberSignUpForm
     
     
     [Required(ErrorMessage = "Required")]
-    [Display(Name = "Confirm Password", Prompt = "Confirm password.")]
+    [Compare(nameof(Password), ErrorMessage = "Password must be confirmed.")]
     [DataType(DataType.Password)]
+    [Display(Name = "Confirm Password", Prompt = "Confirm password.")]
     public string ConfirmPassword { get; set; } = null!;
     
     
-    [Required(ErrorMessage = "Required")]
-    [Display(Name = "Terms & Conditions", Prompt = "I Accept the terms & conditions.")]
+    // [Required(ErrorMessage = "Required")]
+    [Display(Name = "Terms & Conditions", Prompt = "I Accept the terms and conditions.")]
+    [Range(typeof(bool), "true", "true", ErrorMessage="You must accept the terms and conditions to use this site.")]
     public bool TermsAndConditions { get; set; }
 }
