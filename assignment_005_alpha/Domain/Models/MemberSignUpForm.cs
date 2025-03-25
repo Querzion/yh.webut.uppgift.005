@@ -39,8 +39,8 @@ public class MemberSignUpForm
     
     [Required(ErrorMessage = "Required")]
     [Compare(nameof(Password), ErrorMessage = "Password must be confirmed.")]
+    [Display(Name = "Confirm Password", Prompt = "Confirm the password.")]
     [DataType(DataType.Password)]
-    [Display(Name = "Confirm Password", Prompt = "Confirm password.")]
     public string ConfirmPassword { get; set; } = null!;
     
     
