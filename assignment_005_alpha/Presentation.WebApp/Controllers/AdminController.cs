@@ -1,8 +1,13 @@
 using Business.Interfaces;
-using Domain.Models;
+using Domain.DTOs;
+using Domain.DTOs.Registrations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebApp.ViewModels;
+using Presentation.WebApp.ViewModels.Edits;
+using Presentation.WebApp.ViewModels.Logins;
+using Presentation.WebApp.ViewModels.Registrations;
+using Presentation.WebApp.ViewModels.SignUps;
 
 namespace Presentation.WebApp.Controllers;
 
@@ -20,19 +25,32 @@ public class AdminController : Controller
     [Route("members")]
     public async Task<IActionResult> Members()
     {
-        var members = await _memberService.GetAllMembersAsync();
-
-        #region ChatGPT helped here.
+        var viewModel = new MembersViewModel
+        {
+            Title = "Team Members",
+            Members = await _memberService.GetMembersAsync(),
+            RegistrationForm = new MemberSignUpViewModel(),
+            AddMember = new AddMemberViewModel(),
+            EditMember = new EditMemberViewModel(),
+            Login = new MemberLoginViewModel()
+         };
         
-            var viewModel = new MembersViewModel
-            {
-                Members = members,
-                AddMemberForm = new AddMemberForm(),
-                EditMemberForm = new EditMemberForm()
-            };
-            return View(viewModel);
+        return View(viewModel);
         
-        #endregion
+        
+        // var members = await _memberService.GetMembersAsync();
+        //
+        // #region ChatGPT helped here.
+        //
+        //     var viewModel = new MembersViewModel
+        //     {
+        //         Members = members,
+        //         AddMemberForm = new AddMemberForm(),
+        //         EditMemberForm = new EditMemberForm()
+        //     };
+        //     return View(viewModel);
+        //
+        // #endregion
     }
 
     [Route("clients")]

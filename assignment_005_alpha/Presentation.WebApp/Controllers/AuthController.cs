@@ -1,32 +1,38 @@
 using Business.Interfaces;
-using Data.Entities;
-using Domain.Models;
+using Domain.DTOs.Registrations;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.WebApp.ViewModels.Logins;
+using Presentation.WebApp.ViewModels.Registrations;
+using Presentation.WebApp.ViewModels.SignUps;
 
 namespace Presentation.WebApp.Controllers;
 
-#region From the "Tips & Trix - Autentisering och Team Members" Video (https://youtu.be/PO46Yhz_ejg?si=1SHrM_Te8U_wKgPt)
+#region From the "Tips & Trix - ViewModels & Models" Video
 
-    public class AuthController(IAuthService authService) : Controller
+    public class AuthController(IAuthService authenticationService) : Controller
     {
+        private readonly IAuthService _authenticationService = authenticationService;
+
+        
         public IActionResult Login(string returnUrl = "~/")
         {
             if (string.IsNullOrWhiteSpace(returnUrl))
                 returnUrl = "~/";
-
+        
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
         
         [HttpPost]
-        public async Task<IActionResult> Login(MemberLoginForm form, string returnUrl = "~/")
+        public async Task<IActionResult> Login(MemberLoginViewModel form, string returnUrl = "~/")
         {
             ViewBag.ErrorMessage = "";
         
             if (ModelState.IsValid)
             {
-                var result = await authService.LoginAsync(form);
+                var result = await _authenticationService.LoginAsync(form);
                 if (result)
                     return LocalRedirect(string.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
             }
@@ -38,32 +44,110 @@ namespace Presentation.WebApp.Controllers;
         
         public IActionResult SignUp()
         {
-            ViewBag.ErrorMessage = "";
+            return View();
+        }
+        
+        // Convert from ViewModel >> DTO
+        [HttpPost]
+        public async Task<IActionResult> SignUp(MemberSignUpViewModel model)
+        {
+            if(!ModelState.IsValid)
+                return View(model);
+
+            // You can do it this way or through the ViewModel.
+            // var memberSignUpDto = new MemberSignUpForm()
+            // {
+            //     FirstName = model.FirstName,
+            //     LastName = model.LastName,
+            //     Email = model.Email,
+            //     Password = model.Password
+            // };
+            
+            // ViewModel mapping is chosen here.
+            // MemberSignUpForm form = model;
+            // await _authenticationService.SignUpAsync(form);
+            
+            // OR I can do it like this and just put the model in, since the DTO is being converted in the viewModel
+            // IF the convertion from ViewModel to DTO is added to the ViewModel, and This is called a complicit mapping
+            await _authenticationService.SignUpAsync(model);
             
             return View();
         }
         
         [HttpPost]
-        public async Task<IActionResult> SignUp(MemberSignUpForm form)
+        public async Task<IActionResult> AddMember(AddMemberViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await authService.SignUpAsync(form);
-                if (result)
-                    return LocalRedirect("~/");
-            }
-        
-            ViewBag.ErrorMessage = "";
-            return View(form);
-        }
-
-        public async Task<IActionResult> Logout()
-        {
-            await authService.LogoutAsync();
+            if(!ModelState.IsValid)
+                return View(model);
             
-            return LocalRedirect("~/");
+            await _authenticationService.AddMemberAsync(model);
+            
+            return View();
         }
     }
+
+#endregion
+
+#region From the "Tips & Trix - Autentisering och Team Members" Video (https://youtu.be/PO46Yhz_ejg?si=1SHrM_Te8U_wKgPt)
+
+    // public class AuthController(IAuthService authService) : Controller
+    // {
+    //     private readonly IAuthService _authService = authService;
+    //     
+    //     public IActionResult Login(string returnUrl = "~/")
+    //     {
+    //         if (string.IsNullOrWhiteSpace(returnUrl))
+    //             returnUrl = "~/";
+    //
+    //         ViewBag.ReturnUrl = returnUrl;
+    //         return View();
+    //     }
+    //     
+    //     [HttpPost]
+    //     public async Task<IActionResult> Login(MemberLoginForm form, string returnUrl = "~/")
+    //     {
+    //         ViewBag.ErrorMessage = "";
+    //     
+    //         if (ModelState.IsValid)
+    //         {
+    //             var result = await _authService.LoginAsync(form);
+    //             if (result)
+    //                 return LocalRedirect(string.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
+    //         }
+    //         
+    //         ViewBag.ErrorMessage = "Incorrect email or password.";
+    //         return View(form);
+    //         
+    //     }
+    //     
+    //     public IActionResult SignUp()
+    //     {
+    //         ViewBag.ErrorMessage = "";
+    //         
+    //         return View();
+    //     }
+    //     
+    //     [HttpPost]
+    //     public async Task<IActionResult> SignUp(MemberRegistrationForm form)
+    //     {
+    //         if (ModelState.IsValid)
+    //         {
+    //             var result = await _authService.SignUpAsync(form);
+    //             if (result)
+    //                 return LocalRedirect("~/");
+    //         }
+    //     
+    //         ViewBag.ErrorMessage = "";
+    //         return View(form);
+    //     }
+    //
+    //     public async Task<IActionResult> Logout()
+    //     {
+    //         await _authService.LogoutAsync();
+    //         
+    //         return LocalRedirect("~/");
+    //     }
+    // }
 
 #endregion
 

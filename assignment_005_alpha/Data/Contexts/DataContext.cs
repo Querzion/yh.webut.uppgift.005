@@ -16,5 +16,6 @@ public class DataContext(DbContextOptions options) : IdentityDbContext<MemberEnt
     }
 
     public virtual DbSet<MemberAddressEntity> MemberAddresses { get; set; }
+    public virtual DbSet<MemberImageEntity> MemberImages { get; set; }
     // public virtual DbSet<ClientEntity> Clients { get; set; }
 }

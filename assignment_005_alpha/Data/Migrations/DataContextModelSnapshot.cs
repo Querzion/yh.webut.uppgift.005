@@ -20,19 +20,16 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.MemberAddressEntity", b =>
                 {
                     b.Property<string>("MemberId")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("StreetName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("MemberId");
 
@@ -51,6 +48,9 @@ namespace Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime?>("DateOfBirth")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -59,13 +59,15 @@ namespace Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<string>("JobTitle")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
@@ -110,6 +112,19 @@ namespace Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Entities.MemberImageEntity", b =>
+                {
+                    b.Property<string>("MemberId")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("MemberImagePath")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("MemberId");
+
+                    b.ToTable("MemberImages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -251,6 +266,17 @@ namespace Data.Migrations
                     b.Navigation("Member");
                 });
 
+            modelBuilder.Entity("Data.Entities.MemberImageEntity", b =>
+                {
+                    b.HasOne("Data.Entities.MemberEntity", "Member")
+                        .WithOne("MemberImage")
+                        .HasForeignKey("Data.Entities.MemberImageEntity", "MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -305,6 +331,8 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.MemberEntity", b =>
                 {
                     b.Navigation("Address");
+
+                    b.Navigation("MemberImage");
                 });
 #pragma warning restore 612, 618
         }

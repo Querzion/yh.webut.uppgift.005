@@ -1,4 +1,8 @@
 using Domain.Models;
+using Presentation.WebApp.ViewModels.Edits;
+using Presentation.WebApp.ViewModels.Logins;
+using Presentation.WebApp.ViewModels.Registrations;
+using Presentation.WebApp.ViewModels.SignUps;
 
 namespace Presentation.WebApp.ViewModels;
 
@@ -6,9 +10,17 @@ namespace Presentation.WebApp.ViewModels;
 
     public class MembersViewModel
     {
-        public IEnumerable<Member>? Members { get; set; }
-        public AddMemberForm AddMemberForm { get; set; } = new AddMemberForm();
-        public EditMemberForm EditMemberForm { get; set; } = new EditMemberForm();
+        public string Title { get; set; } = null!;
+
+        public IEnumerable<Member>? Members { get; set; } = [];
+
+        public MemberSignUpViewModel RegistrationForm { get; set; } = new();
+        
+        public AddMemberViewModel AddMember { get; set; } = new();
+        
+        public EditMemberViewModel EditMember { get; set; } = new();
+        
+        public MemberLoginViewModel Login { get; set; } = new();
     }
 
 #endregion

@@ -1,4 +1,4 @@
-@model MemberSignUpForm
+@model MemberSignUpViewModel
 @{
     Layout = "_CleanLayout";
     ViewData["Title"] = "Register";
@@ -63,7 +63,7 @@
             <div class="form-footer">
                 <span>Already have an account?</span>
                 <a asp-controller="Auth" asp-action="Login">Login</a>
-            </div>   
+            </div>
         </form>
     </div>
 </div>

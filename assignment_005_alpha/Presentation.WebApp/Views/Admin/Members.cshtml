@@ -1,14 +1,16 @@
 @model MembersViewModel
 @{
-    ViewData["Title"] = "Team Members";
+    ViewData["Title"] = Model.Title;
 }
 
 @* @await Html.PartialAsync("Partials/Sections/_AddMemberModal") *@
-<partial name="Partials/Sections/Members/_AddMemberModal" model="Model.AddMemberForm"/>
-<partial name="Partials/Sections/Members/_EditMemberModal" model="Model.EditMemberForm"/>
+<partial name="Partials/Sections/Members/_AddMemberModal" model="Model.AddMember"/>
+@* <partial name="Partials/Sections/Members/_AddMemberModal" model="Model.AddMemberForm"/> *@
+<partial name="Partials/Sections/Members/_EditMemberModal" model="Model.EditMember" />
+@* <partial name="Partials/Sections/Members/_EditMemberModal" model="Model.EditMemberForm"/> *@
 
 <section id="team-members">
-    
+
     <header class="main-header">
         <h2>@ViewData["Title"]</h2>
         <button type="button" data-modal="true" data-target="#addMemberModal" class="btn btn-add btn-blue">Add Member</button>
