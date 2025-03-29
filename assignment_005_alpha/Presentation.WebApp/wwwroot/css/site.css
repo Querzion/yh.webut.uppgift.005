@@ -1,6 +1,7 @@
 /* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 /* variable scheme */
 :root {
@@ -9,6 +10,7 @@
     --font-standard: "Nunito", sans-serif;
     /* 300-700 */
     --font-logo: "Comfortaa", sans-serif;
+    --font-admin-panel: "Poppins", sans-serif;
     --font-fa-free: "Font Awesome 6 Free";
     --font-fa-pro: "Font Awesome 6 Pro";
     --font-bootstrap: "bootstrap-icons";
@@ -32,6 +34,12 @@
     --font-size-h5: 1.25em; /* 20px */
     --font-size-h6: 1.125em; /* 18px */
     --font-size-logo: 1.625em; /* 26px */
+
+    /* img sizes - not correct sizes */
+    --img-width-default: 48px;
+    --img-width-small: 12px;
+    --img-width-medium: 16px;
+    --img-width-large: 24px;
 
     /* resolutions */
     --size-tablet: 768px;
@@ -312,7 +320,7 @@ a {
     height: 100%;
 }
 
-.surface {
+.surface, .card {
     background-color: var(--surface-color);
     /* Default box-shadow: is >> 2px 12px 16px 2px var(--box-shadow-color); */
     box-shadow: var(--box-sh-prim-horisontal)
@@ -323,6 +331,7 @@ a {
     border-radius: var(--border-radius-default);
     padding: 2rem;
 }
+
 
 .hide {
     display: none;
@@ -539,6 +548,7 @@ h6, .h6 {
     text-decoration: none;
     padding: var(--btn-padding);
     min-width: 130px;
+    overflow: hidden;
 
     &:hover {
         color: var(--btn-hover-text-color);
@@ -813,7 +823,7 @@ form {
         position: relative;
     }
 
-    label {
+    label, .form-label-group {
         font-size: var(--font-size-default);
         font-weight: var(--font-weight-medium);
         text-align: left;
@@ -966,12 +976,17 @@ input[type="checkbox"] {
     margin-bottom: 3rem;
 }
 
+.card-header {
+    text-align: start;
+    background-color: var(--white-100);
+    margin-bottom: 1rem;
+}
 
 
 #editMemberModal {
     position: relative;
     z-index: 1000;
-    
+
     .with-modal-content {
         width: 550px;
     }
@@ -1029,6 +1044,43 @@ input[type="checkbox"] {
 
     h1 {
         margin-bottom: 2rem;
+    }
+}
+
+#users {
+
+    a {
+        display: block;
+        justify-self: right;
+        margin-bottom: .5rem;
+    }
+}
+
+#adduser {
+    width: 550px;
+
+
+}
+
+
+#userlist {
+    width: 550px;
+
+    .user-item {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        padding: 1rem;
+        margin-left: 1rem;
+
+        img {
+            width: var(--img-width-default);
+        }
+
+        .user {
+            display: flex;
+            flex-direction: column;
+        }
     }
 }
 
