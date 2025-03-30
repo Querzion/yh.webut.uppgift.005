@@ -32,9 +32,9 @@ public class MemberRegistrationForm
     [DataType(DataType.EmailAddress)]
     public string Email { get; set; } = null!;
     
-    [Display(Name = "Location", Prompt = "Enter location")]
+    [Display(Name = "Address", Prompt = "Enter address")]
     [DataType(DataType.Text)]
-    public string? Location { get; set; }
+    public string? Address { get; set; }
     
     [Display(Name = "Phone Number", Prompt = "Enter your phone number.")]
     [RegularExpression(@"^\+?\d{1,4}\s?\d{2,4}(\s?-?\s?\d{2,4}){2,3}$", 

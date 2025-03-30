@@ -17,7 +17,7 @@ public class MemberFactory
                 UserName = form.Email,
                 FirstName = form.FirstName,
                 LastName = form.LastName,
-                Email = form.Email,
+                Email = form.Email
             };
     }
     

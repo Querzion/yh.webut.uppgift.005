@@ -428,6 +428,11 @@ a {
     display: flex;
     gap: 1rem;
 }
+.d-grid {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 1rem;
+}
 
 .dome-left {
     display: flex;
@@ -514,6 +519,17 @@ h6, .h6 {
             background-color: var(--navlink-background-active-color);
         }
     }
+}
+
+.account-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .page-header {
@@ -1047,13 +1063,9 @@ input[type="checkbox"] {
     }
 }
 
-#users {
-
-    a {
-        display: block;
-        justify-self: right;
-        margin-bottom: .5rem;
-    }
+#users, #user-management {
+    display: flex;
+    gap: 1rem;
 }
 
 #adduser {
