@@ -1,13 +1,16 @@
 using Data.Contexts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Presentation.WebApp.Controllers;
 
+[Authorize(Policy = "Admins")]
 public class UsersController(AppDbContext context) : Controller
 {
     private readonly AppDbContext _context = context;
 
+    [Route("admin/members")]
     public IActionResult Index()
     {
         return View();
@@ -25,5 +28,12 @@ public class UsersController(AppDbContext context) : Controller
             .ToListAsync();
 
         return Json(users);
+    }
+    
+    [AllowAnonymous]
+    [Route("denied")]
+    public IActionResult Denied()
+    {
+        return View();
     }
 }

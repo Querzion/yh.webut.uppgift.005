@@ -1,0 +1,16 @@
+@using System.Security.Claims
+
+<div class="card">
+    <div class="card-header">
+        <h4>User Claims</h4>
+    </div>
+    
+    <div class="card-body">
+        <ul>
+            @foreach (var claim in User.Claims)
+            {
+                <li>@claim.Type : @claim.Value</li>
+            }
+        </ul>
+    </div>
+</div>

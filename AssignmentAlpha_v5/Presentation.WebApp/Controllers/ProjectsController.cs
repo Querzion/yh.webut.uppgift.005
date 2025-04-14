@@ -4,6 +4,7 @@ using Data.Contexts;
 using Data.Entities;
 using Domain.DTOs.Adds;
 using Domain.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -14,10 +15,12 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Presentation.WebApp.Controllers;
 
+[Authorize]
 public class ProjectsController(IProjectService projectService) : Controller
 {
     private readonly IProjectService _projectService = projectService;
 
+    [Route("admin/projects")]
     public async Task<IActionResult> Index()
     {
         var model = new ProjectsViewModel
