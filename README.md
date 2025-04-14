@@ -1,7 +1,7 @@
 #### yh.webut.uppgift.005
 # ASSIGNMENT 5 - ALPHA PORTAL
 
-## This assignment is in collaboration Between Minna Hjelm & Slisk Lindqvist 
+## This assignment
 The solution is an assignment for the ASP.NET module within the Web Development Course (2024-2026).
 
 ### Incremental Workflow
@@ -11,10 +11,10 @@ As of now, we're trying our best to work along side each other in order to figur
 # Resources used to accomplish Assignment 5 >>
 
 ### A compilation of the prior Assignment:
-* (SLISK) HTML & CSS Assignment - [https://github.com/Querzion/yh.webut.uppgift.001](https://github.com/Querzion/yh.webut.uppgift.001) ( Prior Assignment )
-* (SLISK) JAVASCRIPT Assignment - [https://github.com/Querzion/yh.webut.uppgift.002](https://github.com/Querzion/yh.webut.uppgift.002) ( Prior Assignment ) 
-* (SLISK) C-SHARP Assignment - [https://github.com/Querzion/yh.webut.uppgift.003](https://github.com/Querzion/yh.webut.uppgift.003) ( Prior Assignment )
-* (SLISK) DATA STORAGE Assignment - [https://github.com/Querzion/yh.webut.uppgift.004](https://github.com/Querzion/yh.webut.uppgift.004) ( Prior Assignment )
+* HTML & CSS Assignment - [https://github.com/Querzion/yh.webut.uppgift.001](https://github.com/Querzion/yh.webut.uppgift.001) ( Prior Assignment )
+* JAVASCRIPT Assignment - [https://github.com/Querzion/yh.webut.uppgift.002](https://github.com/Querzion/yh.webut.uppgift.002) ( Prior Assignment ) 
+* C-SHARP Assignment - [https://github.com/Querzion/yh.webut.uppgift.003](https://github.com/Querzion/yh.webut.uppgift.003) ( Prior Assignment )
+* DATA STORAGE Assignment - [https://github.com/Querzion/yh.webut.uppgift.004](https://github.com/Querzion/yh.webut.uppgift.004) ( Prior Assignment )
 
 ### Projects from course video material: (SLISK & MINNA)
 * - Video 1 - [https://youtu.be/4z4LkA_W78I](https://youtu.be/4z4LkA_W78I) ( Get started with Web Applications - MVC )
@@ -27,7 +27,7 @@ As of now, we're trying our best to work along side each other in order to figur
 * - Video 8 - [https://youtu.be/PEww1Frxp7w](https://youtu.be/PEww1Frxp7w) ( Form Validation - ModalState & Vanilla JavaScript )
 
 #### Course Exercises
-* (SLISK) Exercise 2 - Comes in handy when figuring partial views and model connections.
+* Exercise 2 - Comes in handy when figuring partial views and model connections.
 
 ### External video material?:
 * Video 1 -
