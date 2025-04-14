@@ -1,0 +1,32 @@
+@model SignUpViewModel
+@{
+    Layout = "_CenterScreen";
+    ViewData["Title"] = "Create Account";
+}
+
+<div id="signup" class="card">
+
+    <div class="card-header">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div class="card-body">
+
+        <partial name="Partials/Authentication/_LocalSignUpFormPartial" model="Model"/>
+
+        <div class="additional-information">
+            <span>Already have an account?</span>
+            <a asp-controller="Auth" asp-action="SignIn">Sign In</a>
+        </div>
+
+        <div class="or-separator">
+            <span>or</span>
+        </div>
+
+        <partial name="Partials/Authentication/_ExternalSignUpPartial"/>
+
+    </div>
+</div>
+<div class="agreement-links">
+    <a href="#">Terms of Use</a> | <a href="#">Privacy Polacy</a>
+</div>

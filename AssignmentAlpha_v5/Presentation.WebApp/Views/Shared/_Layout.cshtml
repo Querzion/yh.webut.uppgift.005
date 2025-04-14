@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@(string.IsNullOrEmpty(ViewData["Title"] as String) ? "Third-Party Authentication" : @ViewData["Title"] + " - Third-Party Authentication")</title>
+    <script type="importmap"></script>
+    <partial name="_LibsTop"/>
+</head>
+<body>
+
+    <div class="wrapper-portal">
+        
+        <div class="sidebar">
+            <div class="logotype">
+                <partial name="_VideoLink"/>
+            </div>
+        </div>
+
+        <div class="header">
+            <div class="change-the-search-field"></div>
+            <div class="icons">
+                <partial name="Partials/_HeaderPartial"/>
+            </div>
+        </div>
+
+        <main class="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <partial name="_LibsBottom"/>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

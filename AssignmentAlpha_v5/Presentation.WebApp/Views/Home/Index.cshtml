@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div id="tagging">
+    <div class="surface">
+        <div class="card-body">
+            <form asp-controller="Home" asp-action="Add" method="post" novalidate>
+                <div class="form-group">
+                    <div class="form-label">Tags</div>
+                    <div id="tags" class="form-input form-tag-select">
+                        <input type="text" id="tag-search" class="form-tag-input" placeholder="Add tag(s)..." />
+                        <label for="tag-search" class="fa-solid fa-ellipsis"></label>
+                        <div id="tag-search-results" class="search-results"></div>
+                    </div>
+                </div>
+            
+                <button type="submit" class="btn btn-submit">SAVE</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const preSelectedTags = []
+    
+    initTagSelector({
+        containerId: 'tags',
+        inputId: 'tag-search',
+        resultsId: 'tag-search-results',
+        searchUrl: (query) => '@Url.Action("SearchTags", "Tags")' + '?term=' + encodeURIComponent(query),
+        displayProperty: 'tagName',
+        tagClass: 'tag',
+        emptyMessage: 'No tags found.',
+        preSelectedTags: preSelectedTags
+    });
+    
+</script>

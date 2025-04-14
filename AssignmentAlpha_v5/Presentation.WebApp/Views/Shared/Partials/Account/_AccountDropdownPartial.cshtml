@@ -1,0 +1,47 @@
+@{
+    var userRoles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
+    var displayName = await userService.GetDisplayNameAsync(User.Identity?.Name!);
+}
+<div class="account-dropdown-container">
+    <img id="account-dropdown-button" data-type="dropdown" data-target="#account-dropdown" src="images/Avatars/avatar-male-001.svg" alt="User Avatar" class="account-avatar" />
+    
+    <div id="account-dropdown" class="account-dropdown">
+        <div class="role">
+            <div>
+                <span class="muted"><small>Role:</small></span>
+                @if (userRoles.Any())
+                {
+                    <span><small>@string.Join(", ", userRoles)</small></span>
+                }
+                else
+                {
+                    <span><small>No role assigned</small></span> <!-- Or empty string -->
+                }
+            </div>
+        </div>
+        <div class="account-info">
+            <img src="~/images/Avatars/avatar-male-001.svg" alt="User Avatar" class="account-avatar-mini"/>
+            <span class="account-name">
+                @displayName
+            </span>
+        </div>
+        
+        <div class="account-action">
+            <div class="label">
+                <i class="fa-duotone fa-solid fa-cog"></i>
+                <span>Dark Mode</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle" data-type="toggle" data-func="darkmode"/>
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+        <div class="dropdown-divider"></div>
+        
+        <a class="account-signout" asp-controller="Auth" asp-action="SignOut">
+            <i class="fa-duotone fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</div>

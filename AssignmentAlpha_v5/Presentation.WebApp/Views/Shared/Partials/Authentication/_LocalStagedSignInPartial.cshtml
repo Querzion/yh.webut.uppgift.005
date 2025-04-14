@@ -1,0 +1,23 @@
+@model SignInViewModel
+
+<section id="signin-staged">
+    <form id="email-staged" method="post" novalidate>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" id="emailInput" required />
+        </div>
+
+        <div id="error-message" class="error-message hidden"></div>
+
+        <div class="form-group">
+            <button type="button" id="continueBtn" class="btn btn-submit">Continue</button>
+        </div>
+
+    </form>
+    
+    <div id="partial-container"></div>
+</section>
+
+<script src="@(Url.Content("~/js/staged-sigin.js"))"></script>
+
