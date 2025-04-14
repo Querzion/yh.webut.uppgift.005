@@ -137,4 +137,5 @@ obj/
 debug/
 !debug/README.md
 !debug/config.json
+!.sln
 
