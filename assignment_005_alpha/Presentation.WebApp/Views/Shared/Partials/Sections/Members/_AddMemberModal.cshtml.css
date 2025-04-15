@@ -1,0 +1,54 @@
+#addMemberModal {
+    .modal-content {
+        max-width: 550px;
+    }
+}
+
+.notbs-modal {
+    /*display: none;*/
+    align-items: center;
+    justify-content: center;
+    background-color: var(--modal-screen-background-color);
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+
+    .notbs-modal-content {
+        background-color: var(--modal-background-color);
+        border-radius: var(--border-radius-default);
+        box-shadow: 0 4px 4px 3px var(--box-sh-prim-color);
+        padding: 2rem;
+
+        .notbs-modal-header {
+            border-radius: var(--border-radius-default);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+.the-local-modal {
+    position: fixed; /* Makes sure modal stays on top */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the modal */
+    z-index: 1000; /* Ensures it's above other elements */
+    /*background: white;*/
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
+    /*padding: 1.5rem;*/
+    /*border-radius: 8px;*/
+}
+
+/*.modal-overlay {*/
+/*    position: fixed; !* Stretches over the whole screen *!*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100vw;*/
+/*    height: 100vh;*/
+/*    !*background: rgba(0, 0, 0, 0.5); !* Semi-transparent background *!*!*/
+/*    z-index: 999; !* Should be below modal but above content *!*/
+/*}*/

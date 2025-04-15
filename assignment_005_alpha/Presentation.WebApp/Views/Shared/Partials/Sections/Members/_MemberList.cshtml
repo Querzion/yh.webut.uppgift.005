@@ -1,0 +1,53 @@
+@model IEnumerable<Member>
+
+<div class="members-list">
+
+    @if (Model != null)
+    {
+        @foreach (var member in Model)
+        {
+            <partial name="Partials/Sections/Members/_MemberListItem" model="member"/>
+        }
+    }
+
+</div>
+
+
+
+
+@* <div class="member-list"> *@
+@*     <table> *@
+@*         <thead> *@
+@*         <tr> *@
+@*             <th class="member-check"><input type="checkbox" /></th> *@
+@*             <th class="member-info">Member Name</th> *@
+@*             <th class="member-location">Location</th> *@
+@*             <th class="member-phone">Phone</th> *@
+@*             <th class="member-date">Date</th> *@
+@*             <th class="member-status">Status</th> *@
+@*             <th class="member-actions"></th> *@
+@*         </tr> *@
+@*         </thead> *@
+@*         <tbody> *@
+@*         <tr> *@
+@*             <th class="member-check"><input type="checkbox" /></th> *@
+@*             <th class="member-info"> *@
+@*                 <img class="member-image" src="~/images/avatars/avatar-male-001.svg" alt="" /> *@
+@*                 <div class="member-name">Slisk Lindqvist</div> *@
+@*                 <div class="member-email">slisk.lindqvist@querzion.com</div> *@
+@*             </th> *@
+@*             <th class="member-location">Kristinehamn, Sweden</th> *@
+@*             <th class="member-phone">+46 7007 97 082</th> *@
+@*             <th class="member-date">25-03-14</th> *@
+@*             <th class="member-status"> *@
+@*                 <div class="badge success"> *@
+@*                     active *@
+@*                 </div> *@
+@*             </th> *@
+@*             <th class="member-actions"> *@
+@*                 <i class="fa-regular fa-ellipsis" data-modal="true" data-target="#editMemberModal"></i> *@
+@*             </th> *@
+@*         </tr> *@
+@*         </tbody> *@
+@*     </table> *@
+@* </div> *@

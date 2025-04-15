@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Domain.DTOs.Adds;
 
-public class AddUserFormData
+public class AddMemberFormData
 {
     [Display(Name = "Member Image", Prompt = "Select an image")]
     [DataType(DataType.Upload)]
