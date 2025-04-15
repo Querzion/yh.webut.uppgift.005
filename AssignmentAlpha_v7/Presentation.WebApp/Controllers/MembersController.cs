@@ -1,19 +1,33 @@
+using Business.Services;
 using Data.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Presentation.WebApp.ViewModels;
+using Presentation.WebApp.ViewModels.Adds;
+using Presentation.WebApp.ViewModels.Edits;
 
 namespace Presentation.WebApp.Controllers;
 
 [Authorize(Policy = "Admins")]
-public class MembersController(AppDbContext context) : Controller
+public class MembersController(AppDbContext context, IUserService userService) : Controller
 {
+    private readonly IUserService _userService = userService;
+    
     [Route("admin/members")]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        ViewData["Title"] = "Home";
-
-        return View();
+        var userServiceResult = await _userService.GetUsersAsync();
+        
+        var viewModel = new MembersViewModel
+        {
+            Title = "Team Members",
+            AddMember = new AddMemberViewModel(),
+            EditMember = new EditMemberViewModel(),
+            Members = userServiceResult.Result
+        };
+        
+        return View(viewModel);
     }
     
     [HttpGet]

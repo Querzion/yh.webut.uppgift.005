@@ -34,16 +34,35 @@ public class NotificationsController(IHubContext<NotificationHub> notificationHu
         return Ok(notifications);
     }
 
+    // [HttpPost("dismiss/{id}")]
+    // public async Task<IActionResult> DismissNotification(string id)
+    // {
+    //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "anonymous";
+    //     if (string.IsNullOrEmpty(userId))
+    //         return Unauthorized();
+    //     
+    //     await _notificationService.DismissNotificationsAsync(id, userId);
+    //     await _notificationHub.Clients.User(userId).SendAsync("NotificationDismissed", id);
+    //     return Ok(new { success = true });
+    // }
+    
     [HttpPost("dismiss/{id}")]
     public async Task<IActionResult> DismissNotification(string id)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "anonymous";
         if (string.IsNullOrEmpty(userId))
             return Unauthorized();
-        
-        await _notificationService.DismissNotificationsAsync(id, userId);
-        await _notificationHub.Clients.User(userId).SendAsync("NotificationDismissed", id);
-        return Ok(new { success = true });
+    
+        try
+        {
+            await _notificationService.DismissNotificationsAsync(id, userId);
+            await _notificationHub.Clients.User(userId).SendAsync("NotificationDismissed", id);
+            return Ok(new { success = true });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { success = false, message = ex.Message });
+        }
     }
     
     // [HttpDelete("{notificationId}")]

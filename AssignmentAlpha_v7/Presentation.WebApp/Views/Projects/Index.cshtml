@@ -8,14 +8,18 @@
 
 <section id="projects">
     
-    <header>
+    <header class="main-header">
         <h2>Projects</h2>
         <button type="button" data-modal="true" data-target="#addProjectModal" class="btn btn-add btn-blue">Add Project</button>
     </header>
 
-    <div class="surface">
-        @* @await Html.PartialAsync("Partials/Sections/_ProjectList") *@
-        <partial name="Partials/Sections/Projects/_ProjectList"/>
+    <div class="project-grid">
+        <div class="project-grid-item">
+            <div class="surface">
+                <partial name="Partials/Sections/Projects/_ProjectList"/>
+                @* @await Html.PartialAsync("Partials/Sections/_ProjectList") *@
+            </div>
+        </div>
     </div>
 
 </section>

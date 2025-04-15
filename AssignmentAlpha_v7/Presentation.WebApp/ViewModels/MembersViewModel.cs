@@ -11,7 +11,7 @@ namespace Presentation.WebApp.ViewModels;
     {
         public string Title { get; set; } = null!;
 
-        public IEnumerable<User>? Users { get; set; } = [];
+        public IEnumerable<User>? Members { get; set; } = [];
 
         public SignUpViewModel RegistrationForm { get; set; } = new();
         

@@ -2015,9 +2015,9 @@ input:checked + .slider:before {
 }
 
 #clients {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    height: 100%;
+    /*display: grid;*/
+    /*grid-template-rows: auto 1fr;*/
+    /*height: 100%;*/
 }
 
 #addClientModal {
@@ -2132,82 +2132,93 @@ input:checked + .slider:before {
 
 #team-members {
     display: grid;
+    grid-template-areas: "title"
+                         "body";
     gap: 2rem;
 
-    .members-list {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
-
-        /*@media (max-width: 768px) {*/
-        /*    grid-template-columns: 1fr;*/
-        /*}*/
-        @media (min-width: 920px) {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        @media (min-width: 1200px) {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        @media (min-width: 1700px) {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        @media (min-width: 2200px) {
-            grid-template-columns: repeat(5, 1fr);
-        }
-        @media (min-width: 2700px) {
-            grid-template-columns: repeat(6, 1fr);
-        }
-        @media (min-width: 3200px) {
-            grid-template-columns: repeat(7, 1fr);
-        }
-        @media (min-width: 3700px) {
-            grid-template-columns: repeat(8, 1fr);
-        }
-        @media (min-width: 4200px) {
-            grid-template-columns: repeat(9, 1fr);
-        }
-        @media (min-width: 4500px) {
-            grid-template-columns: repeat(10, 1fr);
-        }
+    .main-header {
+        grid-area: title;
     }
+    
+    .main-body {
+        grid-area: body;
+        
+        .members-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
 
-    .card {
-        color: var(--card-text-color);
-        border: 1px solid var(--card-border-color);
-        background-color: var(--card-background-color);
-        box-shadow: var(--box-shadow);
-        padding: 2rem;
-        border-radius: var(--border-radius-m);
-    }
-
-    .member {
-        text-align: center;
-
-
-        .avatar {
-
+            /*@media (max-width: 768px) {*/
+            /*    grid-template-columns: 1fr;*/
+            /*}*/
+            @media (min-width: 920px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            @media (min-width: 1200px) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @media (min-width: 1700px) {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            @media (min-width: 2200px) {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            @media (min-width: 2700px) {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            @media (min-width: 3200px) {
+                grid-template-columns: repeat(7, 1fr);
+            }
+            @media (min-width: 3700px) {
+                grid-template-columns: repeat(8, 1fr);
+            }
+            @media (min-width: 4200px) {
+                grid-template-columns: repeat(9, 1fr);
+            }
+            @media (min-width: 4500px) {
+                grid-template-columns: repeat(10, 1fr);
+            }
         }
 
-        .name {
-
-        }
-
-        .job-title {
-            background-color: var(--white-400);
+        .card {
+            color: var(--card-text-color);
+            border: 1px solid var(--card-border-color);
+            background-color: var(--card-background-color);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
             border-radius: var(--border-radius-m);
-            display: inline-block;
-            align-self: center;
-            padding: .2rem .5rem;
-            margin: .5rem 0 1.5rem;
-            max-width: max-content;
+            z-index: 1;
         }
 
-        .email {
+        .member {
+            text-align: center;
 
-        }
 
-        .phone-number {
+            .avatar {
 
+            }
+
+            .name {
+
+            }
+
+            .job-title {
+                background-color: var(--white-400);
+                border-radius: var(--border-radius-m);
+                display: inline-block;
+                align-self: center;
+                padding: .2rem .5rem;
+                margin: .5rem 0 1.5rem;
+                max-width: max-content;
+            }
+
+            .email {
+
+            }
+
+            .phone-number {
+
+            }
         }
     }
 }
