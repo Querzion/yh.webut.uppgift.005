@@ -1,0 +1,22 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using Presentation.WebApp.ViewModels
+@using Presentation.WebApp.ViewModels.Adds
+@using Presentation.WebApp.ViewModels.Authentications
+@using Presentation.WebApp.ViewModels.Edits
+@using Business.Services
+@using Domain.Models
+@using Domain.DTOs
+@using Domain.DTOs.Adds
+@using Domain.DTOs.Authentication
+@using Domain.DTOs.Edits
+@using Domain.DTOs.Registrations
+
+@using Presentation.WebApp.ViewModels.Authentications
+@using System.Security.Claims
+@using Business.Services
+@using Microsoft.AspNetCore.Authorization
+
+@inject IAuthorizationService authorizationService
+@inject IUserService userService
+@inject INotificationService notificationService

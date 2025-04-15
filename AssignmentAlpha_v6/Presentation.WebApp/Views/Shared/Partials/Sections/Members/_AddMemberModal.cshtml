@@ -1,0 +1,124 @@
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model AddMemberViewModel
+
+<div id="addMemberModal" class="the-local-modal">
+    <div class="with-modal-content">
+
+        <div class="and-a-modal-header">
+            <h3>Add Team Member</h3>
+            <button type="button" class="btn-close" data-close="true"></button>
+        </div>
+
+        <form novalidate method="post" asp-action="AddMember" asp-controller="Members">
+
+            <div class="image-previewer circle">
+                <img src="" class="image-preview" alt="" />
+                <input asp-for="UserImage" accept="image/*" class="hide" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <div class="field-group">
+                    <input asp-for="FirstName" />
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <div class="field-group">
+                    <input asp-for="LastName" />
+                    <span asp-validation-for="LastName"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <div class="field-group">
+                    <input asp-for="Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <div class="field-group">
+                    <input asp-for="PhoneNumber" />
+                    <span asp-validation-for="PhoneNumber"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="JobTitle"></label>
+                <div class="field-group">
+                    <input asp-for="JobTitle" />
+                    <span asp-validation-for="JobTitle"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StreetName"></label>
+                <div class="field-group">
+                    <input asp-for="StreetName" />
+                    <span asp-validation-for="StreetName"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostalCode"></label>
+                <div class="field-group">
+                    <input asp-for="PostalCode" />
+                    <span asp-validation-for="PostalCode"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="City"></label>
+                <div class="field-group">
+                    <input asp-for="City" />
+                    <span asp-validation-for="City"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="SelectedDay">Date of Birth</label>
+                <div class="field-group">
+                    <select asp-for="SelectedDay" class="form-control" aria-label="Select day">
+                        <option value="">Day</option>
+                        @for (var i = 1; i <= 31; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SelectedDay"></span>
+                </div>
+
+                <div class="field-group">
+                    <select asp-for="SelectedMonth" class="form-control" aria-label="Select month">
+                        <option value="">Month</option>
+                        @for (var i = 1; i <= 12; i++)
+                        {
+                            <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SelectedMonth"></span>
+                </div>
+
+                <div class="field-group">
+                    <select asp-for="SelectedYear" class="form-control" aria-label="Select year">
+                        <option value="">Year</option>
+                        @for (var i = DateTime.Now.Year; i >= 1900; i--)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SelectedYear"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-submit btn-blue">Create</button>
+        </form>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("_ValidationScripts")
