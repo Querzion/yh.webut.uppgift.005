@@ -68,18 +68,9 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.min.js" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.slim.min.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
-      <_ContentIncludedByDefault Remove="Views\Shared\Libraries\_Bottom.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\Shared\Libraries\_Top.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="wwwroot\images\uploads\clients\" />
-      <Folder Include="wwwroot\images\uploads\projects\" />
-      <Folder Include="wwwroot\images\uploads\users\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Business\Business.csproj" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -88,6 +79,10 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Business\Business.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,33 @@
+@model SignInViewModel
+@{
+    Layout = "_CenterScreen";
+    ViewData["Title"] = "Sign In";
+}
+
+<div id="signin" class="card">
+
+    <div class="card-header">
+        <h2>Welcome back</h2>
+    </div>
+
+    <div class="card-body">
+
+        <partial name="Partials/Authentication/_LocalStagedSignInPartial" model="Model"/>
+
+        <div class="additional-information">
+            <span>Don't have an account?</span>
+            <a asp-controller="Auth" asp-action="SignUp">Sign Up</a>
+        </div>
+
+        <div class="or-separator">
+            <span>or</span>
+        </div>
+
+        <partial name="Partials/Authentication/_ExternalSignInPartial"/>
+
+    </div>
+</div>
+<div class="agreement-links">
+    <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a>
+</div>
+

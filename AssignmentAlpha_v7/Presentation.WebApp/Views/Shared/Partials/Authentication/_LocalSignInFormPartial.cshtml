@@ -1,0 +1,27 @@
+@model SignInViewModel
+
+<form id="signin-form" asp-controller="Auth" asp-action="SignIn" method="post" enctype="multipart/form-data" novalidate>
+    <input type="hidden" name="returnURL" value="@ViewBag.ReturnUrl" />
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" readonly class="readonly-input" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+    </div>
+
+    @if (!string.IsNullOrEmpty(ViewBag?.ErrorMessage))
+    {
+        <div class="alert-notification error">
+            @ViewBag?.ErrorMessage
+        </div>
+    }
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-submit">Log In</button>
+    </div>
+
+</form>

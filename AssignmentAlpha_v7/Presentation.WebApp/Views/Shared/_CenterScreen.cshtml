@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@(string.IsNullOrEmpty(ViewData["Title"] as String) ? "Change Title" : @ViewData["Title"] + " - Change Title")</title>
+    <script type="importmap"></script>
+    <partial name="_LibsTop"/>
+</head>
+<body>
+
+    <partial name="_VideoLink"/>
+
+    <div class="wrapper-centerscreen">
+        <main class="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <partial name="_LibsBottom"/>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
