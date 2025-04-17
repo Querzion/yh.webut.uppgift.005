@@ -1,14 +1,11 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Domain.DTOs.Adds;
 using Presentation.WebApp.ViewModels.Forms;
 
 namespace Presentation.WebApp.ViewModels.Edits;
 
-public class EditProjectViewModel : ProjectFormViewModel
+public class EditClientViewModel : ClientFormViewModel
 {
     [Required(ErrorMessage = "Required")]
     public string Id { get; set; } = null!;
-    
-    
-    public List<SelectListItem> ClientOptions { get; set; } = new List<SelectListItem>();
 }

@@ -1,55 +1,119 @@
-@model EditProjectForm
+@model EditProjectViewModel
 
-<div id="editProjectModal" class="the-local-modal">
-    <div class="with-modal-content">
+<div id="editProjectModal" class="modal">
+    <div class="modal-content">
 
-        <div class="and-a-modal-header">
+        <div class="modal-header">
             <h3>Edit Project</h3>
             <button type="button" class="btn-close" data-close="true"></button>
         </div>
 
         <form novalidate method="post" asp-action="EditProject" asp-controller="Projects">
 
-            <input asp-for="Id" readonly type="hidden"/>
+            
+            <input asp-for="Id" id="ProjectEditId" readonly type="hidden" />
 
-            <div class="image-previewer circle">
+            <div class="image-previewer square">
                 <img src="" class="image-preview" alt="" />
                 <input asp-for="ProjectImage" accept="image/*" class="hide" />
             </div>
-
+        
             <div class="form-group">
-                <label asp-for="ProjectName"></label>
+                <label class="form-label" asp-for="ProjectName"></label>
                 <div class="field-group">
                     <input asp-for="ProjectName" />
                     <span asp-validation-for="ProjectName"></span>
                 </div>
             </div>
-
+            
             <div class="form-group">
-                <label asp-for="Email"></label>
+                <label class="form-label">Client</label>
+                <div class="form-select" data-placeholder="Choose a client">
+                    <button type="button" class="form-select-trigger">
+                        <span class="form-select-text"></span>
+                    </button>
+                    <ul class="form-select-options">
+                        <li class="form-select-option" data-value="1">Client 1</li>
+                        <li class="form-select-option" data-value="2">Client 2</li>
+                    </ul>
+                    <input type="hidden" name="form-select-value" />
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <select asp-for="@Model.ClientId" asp-items="Model.ClientOptions" class="form-control">
+                    <option value="0" disabled selected>-- Select a Client --</option>
+                </select>
+                <span asp-validation-for="@Model.ClientId"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <div class="wysiwyg">
+                    <textarea class="hide"></textarea>
+                    <div id="project-wysiwyg-editor" class="wysiwyg-editor"></div>
+                    <div id="project-wysiwyg-toolbar" class="wysiwyg-toolbar">
+                        <span class="ql-formats">
+                            <button class="ql-bold"></button>
+                            <button class="ql-italic"></button>
+                            <button class="ql-underline"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-align" value=""></button>
+                            <button class="ql-align" value="center"></button>
+                            <button class="ql-align" value="right"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-list" value="bullet"></button>
+                            <button class="ql-list" value="ordered"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-link"></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-horizontal-group">
+                <div class="form-group">
+                    <label class="form-label" asp-for="StartDate"></label>
+                    <div class="field-group">
+                        <input asp-for="StartDate" />
+                        <span asp-validation-for="StartDate"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" asp-for="EndDate"></label>
+                    <div class="field-group">
+                        <input asp-for="EndDate" />
+                        <span asp-validation-for="EndDate"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Members</label>
+                <div class="form-select" data-placeholder="Choose a member">
+                    <button type="button" class="form-select-trigger">
+                        <span class="form-select-text"></span>
+                    </button>
+                    <ul class="form-select-options">
+                        <li class="form-select-option" data-value="1">Member 1</li>
+                        <li class="form-select-option" data-value="2">Member 2</li>
+                    </ul>
+                    <input type="hidden" name="member-select-value" />
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label class="form-label" asp-for="Budget"></label>
                 <div class="field-group">
-                    <input asp-for="Email" />
-                    <span asp-validation-for="Email"></span>
+                    <input asp-for="Budget" />
+                    <span asp-validation-for="Budget"></span>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Location"></label>
-                <div class="field-group">
-                    <input asp-for="Location" />
-                    <span asp-validation-for="Location"></span>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="PhoneNumber"></label>
-                <div class="field-group">
-                    <input asp-for="PhoneNumber" />
-                    <span asp-validation-for="PhoneNumber"></span>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-submit btn-blue">Create</button>
+            <button type="submit" class="btn btn-submit btn-blue">Save</button>
         </form>
 
     </div>

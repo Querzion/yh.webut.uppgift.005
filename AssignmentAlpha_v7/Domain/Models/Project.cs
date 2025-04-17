@@ -23,4 +23,6 @@ public class Project
     public User User { get; set; } = null!;
     
     public Status Status { get; set; } = null!;
+    
+    public IEnumerable<ProjectMember> ProjectMembers { get; set; } = [];
 }

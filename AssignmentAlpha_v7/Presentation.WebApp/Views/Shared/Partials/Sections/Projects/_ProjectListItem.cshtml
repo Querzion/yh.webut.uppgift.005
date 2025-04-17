@@ -1,1 +1,29 @@
+@model Project
 
+<div class="card member">
+    <div class="pos-right">
+        <button type="button" data-modal="true" data-target="#editMemberModal" class="btn-edit"></button>
+    </div>
+    @if (Model.ProjectImage != null && !string.IsNullOrEmpty(Model.ProjectImage.ImageUrl))
+    {
+        <div class="avatar">
+            <img src="@Model.ProjectImage.ImageUrl" alt="@Model.ProjectImage.AltText" />
+        </div>
+    }
+    else
+    {
+        <div class="avatar">
+            <img src="/images/projects/project-template.svg" alt="Default Image" />
+        </div>
+    }
+    <h4 class="name">@Model.ProjectName</h4>
+    <div class="job-title">@Model.Description</div>
+    <div class="email">@Model.Budget</div>
+    <div class="phone-number">@Model.StartDate</div>
+    <div class="role">@Model.EndDate</div>
+    <button class="btn-nocol btn-gray">Message</button>
+
+    <p>Image Path: @Model.ProjectImage?.ImageUrl</p>
+    <p>Exists? @(Model.ProjectImage != null)</p>
+    <p>BirthDate: @Model.Status</p>
+</div>

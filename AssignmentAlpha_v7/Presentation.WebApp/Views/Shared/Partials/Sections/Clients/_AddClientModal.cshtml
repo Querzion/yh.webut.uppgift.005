@@ -1,16 +1,16 @@
 @model AddClientFormData
 
-<div id="addClientModal" class="the-local-modal">
-    <div class="with-modal-content">
+<div id="addClientModal" class="modal">
+    <div class="modal-content">
 
-        <div class="and-a-modal-header">
+        <div class="modal-header">
             <h3>Add Client</h3>
             <button type="button" class="btn-close" data-close="true"></button>
         </div>
 
         <form novalidate method="post" asp-action="AddClient" asp-controller="Clients">
             
-            <div class="image-previewer circle">
+            <div class="image-previewer square">
                 <img src="" class="image-preview" alt="" />
                 <input asp-for="ClientImage" accept="image/*" class="hide" />
             </div>

@@ -133,6 +133,23 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
             return new RepositoryResult<TModel> { Succeeded = true, StatusCode = 200, Result = result };
         }
         
+        public virtual async Task<RepositoryResult<TEntity>> GetEntityAsync(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes)
+        {
+            IQueryable<TEntity> query = _table;
+
+            if (includes != null && includes.Length > 0)
+            {
+                foreach (var include in includes)
+                    query = query.Include(include);
+            }
+
+            var entity = await query.FirstOrDefaultAsync(where);
+            if (entity == null)
+                return new RepositoryResult<TEntity> { Succeeded = false, StatusCode = 404, Error = "Entity not found." };
+
+            return new RepositoryResult<TEntity> { Succeeded = true, StatusCode = 200, Result = entity };
+        }
+        
         
         public virtual async Task<RepositoryResult<bool>> ExistsAsync(Expression<Func<TEntity, bool>> findBy)
         {

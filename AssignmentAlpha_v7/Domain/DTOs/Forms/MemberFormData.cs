@@ -1,17 +1,18 @@
 using System.ComponentModel.DataAnnotations;
+using Domain.DTOs.Adds;
 using Microsoft.AspNetCore.Http;
 
-namespace Domain.DTOs.Edits;
+namespace Domain.DTOs.Forms;
 
-public class EditUserForm
+public class MemberFormData
 {
-    public string Id { get; set; } = null!;
-    
     [Display(Name = "Member Image", Prompt = "Select an image")]
     [DataType(DataType.Upload)]
     public IFormFile? UserImage { get; set; }
     
-    public string? ImagePath { get; set; }
+    public ImageFormData? Image { get; set; }
+    
+    public string? ImageId { get; set; }
     
     
     [Required(ErrorMessage = "Required")]
@@ -45,18 +46,14 @@ public class EditUserForm
     [DataType(DataType.PhoneNumber)]
     public string? PhoneNumber { get; set; }
     
+    [Required(ErrorMessage = "Required")]
+    [Display(Name = "Password", Prompt = "Enter a password.")]
+    [RegularExpression(@"^(?=.*[A-Ö])(?=.*[a-ö])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$", 
+        ErrorMessage = "Invalid Password")]
+    [DataType(DataType.Password)]
+    public string Password { get; set; } = null!;
     
-    [Display(Name = "Street Name", Prompt = "Your Street Name")]
-    [DataType(DataType.Text)]
-    public string? StreetName { get; set; }
-    
-    [Display(Name = "Postal Code", Prompt = "Your Postal Code")]
-    [DataType(DataType.Text)]
-    public string? PostalCode { get; set; }
-    
-    [Display(Name = "City", Prompt = "Your City")]
-    [DataType(DataType.Text)]
-    public string? City { get; set; }
+    public UserAddressFormData? Address { get; set; }
     
     public DateTime? DateOfBirth { get; set; }
 }

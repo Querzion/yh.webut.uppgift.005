@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeButtons = document.querySelectorAll('[data-close="true"]')
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const modal = button.closest('.the-local-modal')
+            const modal = button.closest('.modal')
             if (modal) {
                 modal.style.display = 'none';
 
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
 
                 if (res.ok) {
-                    const modal = form.closest('.the-local-modal')
+                    const modal = form.closest('.modal')
                     modal.style.display = 'none'
                     // form.reset()
                     window.location.reload()

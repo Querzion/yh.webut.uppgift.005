@@ -1,24 +1,16 @@
+using Business.Services;
 using Data.Contexts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Presentation.WebApp.Controllers;
 
-public class TagsController(AppDbContext context) : Controller
+public class TagsController(ITagsService tagsService) : Controller
 {
-    // private readonly ITagsService _tagsService;
-    private readonly AppDbContext _context = context;
-
     [HttpGet]
     public async Task<IActionResult> SearchTags(string term)
     {
-        if (string.IsNullOrWhiteSpace(term))
-            return Json(new List<object>());
-
-        var tags = await _context.Tags
-            .Where(x => x.TagName.Contains(term))
-            .ToListAsync();
-        
+        var tags = await tagsService.SearchTagsAsync(term);
         return Json(tags);
     }
 }

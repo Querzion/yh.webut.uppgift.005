@@ -1,8 +1,12 @@
 using System.Diagnostics;
+using System.Linq.Expressions;
+using Business.Factories;
 using Business.Models;
 using Data.Entities;
 using Data.Interfaces;
 using Domain.DTOs;
+using Domain.DTOs.Adds;
+using Domain.DTOs.Edits;
 using Domain.Extensions;
 using Domain.Models;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +18,11 @@ public interface IUserService
     Task<UserServiceResult> GetUsersAsync();
     Task<UserServiceResult> AddUserToRole(string userId, string roleName);
     Task<UserServiceResult> CreateUserAsync(SignUpFormData formData, string roleName = "User");
+
+    Task<UserServiceResult> CreateUserAsync(AddMemberFormData formData, string roleName = "User", string password = "BytMig123!");
     Task<UserServiceResult> GetUserByEmailAsync(string email);
+    Task<UserServiceResult> GetUserByIdAsync(string id);
+    Task<UserServiceResult> UpdateUserAsync(string userId, EditMemberForm formData);
     Task<string> GetDisplayNameAsync(string? username);
 }
 
@@ -61,11 +69,60 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                 //     }
                 // }
                 
+                // public async Task<UserServiceResult> CreateUserAsync(SignUpFormData formData, string roleName = "User")
+                // {
+                //     if (formData == null)
+                //         return new UserServiceResult { Succeeded = false, StatusCode = 400, Error = "Form data cannot be null." };
+                //
+                //     // Check if email exists
+                //     var existsResult = await _userRepository.ExistsAsync(u => u.NormalizedEmail == formData.Email.ToUpperInvariant());
+                //     if (existsResult.Succeeded)
+                //         return new UserServiceResult { Succeeded = false, StatusCode = 409, Error = "Email already exists." };
+                //
+                //     try
+                //     {
+                //         // Map form data to AppUser using the extension
+                //         var userEntity = formData.MapTo<AppUser>(); // Uses your MapTo extension
+                //
+                //         // Ensure UserName is assigned if it's not already mapped
+                //         userEntity.UserName = formData.Email;  // Use Email or another unique identifier
+                //
+                //         // Create the user
+                //         var result = await _userManager.CreateAsync(userEntity, formData.Password);
+                //         if (result.Succeeded)
+                //         {
+                //             // Add to role
+                //             var addToRoleResult = await _userManager.AddToRoleAsync(userEntity, roleName);
+                //             if (addToRoleResult.Succeeded)
+                //             {
+                //                 return new UserServiceResult { Succeeded = true, StatusCode = 201 };
+                //             }
+                //             else
+                //             {
+                //                 return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "User created, but not added to role." };
+                //             }
+                //         }
+                //         else
+                //         {
+                //             return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "Unable to create user." };
+                //         }
+                //     }
+                //     catch (Exception ex)
+                //     {
+                //         Debug.WriteLine(ex.Message);
+                //         return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = ex.Message };
+                //     }
+                // }
+
+            #endregion
+
+            #region With Transaction Management (ChatGPT help for quick creation)
+
                 public async Task<UserServiceResult> CreateUserAsync(SignUpFormData formData, string roleName = "User")
                 {
                     if (formData == null)
                         return new UserServiceResult { Succeeded = false, StatusCode = 400, Error = "Form data cannot be null." };
-    
+
                     // Check if email exists
                     var existsResult = await _userRepository.ExistsAsync(u => u.NormalizedEmail == formData.Email.ToUpperInvariant());
                     if (existsResult.Succeeded)
@@ -73,6 +130,9 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
 
                     try
                     {
+                        // Begin transaction
+                        await _userRepository.BeginTransactionAsync();
+
                         // Map form data to AppUser using the extension
                         var userEntity = formData.MapTo<AppUser>(); // Uses your MapTo extension
 
@@ -87,77 +147,93 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                             var addToRoleResult = await _userManager.AddToRoleAsync(userEntity, roleName);
                             if (addToRoleResult.Succeeded)
                             {
+                                await _userRepository.CommitTransactionAsync();
                                 return new UserServiceResult { Succeeded = true, StatusCode = 201 };
                             }
                             else
                             {
+                                await _userRepository.RollbackTransactionAsync();
                                 return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "User created, but not added to role." };
                             }
                         }
                         else
                         {
+                            await _userRepository.RollbackTransactionAsync();
                             return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "Unable to create user." };
                         }
                     }
                     catch (Exception ex)
                     {
+                        await _userRepository.RollbackTransactionAsync();
                         Debug.WriteLine(ex.Message);
                         return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = ex.Message };
                     }
                 }
+                
+                public async Task<UserServiceResult> CreateUserAsync(AddMemberFormData formData, string roleName = "User", string password = "BytMig123!")
+                {
+                    if (formData == null)
+                        return new UserServiceResult { Succeeded = false, StatusCode = 400, Error = "Form data cannot be null." };
 
-            #endregion
+                    // Check if email exists
+                    var existsResult = await _userRepository.ExistsAsync(u => u.NormalizedEmail == formData.Email.ToUpperInvariant());
+                    if (existsResult.Succeeded)
+                        return new UserServiceResult { Succeeded = false, StatusCode = 409, Error = "Email already exists." };
 
-            #region With Transaction Management (ChatGPT help for quick creation)
+                    try
+                    {
+                        // Begin transaction
+                        await _userRepository.BeginTransactionAsync();
+                        
+                        var userEntity = UserFactory.CreateFromAddMemberForm(formData); 
 
-                // public async Task<UserServiceResult> CreateUserAsync(SignUpFormData formData, string roleName = "User")
-                // {
-                //     if (formData == null)
-                //         return new UserServiceResult { Succeeded = false, StatusCode = 400, Error = "Form data cannot be null." };
-                //
-                //     var existsResult = await _userRepository.ExistsAsync(u => u.Email == formData.Email);
-                //     if (existsResult.Succeeded)
-                //         return new UserServiceResult { Succeeded = false, StatusCode = 409, Error = "Email already exists." };
-                //
-                //     try
-                //     {
-                //         // Start the transaction from the repository
-                //         await _userRepository.BeginTransactionAsync();
-                //
-                //         // Map the form data to the AppUser entity
-                //         var userEntity = formData.MapTo<AppUser>();
-                //
-                //         // Use UserManager to create the user
-                //         var result = await _userManager.CreateAsync(userEntity, formData.Password);
-                //         if (result.Succeeded)
-                //         {
-                //             // Add the user to the role
-                //             var addToRoleResult = await AddUserToRole(userEntity.Id, roleName);
-                //
-                //             // Commit the transaction if everything goes well
-                //             if (addToRoleResult.Succeeded)
-                //             {
-                //                 await _userRepository.CommitTransactionAsync();
-                //                 return new UserServiceResult { Succeeded = true, StatusCode = 201 };
-                //             }
-                //
-                //             // If adding to role fails, rollback and return error
-                //             await _userRepository.RollbackTransactionAsync();
-                //             return new UserServiceResult { Succeeded = false, StatusCode = 201, Error = "User created, but not added to role." };
-                //         }
-                //
-                //         // If user creation fails, rollback and return error
-                //         await _userRepository.RollbackTransactionAsync();
-                //         return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "Unable to create user." };
-                //     }
-                //     catch (Exception ex)
-                //     {
-                //         // Rollback the transaction in case of an exception
-                //         await _userRepository.RollbackTransactionAsync();
-                //         Debug.WriteLine(ex.Message);
-                //         return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = ex.Message };
-                //     }
-                // }
+                        // Ensure UserName is assigned if it's not already mapped
+                        userEntity.UserName = formData.Email;  // Use Email or another unique identifier
+                        
+                        if (formData.Image != null)
+                        {
+                            var imageEntity = formData.Image.MapTo<ImageEntity>();  // Map ImageFormData to ImageEntity
+
+                            // Manually set the AltText if needed
+                            imageEntity.AltText = $"{formData.FirstName} {formData.LastName}'s profile picture";
+    
+                            // Assign it to the userEntity.Image property
+                            userEntity.Image = imageEntity;
+                        }
+
+                        if (formData.Address != null)
+                            userEntity.Address = formData.Address.MapTo<UserAddressEntity>();
+
+                        // Create the user
+                        var result = await _userManager.CreateAsync(userEntity, password);
+                        if (result.Succeeded)
+                        {
+                            // Add to role
+                            var addToRoleResult = await _userManager.AddToRoleAsync(userEntity, roleName);
+                            if (addToRoleResult.Succeeded)
+                            {
+                                await _userRepository.CommitTransactionAsync();
+                                return new UserServiceResult { Succeeded = true, StatusCode = 201 };
+                            }
+                            else
+                            {
+                                await _userRepository.RollbackTransactionAsync();
+                                return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "User created, but not added to role." };
+                            }
+                        }
+                        else
+                        {
+                            await _userRepository.RollbackTransactionAsync();
+                            return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "Unable to create user." };
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await _userRepository.RollbackTransactionAsync();
+                        Debug.WriteLine(ex.Message);
+                        return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = ex.Message };
+                    }
+                }
 
             #endregion
 
@@ -166,10 +242,36 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
     
         #region Read
 
+            // public async Task<UserServiceResult> GetUsersAsync()
+            // {
+            //     var result = await _userRepository.GetAllAsync(
+            //         includes: [x => x.Image!] 
+            //     );
+            //     return result.MapTo<UserServiceResult>();
+            // }
+            
             public async Task<UserServiceResult> GetUsersAsync()
             {
-                var result = await _userRepository.GetAllAsync();
-                return result.MapTo<UserServiceResult>();
+                var response = await _userRepository.GetAllAsync(
+                    orderByDecending: true,
+                    sortBy: s => s.FirstName,
+                    where: null,
+                    includes: new Expression<Func<AppUser, object>>[]
+                    {
+                        x => x.Image,
+                        x => x.Address
+                    }
+                );
+
+                // Assuming you want to map the response to a service result of User
+                var users = response.Result.Select(appUser => appUser.MapTo<User>()).ToList();
+
+                return new UserServiceResult
+                {
+                    Succeeded = true,
+                    StatusCode = 200,
+                    Result = users // Result is already of type IEnumerable<User>
+                };
             }
 
             public async Task<UserServiceResult> GetUserByEmailAsync(string email)
@@ -195,7 +297,121 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                 };
             }
             
+            public async Task<UserServiceResult> GetUserByIdAsync(string id)
+            {
+                var result = await _userRepository.GetAsync(u => u.Id == id);
 
+                if (!result.Succeeded || result.Result == null)
+                {
+                    return new UserServiceResult
+                    {
+                        Succeeded = false,
+                        StatusCode = result.StatusCode,
+                        Error = result.Error ?? "User not found.",
+                        Result = null
+                    };
+                }
+
+                return new UserServiceResult
+                {
+                    Succeeded = true,
+                    StatusCode = 200,
+                    Result = new List<User> { result.Result }
+                };
+            }
+
+        #endregion
+
+        #region Update (ChatGPT)
+
+            public async Task<UserServiceResult> UpdateUserAsync(string userId, EditMemberForm formData)
+            {
+                if (formData == null)
+                    return new UserServiceResult { Succeeded = false, StatusCode = 400, Error = "Form data cannot be null." };
+
+                // Get the raw AppUser entity
+                var userResult = await _userRepository.GetEntityAsync(u => u.Id == userId,
+                    x => x.Address, x => x.Image); // Include any related entities you may want to update
+
+                if (!userResult.Succeeded || userResult.Result == null)
+                    return new UserServiceResult { Succeeded = false, StatusCode = 404, Error = "User not found." };
+
+                var existingUser = userResult.Result;
+
+                try
+                {
+                    // Begin transaction
+                    await _userRepository.BeginTransactionAsync();
+
+                    // Update the existing user with the form data
+                    UserFactory.UpdateFromEditMemberForm(existingUser, formData);
+
+                    // Update the user in the database
+                    var result = await _userManager.UpdateAsync(existingUser);
+                    if (result.Succeeded)
+                    {
+                        await _userRepository.CommitTransactionAsync();
+                        return new UserServiceResult { Succeeded = true, StatusCode = 200 };
+                    }
+                    else
+                    {
+                        await _userRepository.RollbackTransactionAsync();
+                        return new UserServiceResult
+                        {
+                            Succeeded = false,
+                            StatusCode = 500,
+                            Error = string.Join("; ", result.Errors.Select(e => e.Description))
+                        };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _userRepository.RollbackTransactionAsync();
+                    return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = ex.Message };
+                }
+            }
+
+
+        #endregion
+
+        #region Delete (ChatGPT)
+
+            public async Task<UserServiceResult> DeleteUserAsync(string userId)
+            {
+                if (string.IsNullOrWhiteSpace(userId))
+                    return new UserServiceResult { Succeeded = false, StatusCode = 400, Error = "User ID cannot be null or empty." };
+
+                try
+                {
+                    await _userRepository.BeginTransactionAsync();
+
+                    var user = await _userManager.FindByIdAsync(userId);
+                    if (user == null)
+                    {
+                        await _userRepository.RollbackTransactionAsync();
+                        return new UserServiceResult { Succeeded = false, StatusCode = 404, Error = "User not found." };
+                    }
+
+                    var result = await _userManager.DeleteAsync(user);
+                    if (result.Succeeded)
+                    {
+                        await _userRepository.CommitTransactionAsync();
+                        return new UserServiceResult { Succeeded = true, StatusCode = 200 };
+                    }
+                    else
+                    {
+                        await _userRepository.RollbackTransactionAsync();
+                        return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "Failed to delete user." };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _userRepository.RollbackTransactionAsync();
+                    Debug.WriteLine(ex.Message);
+                    return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = ex.Message };
+                }
+            }
+            
         #endregion
 
     #endregion

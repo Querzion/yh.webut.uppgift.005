@@ -1,28 +1,27 @@
-@using System.Globalization
-@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model EditMemberViewModel
 
-<div id="editMemberModal" class="the-local-modal">
-    <div class="with-modal-content">
+<div id="editMemberModal" class="modal">
+    <div class="modal-content">
 
-        <div class="and-a-modal-header">
+        <div class="modal-header">
             <h3>Edit Member</h3>
             <button type="button" class="btn-close" data-close="true"></button>
         </div>
 
         <form novalidate method="post" asp-action="EditMember" asp-controller="Members">
 
-            <input asp-for="Id" readonly type="hidden"/>
+            <!-- Hidden input for the member ID -->
+            <input asp-for="Id" id="MemberEditId" readonly type="hidden" />
 
             <div class="image-previewer circle">
                 <img src="" class="image-preview" alt="" />
-                <input asp-for="MemberImage" accept="image/*" class="hide" />
+                <input asp-for="UserImage" accept="image/*" class="hide" />
             </div>
 
             <div class="form-group">
                 <label asp-for="FirstName"></label>
                 <div class="field-group">
-                    <input asp-for="FirstName" />
+                    <input asp-for="FirstName" id="EditFirstName" />
                     <span asp-validation-for="FirstName"></span>
                 </div>
             </div>
@@ -30,7 +29,7 @@
             <div class="form-group">
                 <label asp-for="LastName"></label>
                 <div class="field-group">
-                    <input asp-for="LastName" />
+                    <input asp-for="LastName" id="EditLastName" />
                     <span asp-validation-for="LastName"></span>
                 </div>
             </div>
@@ -38,7 +37,7 @@
             <div class="form-group">
                 <label asp-for="Email"></label>
                 <div class="field-group">
-                    <input asp-for="Email" />
+                    <input asp-for="Email" id="EditEmail" />
                     <span asp-validation-for="Email"></span>
                 </div>
             </div>
@@ -46,7 +45,7 @@
             <div class="form-group">
                 <label asp-for="PhoneNumber"></label>
                 <div class="field-group">
-                    <input asp-for="PhoneNumber" />
+                    <input asp-for="PhoneNumber" id="EditPhoneNumber" />
                     <span asp-validation-for="PhoneNumber"></span>
                 </div>
             </div>
@@ -54,7 +53,7 @@
             <div class="form-group">
                 <label asp-for="JobTitle"></label>
                 <div class="field-group">
-                    <input asp-for="JobTitle" />
+                    <input asp-for="JobTitle" id="EditJobTitle" />
                     <span asp-validation-for="JobTitle"></span>
                 </div>
             </div>
@@ -62,65 +61,69 @@
             <div class="form-group">
                 <label asp-for="StreetName"></label>
                 <div class="field-group">
-                    <input asp-for="StreetName" />
+                    <input asp-for="StreetName" id="EditStreetName" />
                     <span asp-validation-for="StreetName"></span>
                 </div>
             </div>
+
             <div class="form-group">
                 <label asp-for="PostalCode"></label>
                 <div class="field-group">
-                    <input asp-for="PostalCode" />
+                    <input asp-for="PostalCode" id="EditPostalCode" />
                     <span asp-validation-for="PostalCode"></span>
                 </div>
             </div>
+
             <div class="form-group">
                 <label asp-for="City"></label>
                 <div class="field-group">
-                    <input asp-for="City" />
+                    <input asp-for="City" id="EditCity" />
                     <span asp-validation-for="City"></span>
                 </div>
             </div>
             
             <div class="form-group">
                 <label asp-for="SelectedDay">Date of Birth</label>
-                <div class="field-group">
-                    <select asp-for="SelectedDay" class="form-control" aria-label="Select day">
-                        <option value="">Day</option>
-                        @for (var i = 1; i <= 31; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
-                    <span asp-validation-for="SelectedDay"></span>
-                </div>
+                <div class="d-flex">
+                    <div class="field-group">
+                        <select asp-for="SelectedDay" class="form-control" id="EditSelectedDay" aria-label="Select day">
+                            <option value="">Day</option>
+                            @for (var i = 1; i <= 31; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SelectedDay"></span>
+                    </div>
 
-                <div class="field-group">
-                    <select asp-for="SelectedMonth" class="form-control" aria-label="Select month">
-                        <option value="">Month</option>
-                        @for (var i = 1; i <= 12; i++)
-                        {
-                            <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
-                        }
-                    </select>
-                    <span asp-validation-for="SelectedMonth"></span>
-                </div>
+                    <div class="field-group">
+                        <select asp-for="SelectedMonth" class="form-control" id="EditSelectedMonth" aria-label="Select month">
+                            <option value="">Month</option>
+                            @for (var i = 1; i <= 12; i++)
+                            {
+                                <option value="@i">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SelectedMonth"></span>
+                    </div>
 
-                <div class="field-group">
-                    <select asp-for="SelectedYear" class="form-control" aria-label="Select year">
-                        <option value="">Year</option>
-                        @for (var i = DateTime.Now.Year; i >= 1900; i--)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
-                    <span asp-validation-for="SelectedYear"></span>
+                    <div class="field-group">
+                        <select asp-for="SelectedYear" class="form-control" id="EditSelectedYear" aria-label="Select year">
+                            <option value="">Year</option>
+                            @for (var i = DateTime.Now.Year; i >= 1900; i--)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SelectedYear"></span>
+                    </div>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-submit btn-blue">Create</button>
+            <button type="submit" class="btn btn-submit btn-blue">Save</button>
         </form>
 
     </div>
 </div>
 
-@await Html.PartialAsync("_ValidationScripts")
+@await Html.PartialAsync("_ValidationScripts") <!-- Validation scripts if you need them -->

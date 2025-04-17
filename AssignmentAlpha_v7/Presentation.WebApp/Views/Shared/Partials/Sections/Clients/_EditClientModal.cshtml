@@ -1,18 +1,19 @@
 @model EditClientForm
 
-<div id="editClientModal" class="the-local-modal">
-    <div class="with-modal-content">
+<div id="editClientModal" class="modal">
+    <div class="modal-content">
 
-        <div class="and-a-modal-header">
+        <div class="modal-header">
             <h3>Edit Client</h3>
             <button type="button" class="btn-close" data-close="true"></button>
         </div>
 
         <form novalidate method="post" asp-action="EditClient" asp-controller="Clients">
 
-            <input asp-for="Id" readonly type="hidden"/>
+            
+            <input asp-for="Id" id="ClientEditId" readonly type="hidden" />
 
-            <div class="image-previewer circle">
+            <div class="image-previewer square">
                 <img src="" class="image-preview" alt="" />
                 <input asp-for="ClientImage" accept="image/*" class="hide" />
             </div>

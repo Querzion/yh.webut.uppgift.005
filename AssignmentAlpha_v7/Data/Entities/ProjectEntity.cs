@@ -27,10 +27,8 @@ public class ProjectEntity
     [Column(TypeName = "decimal(18,2)")]
     public decimal? Budget { get; set; }
     
-    [ForeignKey(nameof(Image))]
-    [Column(TypeName = "varchar(36)")]
+    [ForeignKey(nameof(Image)), Column(TypeName = "varchar(36)")]
     public string? ImageId { get; set; }
-    
     public virtual ImageEntity? Image { get; set; }
 
     [ForeignKey(nameof(Client)), Column(TypeName = "varchar(36)")]

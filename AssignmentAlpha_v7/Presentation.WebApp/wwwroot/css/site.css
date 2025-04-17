@@ -747,6 +747,24 @@ h6, .h6 {
     }
 }
 
+.btn-edit {
+    background-color: transparent;
+    border: none;
+    display: block;
+    justify-self: flex-start;
+    position: relative;
+    left: 0;
+    top: 0;
+    justify-content: center;
+    gap: .5rem;
+
+    &::before {
+        content: "··";
+        font-family: var(--font-standard), sans-serif;
+        font-size: 2rem;
+    }
+}
+
 .btn-nocol {
     -webkit-transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
     -moz-transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
@@ -1396,6 +1414,15 @@ form .form-group {
     top: 1.2rem;
 }
 
+.form-horizontal-group {
+    display: flex;
+    gap: 2rem;
+}
+
+.form-input-with-icon {
+    display: flex;
+}
+
 .search-results {
     background-color: var(--form-input-background-color);
     border: 1px solid var(--form-input-border-color);
@@ -1947,7 +1974,7 @@ input:checked + .slider:before {
 }
 
 /* modal */
-.the-local-modal {
+.modal {
     display: none;
     align-items: center;
     justify-content: center;
@@ -1958,13 +1985,13 @@ input:checked + .slider:before {
     bottom: 0;
     left: 0;
 
-    .with-modal-content {
+    .modal-content {
         background-color: var(--modal-background-color);
         border-radius: var(--border-radius-default);
         box-shadow: 0 4px 4px 3px var(--box-sh-prim-color);
         padding: 2rem;
 
-        .and-a-modal-header {
+        .modal-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1988,12 +2015,16 @@ input:checked + .slider:before {
     margin-bottom: 1rem;
 }
 
+#addMemberModal {
+
+    .modal-content {
+        max-width: 550px;
+    }
+}
 
 #editMemberModal {
-    position: relative;
-    z-index: 1000;
 
-    .with-modal-content {
+    .modal-content {
         width: 550px;
     }
 }
@@ -2003,13 +2034,13 @@ input:checked + .slider:before {
 }
 
 #addProjectModal {
-    .with-modal-content {
+    .modal-content {
         width: 550px;
     }
 }
 
 #editProjectModal {
-    .with-modal-content {
+    .modal-content {
         width: 550px;
     }
 }
@@ -2021,13 +2052,13 @@ input:checked + .slider:before {
 }
 
 #addClientModal {
-    .with-modal-content {
+    .modal-content {
         width: 550px;
     }
 }
 
 #editClientModal {
-    .with-modal-content {
+    .modal-content {
         width: 550px;
     }
 }
@@ -2185,9 +2216,9 @@ input:checked + .slider:before {
             border: 1px solid var(--card-border-color);
             background-color: var(--card-background-color);
             box-shadow: var(--box-shadow);
-            padding: 2rem;
+            /*padding: 2rem;*/
             border-radius: var(--border-radius-m);
-            z-index: 1;
+            z-index: 0;
         }
 
         .member {
@@ -2195,7 +2226,7 @@ input:checked + .slider:before {
 
 
             .avatar {
-
+                margin-bottom: 1rem;
             }
 
             .name {

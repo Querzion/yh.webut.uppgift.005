@@ -1,6 +1,73 @@
+using Business.Services;
+using Data.Entities;
+using Domain.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Presentation.WebApp.ViewModels.Adds;
+using Presentation.WebApp.ViewModels.Edits;
+
 namespace Presentation.WebApp.ViewModels;
 
-public class ProjectsViewModel
+public class ProjectsViewModel(IClientService clientService)
 {
+    private readonly IClientService _clientService = clientService;
+
+    public ProjectEntity? SelectedProject { get; set; }
+    public List<ProjectEntity> Projects { get; set; } = new List<ProjectEntity>(); // Initialize with new List
+    public List<SelectListItem> ClientOptions { get; set; } = new List<SelectListItem>(); // Initialize with new List
+    public AddProjectViewModel AddProject { get; set; } = new AddProjectViewModel();
+    public EditProjectViewModel EditProject { get; set; } = new EditProjectViewModel();
+
+    public async Task PopulateClientOptionsAsync()
+    {
+        // Fetch clients from the client service
+        var result = await _clientService.GetClientsAsync();
+
+        if (!result.Succeeded)
+            return;
+
+        // Ensure clients list is populated
+        var clients = result.Result ?? new List<Client>(); // Initialize with empty list if result is null
+
+        // Populate ClientOptions for SelectList in the view
+        ClientOptions = clients.Select(x => new SelectListItem
+        {
+            Value = x.Id.ToString(),
+            Text = x.ClientName
+        }).ToList();
+    }
     
+    // public ProjectEntity? SelectedProject { get; set; }
+    //
+    // public List<ProjectEntity> Projects { get; set; } = [];
+    //
+    // public List<SelectListItem> ClientOptions { get; set; } = [];
+    //
+    // public AddProjectViewModel AddProject { get; set; } = new();
+    // public EditProjectViewModel EditProject { get; set; } = new();
+    //
+    // public async Task PopulateClientOptionsAsync()
+    // {
+    //
+    //     #region ChatGPT generated code
+    //
+    //         var result = await _clientService.GetClientsAsync();
+    //
+    //         if (!result.Succeeded)
+    //             return;
+    //
+    //         // var clients = (result as Result<IEnumerable<Client>>)?.Data ?? [];
+    //         var clients = result.Result ?? new List<Client>();
+    //
+    //     #endregion
+    //
+    //     ClientOptions =
+    //     [
+    //         ..clients.Select(x => new SelectListItem
+    //         {
+    //             Value = x.Id.ToString(),
+    //             Text = x.ClientName
+    //         })
+    //     ];
+    // }
+
 }
