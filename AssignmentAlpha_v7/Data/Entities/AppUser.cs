@@ -26,8 +26,8 @@ public class AppUser : IdentityUser
     [ForeignKey(nameof(Image))]
     [Column(TypeName = "varchar(36)")]
     public string? ImageId { get; set; }
-    
     public virtual ImageEntity? Image { get; set; }
+    
     public virtual UserAddressEntity? Address { get; set; }
 
     public virtual ICollection<ProjectEntity> Projects { get; set; } = [];

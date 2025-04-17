@@ -8,7 +8,4 @@ public class EditProjectViewModel : ProjectFormViewModel
 {
     [Required(ErrorMessage = "Required")]
     public string Id { get; set; } = null!;
-    
-    
-    public List<SelectListItem> ClientOptions { get; set; } = new List<SelectListItem>();
 }

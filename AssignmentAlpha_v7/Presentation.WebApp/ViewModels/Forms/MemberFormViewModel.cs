@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Domain.DTOs.Forms;
 
 namespace Presentation.WebApp.ViewModels.Forms;
 
@@ -8,6 +9,7 @@ public class MemberFormViewModel
     [DataType(DataType.Upload)]
     public IFormFile? UserImage { get; set; }
     
+    public ImageFormData? Image { get; set; }
     public string? ImageUrl { get; set; }
     
     
@@ -43,17 +45,7 @@ public class MemberFormViewModel
     public string? PhoneNumber { get; set; }
     
     
-    [Display(Name = "Street Name", Prompt = "Your Street Name")]
-    [DataType(DataType.Text)]
-    public string? StreetName { get; set; }
-    
-    [Display(Name = "Postal Code", Prompt = "Your Postal Code")]
-    [DataType(DataType.Text)]
-    public string? PostalCode { get; set; }
-    
-    [Display(Name = "City", Prompt = "Your City")]
-    [DataType(DataType.Text)]
-    public string? City { get; set; }
+    public UserAddressFormData? Address { get; set; }
     
     public int? SelectedDay { get; set; }
     public int? SelectedMonth { get; set; }

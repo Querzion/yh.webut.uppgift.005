@@ -11,7 +11,14 @@ namespace Business.Services;
 
 public interface IClientService
 {
+    Task<ClientServiceResult> CreateClientAsync(AddClientFormData form);
     Task<ClientServiceResult> GetClientsAsync();
+    Task<ClientServiceResult> GetAllClientsAsync();
+    Task<ClientServiceResult> GetClientByIdAsync(string id);
+    Task<ClientServiceResult> GetClientByNameAsync(string clientName);
+    Task<ClientServiceResult> GetClientByEmailAsync(string email);
+    Task<ClientServiceResult> UpdateClientAsync(string id, EditClientFormData update);
+    Task<ClientServiceResult> DeleteClientAsync(string id);
 }
 
 public class ClientService(IClientRepository clientRepository) : IClientService
@@ -208,7 +215,7 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
         #region Update
 
-            public async Task<ClientServiceResult> UpdateClientAsync(string id, EditClientForm update)
+            public async Task<ClientServiceResult> UpdateClientAsync(string id, EditClientFormData update)
             {
                 if (string.IsNullOrWhiteSpace(id))
                 {

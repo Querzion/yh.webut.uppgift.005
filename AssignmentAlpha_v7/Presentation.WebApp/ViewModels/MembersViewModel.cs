@@ -12,14 +12,14 @@ namespace Presentation.WebApp.ViewModels;
         public string Title { get; set; } = null!;
 
         public IEnumerable<User>? Members { get; set; } = [];
-
-        public SignUpViewModel RegistrationForm { get; set; } = new();
         
         public AddMemberViewModel AddMember { get; set; } = new();
         
         public EditMemberViewModel EditMember { get; set; } = new();
         
         public SignInViewModel Login { get; set; } = new();
+       
+        public SignUpViewModel RegistrationForm { get; set; } = new();
     }
 
 #endregion

@@ -1,13 +1,12 @@
 using System.ComponentModel.DataAnnotations;
-using Domain.DTOs.Adds;
 using Domain.DTOs.Forms;
 using Microsoft.AspNetCore.Http;
 
 namespace Domain.DTOs.Edits;
 
-public class EditMemberForm : MemberFormData
+public class EditClientFormData : ClientFormData
 {
-    [Required(ErrorMessage = "Member ID is required.")]
-    [Display(Name = "Member ID")]
+    [Required(ErrorMessage = "Client ID is required.")]
+    [Display(Name = "Client ID")]
     public string Id { get; set; } = null!;
 }

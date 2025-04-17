@@ -39,24 +39,24 @@ public static class UserFactory
         };
     }
     
-    public static void UpdateFromEditMemberForm(AppUser existingUser, EditMemberForm form)
+    public static void UpdateFromEditMemberForm(AppUser existingUser, EditMemberFormData formData)
     {
-        existingUser.FirstName = form.FirstName;
-        existingUser.LastName = form.LastName;
-        existingUser.Email = form.Email;
-        existingUser.PhoneNumber = form.PhoneNumber;
-        existingUser.JobTitle = form.JobTitle;
-        existingUser.DateOfBirth = form.DateOfBirth;
+        existingUser.FirstName = formData.FirstName;
+        existingUser.LastName = formData.LastName;
+        existingUser.Email = formData.Email;
+        existingUser.PhoneNumber = formData.PhoneNumber;
+        existingUser.JobTitle = formData.JobTitle;
+        existingUser.DateOfBirth = formData.DateOfBirth;
 
-        if (form.Address != null)
+        if (formData.Address != null)
         {
-            existingUser.Address = form.Address.MapTo<UserAddressEntity>(); // Map Address if available
+            existingUser.Address = formData.Address.MapTo<UserAddressEntity>(); // Map Address if available
         }
 
-        if (form.Image != null)
+        if (formData.Image != null)
         {
-            existingUser.Image = form.Image.MapTo<ImageEntity>(); // Map Image if available
-            existingUser.ImageId = form.ImageId; // Ensure ImageId is updated if provided
+            existingUser.Image = formData.Image.MapTo<ImageEntity>(); // Map Image if available
+            existingUser.ImageId = formData.ImageId; // Ensure ImageId is updated if provided
         }
     }
 

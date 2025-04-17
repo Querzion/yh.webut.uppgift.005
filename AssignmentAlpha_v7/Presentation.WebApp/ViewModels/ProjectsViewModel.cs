@@ -11,9 +11,11 @@ public class ProjectsViewModel(IClientService clientService)
 {
     private readonly IClientService _clientService = clientService;
 
+    public string Title { get; set; } = null!;
+    
     public ProjectEntity? SelectedProject { get; set; }
-    public List<ProjectEntity> Projects { get; set; } = new List<ProjectEntity>(); // Initialize with new List
-    public List<SelectListItem> ClientOptions { get; set; } = new List<SelectListItem>(); // Initialize with new List
+    public IEnumerable<Project> Projects { get; set; } = []; // Initialize with new List
+    public IEnumerable<SelectListItem> ClientOptions { get; set; } = new List<SelectListItem>(); // Initialize with new List
     public AddProjectViewModel AddProject { get; set; } = new AddProjectViewModel();
     public EditProjectViewModel EditProject { get; set; } = new EditProjectViewModel();
 
@@ -35,39 +37,4 @@ public class ProjectsViewModel(IClientService clientService)
             Text = x.ClientName
         }).ToList();
     }
-    
-    // public ProjectEntity? SelectedProject { get; set; }
-    //
-    // public List<ProjectEntity> Projects { get; set; } = [];
-    //
-    // public List<SelectListItem> ClientOptions { get; set; } = [];
-    //
-    // public AddProjectViewModel AddProject { get; set; } = new();
-    // public EditProjectViewModel EditProject { get; set; } = new();
-    //
-    // public async Task PopulateClientOptionsAsync()
-    // {
-    //
-    //     #region ChatGPT generated code
-    //
-    //         var result = await _clientService.GetClientsAsync();
-    //
-    //         if (!result.Succeeded)
-    //             return;
-    //
-    //         // var clients = (result as Result<IEnumerable<Client>>)?.Data ?? [];
-    //         var clients = result.Result ?? new List<Client>();
-    //
-    //     #endregion
-    //
-    //     ClientOptions =
-    //     [
-    //         ..clients.Select(x => new SelectListItem
-    //         {
-    //             Value = x.Id.ToString(),
-    //             Text = x.ClientName
-    //         })
-    //     ];
-    // }
-
 }

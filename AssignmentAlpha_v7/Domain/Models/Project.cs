@@ -16,13 +16,13 @@ public class Project
     
     public decimal? Budget { get; set; }
     
-    public Image? ProjectImage { get; set; }
+    public virtual Image? ProjectImage { get; set; }
     
-    public Client Client { get; set; } = null!;
+    public virtual Client Client { get; set; } = null!;
     
-    public User User { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
     
-    public Status Status { get; set; } = null!;
+    public virtual Status Status { get; set; } = null!;
     
-    public IEnumerable<ProjectMember> ProjectMembers { get; set; } = [];
+    public virtual ICollection<ProjectMember> ProjectMembers { get; set; } = [];
 }

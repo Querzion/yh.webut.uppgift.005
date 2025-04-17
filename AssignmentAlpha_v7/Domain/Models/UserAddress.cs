@@ -10,5 +10,5 @@ public class UserAddress
     
     public string? City { get; set; }
     
-    public User User { get; set; } = null!;
+    public virtual User User { get; set; } = null!;
 }

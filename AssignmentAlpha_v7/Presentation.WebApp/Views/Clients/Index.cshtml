@@ -1,10 +1,11 @@
+@model ClientsViewModel
 @{
     ViewData["Title"] = "Clients";
 }
 
 @* @await Html.PartialAsync("Partials/Sections/_AddClientModal") *@
-<partial name="Partials/Sections/Clients/_AddClientModal"/>
-<partial name="Partials/Sections/Clients/_EditClientModal"/>
+<partial name="Partials/Sections/Clients/_AddClientModal" model="Model.AddClient"/>
+<partial name="Partials/Sections/Clients/_EditClientModal" model="Model.EditClient"/>
 
 <section id="clients">
     
@@ -15,7 +16,7 @@
 
     <div class="surface">
         @* @await Html.PartialAsync("Partials/Sections/_ClientList") *@
-        <partial name="Partials/Sections/Clients/_ClientList"/>
+        <partial name="Partials/Sections/Clients/_ClientList" model="Model.Clients"/>
     </div>
 
 </section>

@@ -4,6 +4,7 @@ using Data.Contexts;
 using Data.Entities;
 using Domain.DTOs.Adds;
 using Domain.DTOs.Edits;
+using Domain.DTOs.Forms;
 using Domain.Extensions;
 using Domain.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Presentation.WebApp.Helpers;
 using Presentation.WebApp.ViewModels;
 using Presentation.WebApp.ViewModels.Adds;
 using Presentation.WebApp.ViewModels.Edits;
@@ -21,23 +23,28 @@ namespace Presentation.WebApp.Controllers;
 
 [Authorize]
 [Route("admin/projects")]
-public class ProjectsController(IProjectService projectService, AppDbContext context, IClientService clientService) : Controller
+public class ProjectsController(IProjectService projectService, AppDbContext context, IClientService clientService, IImageUploadHelper imageUploadHelper) : Controller
 {
     private readonly IProjectService _projectService = projectService;
     private readonly AppDbContext _context = context;
     private readonly IClientService _clientService = clientService;
+    private readonly IImageUploadHelper _imageUploadHelper = imageUploadHelper;
 
     [Route("")]
     [HttpGet]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        // var projects = _projectService.GetProjectsAsync(); // Example method
-        // if (projects == null)
-        // {
-        //     // Handle the error or pass an empty collection to the view.
-        //     projects = new List<Project>();
-        // }
-        return View();
+        var projectServiceResult = await _projectService.GetProjectsAsync();
+        
+        var viewModel = new ProjectsViewModel(_clientService)
+        {
+            Title = "Projects",
+            AddProject = new AddProjectViewModel(),
+            EditProject = new EditProjectViewModel(),
+            Projects = projectServiceResult.Result!
+        };
+        
+        return View(viewModel);
     }
     
     [Route("{id}")]
@@ -123,7 +130,29 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
             return Json(new { Success = false, Message = "Model is invalid" });
         }
 
+        // Handle image upload using the helper
+        if (model.ProjectImage != null && model.ProjectImage.Length > 0)
+        {
+            var imageUrl = await _imageUploadHelper.UploadImageAsync(model.ProjectImage, "projects");
+
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                model.ImageUrl = imageUrl;
+            }
+        }
+
         var addProjectFormData = model.MapTo<AddProjectFormData>();
+
+        // Set image entity if we got an image URL
+        if (!string.IsNullOrEmpty(model.ImageUrl))
+        {
+            addProjectFormData.Image = new ImageFormData
+            {
+                ImageUrl = model.ImageUrl,
+                AltText = "Project Image"
+            };
+        }
+
         var result = await _projectService.CreateProjectAsync(addProjectFormData);
 
         if (!result.Succeeded)
@@ -133,6 +162,7 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
 
         return Json(new { Success = true });
     }
+
 
     // POST: EditProject
     [HttpPost]
@@ -144,7 +174,7 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
         }
 
         // Map ViewModel to Service Model
-        var editProjectFormData = model.MapTo<EditProjectForm>(); // Ensure your MapTo works here
+        var editProjectFormData = model.MapTo<EditProjectFormData>(); // Ensure your MapTo works here
 
         // Call the service to update the project
         var result = await _projectService.UpdateProjectAsync(editProjectFormData);

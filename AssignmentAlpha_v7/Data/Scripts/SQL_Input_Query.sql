@@ -31,11 +31,11 @@ values ('1', 'Started'),
        ('4', 'Completed');
 
 -- DATABASE TIMESTAMP ERRORS
-UPDATE Projects
-SET Created = datetime(Created / 1000, 'unixepoch'),
-    StartDate = datetime(StartDate / 1000, 'unixepoch'),
-    EndDate = datetime(EndDate / 1000, 'unixepoch');
-
-UPDATE ImagePaths
-SET UploadedAt = datetime(UploadedAt / 1000, 'unixepoch')
-WHERE UploadedAt > 1000000000000;
+-- UPDATE Projects
+-- SET Created = datetime(Created / 1000, 'unixepoch'),
+--     StartDate = datetime(StartDate / 1000, 'unixepoch'),
+--     EndDate = datetime(EndDate / 1000, 'unixepoch');
+-- 
+-- UPDATE ImagePaths
+-- SET UploadedAt = datetime(UploadedAt / 1000, 'unixepoch')
+-- WHERE UploadedAt > 1000000000000;

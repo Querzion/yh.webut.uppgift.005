@@ -1,3 +1,5 @@
+@model IEnumerable<Client>
+
 <div class="client-list">
     <table>
         <thead>
@@ -12,25 +14,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th class="client-check"><input type="checkbox" /></th>
-            <th class="client-info">
-                <img class="client-image" src="~/images/avatars/avatar-male-001.svg" alt="" />
-                <div class="client-name">EPN Sverige AB</div>
-                <div class="client-email">info@domain.com</div>
-            </th>
-            <th class="client-location">Stockholm, Sweden</th>
-            <th class="client-phone">+46 08 121 475 50</th>
-            <th class="client-date">25-03-12</th>
-            <th class="client-status">
-                <div class="badge success">
-                    active
-                </div>
-            </th>
-            <th class="client-actions">
-                <i class="fa-regular fa-ellipsis" data-modal="true" data-target="#editClientModal"></i>
-            </th>
-        </tr>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var client in Model)
+            {
+                <tr>
+                    <partial name="Partials/Sections/Clients/_ClientListItem" model="client"/>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">No clients available.</td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>

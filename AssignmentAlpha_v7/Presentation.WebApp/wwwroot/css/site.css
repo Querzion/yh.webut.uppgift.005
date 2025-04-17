@@ -831,7 +831,7 @@ h6, .h6 {
     &::before {
         content: "\F3F0";
         font-family: var(--font-bootstrap), sans-serif;
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 }
 
@@ -851,7 +851,7 @@ h6, .h6 {
     &::before {
         content: "\F344";
         font-family: var(--font-bootstrap), sans-serif;
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 }
 
@@ -871,7 +871,7 @@ h6, .h6 {
     &::before {
         content: "\F65D";
         font-family: var(--font-bootstrap), sans-serif;
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 }
 
@@ -891,7 +891,7 @@ h6, .h6 {
     &::before {
         content: "\F3ED";
         font-family: var(--font-bootstrap), sans-serif;
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 }
 
@@ -911,7 +911,7 @@ h6, .h6 {
     &::before {
         content: "\F8DB";
         font-family: var(--font-bootstrap), sans-serif;
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 }
 

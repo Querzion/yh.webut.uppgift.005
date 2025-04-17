@@ -22,7 +22,7 @@ public interface IUserService
     Task<UserServiceResult> CreateUserAsync(AddMemberFormData formData, string roleName = "User", string password = "BytMig123!");
     Task<UserServiceResult> GetUserByEmailAsync(string email);
     Task<UserServiceResult> GetUserByIdAsync(string id);
-    Task<UserServiceResult> UpdateUserAsync(string userId, EditMemberForm formData);
+    Task<UserServiceResult> UpdateUserAsync(string userId, EditMemberFormData formDataData);
     Task<string> GetDisplayNameAsync(string? username);
 }
 
@@ -324,9 +324,9 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
 
         #region Update (ChatGPT)
 
-            public async Task<UserServiceResult> UpdateUserAsync(string userId, EditMemberForm formData)
+            public async Task<UserServiceResult> UpdateUserAsync(string userId, EditMemberFormData formDataData)
             {
-                if (formData == null)
+                if (formDataData == null)
                     return new UserServiceResult { Succeeded = false, StatusCode = 400, Error = "Form data cannot be null." };
 
                 // Get the raw AppUser entity
@@ -344,7 +344,7 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                     await _userRepository.BeginTransactionAsync();
 
                     // Update the existing user with the form data
-                    UserFactory.UpdateFromEditMemberForm(existingUser, formData);
+                    UserFactory.UpdateFromEditMemberForm(existingUser, formDataData);
 
                     // Update the user in the database
                     var result = await _userManager.UpdateAsync(existingUser);

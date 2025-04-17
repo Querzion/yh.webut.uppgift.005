@@ -8,6 +8,7 @@ using Domain.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Presentation.WebApp.Helpers;
 using Presentation.WebApp.ViewModels;
 using Presentation.WebApp.ViewModels.Adds;
 using Presentation.WebApp.ViewModels.Edits;
@@ -15,10 +16,10 @@ using Presentation.WebApp.ViewModels.Edits;
 namespace Presentation.WebApp.Controllers;
 
 [Authorize(Policy = "Admins")]
-public class MembersController(AppDbContext context, IUserService userService, IWebHostEnvironment env) : Controller
+public class MembersController(AppDbContext context, IUserService userService, IImageUploadHelper imageUploadHelper) : Controller
 {
     private readonly IUserService _userService = userService;
-    private readonly IWebHostEnvironment _env = env;
+    private readonly IImageUploadHelper _imageUploadHelper = imageUploadHelper;
     
     [Route("admin/members")]
     public async Task<IActionResult> Index()
@@ -81,41 +82,32 @@ public class MembersController(AppDbContext context, IUserService userService, I
             return BadRequest(new { success = false, errors });
         }
 
-        // Handle file upload
+        // Handle image upload using the helper
         if (formData.UserImage != null && formData.UserImage.Length > 0)
         {
-            var uploadFolder = Path.Combine(_env.WebRootPath, "uploads", "members");
-            Directory.CreateDirectory(uploadFolder);
+            var imageUrl = await _imageUploadHelper.UploadImageAsync(formData.UserImage, "members");
 
-            var extension = Path.GetExtension(formData.UserImage.FileName);
-            var fileName = $"[{DateTime.UtcNow:yyyy-MM-dd}].[{Guid.NewGuid()}]{extension}";
-            var savePath = Path.Combine(uploadFolder, fileName);
-
-            await using (var stream = new FileStream(savePath, FileMode.Create))
+            if (!string.IsNullOrEmpty(imageUrl))
             {
-                await formData.UserImage.CopyToAsync(stream);
+                formData.ImageUrl = imageUrl;
             }
-
-            var imageUrl = Path.Combine("/uploads/members", fileName).Replace("\\", "/");
-
-            // Set the image URL on the view model
-            formData.ImageUrl = imageUrl;
         }
 
-        // Optionally: Compose the DateOfBirth from dropdowns
+        // Compose the DateOfBirth from dropdowns
         formData.ComposeDateOfBirth();
 
-        var address = new UserAddressFormData
-        {
-            StreetName = formData.StreetName,
-            PostalCode = formData.PostalCode,
-            City = formData.City
-        };
-        
-        // Map to the domain model (this part needs to ensure ImageEntity gets the URL)
+        // Map to domain model
         var formMapped = formData.MapTo<AddMemberFormData>();
 
-        // Make sure ImageEntity is populated from the ImageUrl
+        // Set address
+        formMapped.Address = new UserAddressFormData
+        {
+            StreetName = formData.Address!.StreetName,
+            PostalCode = formData.Address!.PostalCode,
+            City = formData.Address!.City
+        };
+
+        // Set image entity if uploaded
         if (!string.IsNullOrEmpty(formData.ImageUrl))
         {
             formMapped.Image = new ImageFormData
@@ -125,9 +117,8 @@ public class MembersController(AppDbContext context, IUserService userService, I
             };
         }
 
-        formMapped.Address = address;
-        
         var result = await _userService.CreateUserAsync(formMapped);
+
         if (result.Succeeded)
         {
             return Ok(new { success = true });
@@ -151,36 +142,24 @@ public class MembersController(AppDbContext context, IUserService userService, I
             return BadRequest(new { success = false, errors });
         }
 
-        // Ensure the user exists
         var user = await _userService.GetUserByIdAsync(viewModel.Id);
         if (user == null)
         {
             return NotFound(new { success = false, error = "User not found." });
         }
 
-        // Handle file upload
         if (viewModel.UserImage != null && viewModel.UserImage.Length > 0)
         {
-            var uploadFolder = Path.Combine(_env.WebRootPath, "uploads", "members");
-            Directory.CreateDirectory(uploadFolder);
-
-            var extension = Path.GetExtension(viewModel.UserImage.FileName);
-            var fileName = $"[{DateTime.UtcNow:yyyy-MM-dd}].[{Guid.NewGuid()}]{extension}";
-            var savePath = Path.Combine(uploadFolder, fileName);
-
-            await using (var stream = new FileStream(savePath, FileMode.Create))
+            var imageUrl = await _imageUploadHelper.UploadImageAsync(viewModel.UserImage, "members");
+            if (!string.IsNullOrEmpty(imageUrl))
             {
-                await viewModel.UserImage.CopyToAsync(stream);
+                viewModel.ImageUrl = imageUrl;
             }
-
-            viewModel.ImageUrl = Path.Combine("/uploads/members", fileName).Replace("\\", "/");
         }
 
-        // Compose date of birth from dropdowns
         viewModel.ComposeDateOfBirth();
 
-        // Map view model to domain form
-        var form = new EditMemberForm
+        var form = new EditMemberFormData
         {
             Id = viewModel.Id,
             FirstName = viewModel.FirstName,
@@ -196,14 +175,14 @@ public class MembersController(AppDbContext context, IUserService userService, I
                     AltText = "Updated Avatar"
                 }
                 : null,
-            Address = (!string.IsNullOrEmpty(viewModel.StreetName) ||
-                       !string.IsNullOrEmpty(viewModel.PostalCode) ||
-                       !string.IsNullOrEmpty(viewModel.City))
+            Address = (!string.IsNullOrEmpty(viewModel.Address!.StreetName) ||
+                       !string.IsNullOrEmpty(viewModel.Address!.PostalCode) ||
+                       !string.IsNullOrEmpty(viewModel.Address!.City))
                 ? new UserAddressFormData
                 {
-                    StreetName = viewModel.StreetName,
-                    PostalCode = viewModel.PostalCode,
-                    City = viewModel.City
+                    StreetName = viewModel.Address!.StreetName,
+                    PostalCode = viewModel.Address!.PostalCode,
+                    City = viewModel.Address!.City
                 }
                 : null
         };
@@ -216,6 +195,7 @@ public class MembersController(AppDbContext context, IUserService userService, I
 
         return Problem(result.Error ?? "Unable to update user data.");
     }
+
         
     [HttpGet]
     public async Task<JsonResult> SearchUsers(string term)

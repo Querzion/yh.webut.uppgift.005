@@ -16,7 +16,7 @@ public interface IProjectService
     Task<ProjectServiceResult> CreateProjectAsync(AddProjectFormData formData);
     Task<ProjectServiceResult<IEnumerable<Project>>> GetProjectsAsync();
     Task<ProjectServiceResult<Project>> GetProjectAsync(string id);
-    Task<ProjectServiceResult<Project>> UpdateProjectAsync(EditProjectForm model);
+    Task<ProjectServiceResult<Project>> UpdateProjectAsync(EditProjectFormData model);
 }
 
 public class ProjectService(IProjectRepository projectRepository, IStatusService statusService, AppDbContext context) : IProjectService
@@ -92,7 +92,7 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
 
         #region Update
 
-            public async Task<ProjectServiceResult<Project>> UpdateProjectAsync(EditProjectForm model)
+            public async Task<ProjectServiceResult<Project>> UpdateProjectAsync(EditProjectFormData model)
             {
                 var result = new ProjectServiceResult<Project>();
 

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Domain.DTOs.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -9,7 +10,8 @@ public class ProjectFormViewModel
     [Display(Name = "Project Image", Prompt = "Select an image")]
     [DataType(DataType.Upload)]
     public IFormFile? ProjectImage { get; set; }
-
+    
+    public ImageFormData? Image { get; set; }
     public string? ImageUrl { get; set; }
 
     [Required(ErrorMessage = "Project name is required.")]

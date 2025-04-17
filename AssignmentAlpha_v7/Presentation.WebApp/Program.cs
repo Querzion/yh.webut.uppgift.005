@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Business.Services;
 using Data.Contexts;
 using Data.Entities;
@@ -8,10 +9,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Hubs;
+using Presentation.WebApp.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
+
+builder.Services.AddScoped<IImageUploadHelper, ImageUploadHelper>();
 
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
@@ -56,6 +60,44 @@ builder.Services.AddAuthentication(options =>
 {
     options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
     options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
+}).AddFacebook(options =>
+{
+    options.AppId = builder.Configuration["Authentication:Facebook:AppId"]!;
+    options.AppSecret = builder.Configuration["Authentication:Facebook:AppSecret"]!;
+}).AddGitHub(options =>
+{
+    options.ClientId = builder.Configuration["Authentication:GitHub:ClientId"]!;
+    options.ClientSecret = builder.Configuration["Authentication:GitHub:ClientSecret"]!;
+    options.Scope.Add("user:email");
+    options.Scope.Add("read:user");
+
+    options.Events.OnCreatingTicket = async context =>
+    {
+        await Task.Delay(0);
+
+        if (context.User.TryGetProperty("name", out var nameClaim))
+        {
+            var fullName = nameClaim.GetString();
+            if (!string.IsNullOrEmpty(fullName))
+            {
+                var names = fullName.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+                if (names.Length > 0)
+                {
+                    context.Identity?.AddClaim(new Claim(ClaimTypes.GivenName, names[0]));
+                }
+
+                if (names.Length > 1)
+                {
+                        
+                    context.Identity?.AddClaim(new Claim(ClaimTypes.Surname, names[1]));
+                }
+            }
+        }
+    };
+}).AddMicrosoftAccount(options =>
+{
+    options.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"]!;
+    options.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"]!;
 });
 
 builder.Services.AddAuthorization(options =>

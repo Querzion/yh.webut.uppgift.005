@@ -111,6 +111,9 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
@@ -118,11 +121,14 @@ namespace Data.Migrations
                     b.Property<string>("ImageId")
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(200)");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("varchar(20)");
+
+                    b.Property<string>("UserAddressId")
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -130,6 +136,8 @@ namespace Data.Migrations
                         .IsUnique();
 
                     b.HasIndex("ImageId");
+
+                    b.HasIndex("UserAddressId");
 
                     b.ToTable("Clients");
                 });
@@ -509,7 +517,13 @@ namespace Data.Migrations
                         .WithMany("Clients")
                         .HasForeignKey("ImageId");
 
+                    b.HasOne("Data.Entities.UserAddressEntity", "UserAddress")
+                        .WithMany()
+                        .HasForeignKey("UserAddressId");
+
                     b.Navigation("Image");
+
+                    b.Navigation("UserAddress");
                 });
 
             modelBuilder.Entity("Data.Entities.NotificationDismissedEntity", b =>
