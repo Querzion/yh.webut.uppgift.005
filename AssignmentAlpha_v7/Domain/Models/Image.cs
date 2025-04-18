@@ -17,7 +17,7 @@ public class Image
     public DateTime UploadedAt { get; set; }
 
     // If each image is only related to one client, project, or user
-    public string? ClientId { get; set; }
-    public string? ProjectId { get; set; }
-    public string? UserId { get; set; }
+    public Client? ClientId { get; set; }
+    public Project? ProjectId { get; set; }
+    public User? UserId { get; set; }
 }

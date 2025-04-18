@@ -51,24 +51,24 @@
             </div>
             
             <div class="form-group">
-                <label asp-for="Address!.StreetName"></label>
+                <label asp-for="Address.StreetName"></label>
                 <div class="field-group">
-                    <input asp-for="Address!.StreetName" />
-                    <span asp-validation-for="Address!.StreetName"></span>
+                    <input asp-for="Address.StreetName" />
+                    <span asp-validation-for="Address.StreetName"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Address!.PostalCode"></label>
+                <label asp-for="Address.PostalCode"></label>
                 <div class="field-group">
-                    <input asp-for="Address!.PostalCode" />
-                    <span asp-validation-for="Address!.PostalCode"></span>
+                    <input asp-for="Address.PostalCode" />
+                    <span asp-validation-for="Address.PostalCode"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Address!.City"></label>
+                <label asp-for="Address.City"></label>
                 <div class="field-group">
-                    <input asp-for="Address!.City" />
-                    <span asp-validation-for="Address!.City"></span>
+                    <input asp-for="Address.City" />
+                    <span asp-validation-for="Address.City"></span>
                 </div>
             </div>
 
@@ -78,4 +78,4 @@
     </div>
 </div>
 
-@await Html.PartialAsync("_ValidationScripts")
+@* @await Html.PartialAsync("_ValidationScripts") *@

@@ -1,10 +1,19 @@
 @{
     var userRoles = User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList();
     var displayName = await userService.GetDisplayNameAsync(User.Identity?.Name!);
-}
-<div class="account-dropdown-container">
-    <img id="account-dropdown-button" data-type="dropdown" data-target="#account-dropdown" src="images/Avatars/avatar-male-001.svg" alt="User Avatar" class="account-avatar" />
     
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+    var userResult = await userService.GetUserByIdAsync(userId);
+    var user = userResult.Result?.FirstOrDefault(); // Get actual model
+
+    var avatarUrl = user?.ProfileImage?.ImageUrl != null
+        ? Url.Content(user.ProfileImage.ImageUrl)
+        : Url.Content("~/images/profiles/user-template-male.svg");
+}
+
+<div class="account-dropdown-container">
+    <img id="account-dropdown-button" data-type="dropdown" data-target="#account-dropdown" src="@avatarUrl" alt="User Avatar" class="account-avatar" />
+    <p>Path: @user?.ProfileImage?.ImageUrl</p>
     <div id="account-dropdown" class="account-dropdown">
         <div class="role">
             <div>
@@ -20,7 +29,7 @@
             </div>
         </div>
         <div class="account-info">
-            <img src="~/images/Avatars/avatar-male-001.svg" alt="User Avatar" class="account-avatar-mini"/>
+            <img src="@avatarUrl" alt="User Avatar" class="account-avatar-mini"/>
             <span class="account-name">
                 @displayName
             </span>
