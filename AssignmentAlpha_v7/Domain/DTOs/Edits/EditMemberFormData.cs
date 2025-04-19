@@ -9,5 +9,6 @@ public class EditMemberFormData : MemberFormData
 {
     [Required(ErrorMessage = "Member ID is required.")]
     [Display(Name = "Member ID")]
+    [StringLength(36)]
     public string Id { get; set; } = null!;
 }

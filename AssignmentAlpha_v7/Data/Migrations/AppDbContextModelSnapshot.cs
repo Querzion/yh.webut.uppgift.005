@@ -182,20 +182,11 @@ namespace Data.Migrations
                     b.Property<string>("AltText")
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("ClientId")
-                        .HasColumnType("varchar(36)");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("ProjectId")
-                        .HasColumnType("varchar(36)");
-
                     b.Property<DateTime>("UploadedAt")
                         .HasColumnType("date");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 

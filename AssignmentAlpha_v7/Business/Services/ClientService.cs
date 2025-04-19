@@ -103,13 +103,13 @@ public class ClientService(IClientRepository clientRepository) : IClientService
     
         #region Read
 
-            public async Task<ClientServiceResult> GetClientsAsync()
+            public async Task<ClientServiceResult> GetAllClientsAsync()
             {
                 var result = await _clientRepository.GetAllAsync();
                 return result.MapTo<ClientServiceResult>();
             }
             
-            public async Task<ClientServiceResult> GetAllClientsAsync()
+            public async Task<ClientServiceResult> GetClientsAsync()
             {
                 var repoResult = await _clientRepository.GetAllAsync();
             

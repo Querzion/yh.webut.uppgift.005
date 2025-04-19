@@ -8,5 +8,6 @@ public class EditClientFormData : ClientFormData
 {
     [Required(ErrorMessage = "Client ID is required.")]
     [Display(Name = "Client ID")]
+    [StringLength(36)]
     public string Id { get; set; } = null!;
 }

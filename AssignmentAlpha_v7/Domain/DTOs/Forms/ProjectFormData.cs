@@ -12,6 +12,7 @@ public class ProjectFormData
     
     public ImageFormData? Image { get; set; }
     
+    [StringLength(36)]
     public string? ImageId { get; set; }
     
     [Display(Name = "Project Name", Prompt = "Enter project name")]
@@ -39,13 +40,16 @@ public class ProjectFormData
     
     [Display(Name = "Client", Prompt = "Select a client")]
     [Required(ErrorMessage = "Client is required")]
+    [StringLength(36)]
     public string ClientId { get; set; } = null!;
     
     [Display(Name = "User", Prompt = "Select a user")]
     [Required(ErrorMessage = "User is required")]
+    [StringLength(36)]
     public string UserId { get; set; } = null!;
     
     [Display(Name = "Status", Prompt = "Select the project status")]
     [Required(ErrorMessage = "Status is required")]
+    [StringLength(36)]
     public int StatusId { get; set; }
 }

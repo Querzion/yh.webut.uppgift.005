@@ -44,7 +44,8 @@ public class MemberFormViewModel
     [DataType(DataType.PhoneNumber)]
     public string? PhoneNumber { get; set; }
     
-    
+    [StringLength(36)]
+    public string? AddressId { get; set; }
     public AddressFormData? Address { get; set; }
     
     public int? SelectedDay { get; set; }

@@ -48,10 +48,7 @@ namespace Data.Migrations
                     Id = table.Column<string>(type: "varchar(36)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     AltText = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    UploadedAt = table.Column<DateTime>(type: "date", nullable: false),
-                    ClientId = table.Column<string>(type: "varchar(36)", nullable: true),
-                    ProjectId = table.Column<string>(type: "varchar(36)", nullable: true),
-                    UserId = table.Column<string>(type: "varchar(36)", nullable: true)
+                    UploadedAt = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {

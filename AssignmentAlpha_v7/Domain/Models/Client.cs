@@ -4,6 +4,7 @@ namespace Domain.Models;
 
 public class Client
 {
+    [StringLength(36)]
     public string Id { get; set; } = null!;
 
     [Display(Name = "Client Name", Prompt = "Enter client name")]
@@ -16,10 +17,12 @@ public class Client
     public string? PhoneNumber { get; set; }
 
     [Display(Name = "Profile Image")]
+    [StringLength(36)]
     public string? ImageId { get; set; }
     public virtual Image? Image { get; set; }
 
     [Display(Name = "Address")]
+    [StringLength(36)]
     public string? AddressId { get; set; }
 
     public bool IsActive { get; set; } = true;

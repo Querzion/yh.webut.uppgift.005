@@ -4,6 +4,7 @@ namespace Domain.Models;
 
 public class Project
 {
+    [StringLength(36)]
     public string Id { get; set; } = null!;
     
     public string ProjectName { get; set; } = null!;
@@ -17,6 +18,7 @@ public class Project
     public decimal? Budget { get; set; }
     
     [Display(Name = "Project Image")]
+    [StringLength(36)]
     public string? ImageId { get; set; }
     public virtual Image? Image { get; set; }
     

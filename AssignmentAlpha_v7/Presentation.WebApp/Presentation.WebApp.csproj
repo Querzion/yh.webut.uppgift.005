@@ -71,6 +71,24 @@
       <_ContentIncludedByDefault Remove="Views\Shared\Error.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[0feabeba-a18b-4d1f-9486-fdbb9af36cf2].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[10ac2d5a-ef67-406b-a3d5-42ddaadb18da].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[1b77eeb2-f03f-42c3-809a-f4367e5bef45].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[2f5836de-bf62-4a58-82b6-73f057043c72].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[4d72bb80-3a19-4788-b104-3c0eb33ed63e].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[4dc588ad-171e-40ce-9a7c-684038346d68].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[50bb5197-0686-44ab-b9bc-8869f59e02d1].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[5cb90052-f85c-4861-85cc-9e93a5022a71].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[6a0dbd31-f5f2-4ff7-8807-ea59b124fe22].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[9225a6dc-c3d8-466a-920a-3a4c2bab8579].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[cc859855-119c-489b-847e-680839f61edb].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[d84f6950-073b-4d4d-a320-639bfe70f32d].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-17].[d9673a0f-4668-4a4c-9ff2-babb8647bff7].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-18].[78b045a1-d905-46cb-ade2-76a3a0703404].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-18].[ef4f1f55-098d-4c0c-a92d-251d43d6c6fb].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-19].[12ad2710-4625-4aea-b296-cd4a547a4a32].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-19].[3ed1df5f-3248-4c6e-b1fe-60144527d7a6].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-19].[beea88f6-daa3-49b0-9dc1-131fda45e19a].png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -86,6 +104,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Business\Business.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\uploads\" />
     </ItemGroup>
 
 </Project>

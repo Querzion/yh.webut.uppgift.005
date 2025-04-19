@@ -34,6 +34,8 @@ public class ClientFormViewModel
         ErrorMessage = "Invalid phone number format.")]
     public string? PhoneNumber { get; set; }
 
+    [StringLength(36)]
+    public string? AddressId { get; set; }
     public AddressFormData? Address { get; set; }
     
     [Display(Name = "Location", Prompt = "Enter location")]

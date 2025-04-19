@@ -11,4 +11,6 @@ public class ImageFormData
     [Display(Name = "Alt Text", Prompt = "Image description")]
     [DataType(DataType.Text)]
     public string? AltText { get; set; }
+
+    
 }

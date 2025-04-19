@@ -30,14 +30,16 @@ public class ClientEntity
     [Column(TypeName = "varchar(20)")]
     public string? PhoneNumber { get; set; }
 
-    [Column(TypeName = "varchar(36)")]
+    // Strict ONE TO ONE RELATIONSHIP
+    [ForeignKey(nameof(Image)), Column(TypeName = "varchar(36)")]
     public string? ImageId { get; set; }
-    [ForeignKey(nameof(ImageId))]
     public virtual ImageEntity? Image { get; set; }
 
-    [Column(TypeName = "bit")] public bool IsActive { get; set; } = true;
+    [Column(TypeName = "bit")] 
+    public bool IsActive { get; set; } = true;
 
-    [Column(TypeName = "datetime")] public DateTime Date { get; set; } = DateTime.Now;
+    [Column(TypeName = "datetime")] 
+    public DateTime Date { get; set; } = DateTime.Now;
 
     [Column(TypeName = "varchar(36)")]
     public string? AddressId { get; set; }

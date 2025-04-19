@@ -7,7 +7,7 @@ public class UserRegistrationForm
 {
     [Display(Name = "Member Image", Prompt = "Select an image")]
     [DataType(DataType.Upload)]
-    public IFormFile? UserImage { get; set; }
+    public IFormFile? Image { get; set; }
     
     
     [Required(ErrorMessage = "Required")]

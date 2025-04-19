@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices.JavaScript;
+using Business.Models;
 using Business.Services;
 using Data.Contexts;
 using Data.Entities;
@@ -25,12 +26,14 @@ namespace Presentation.WebApp.Controllers;
 
 [Authorize]
 [Route("admin/projects")]
-public class ProjectsController(IProjectService projectService, AppDbContext context, IClientService clientService, IImageUploadHelper imageUploadHelper) : Controller
+public class ProjectsController(IProjectService projectService, AppDbContext context, IClientService clientService, IImageServiceHelper imageServiceHelper, IImageService imageService, ILogger<ProjectsController> logger) : Controller
 {
     private readonly IProjectService _projectService = projectService;
     private readonly AppDbContext _context = context;
     private readonly IClientService _clientService = clientService;
-    private readonly IImageUploadHelper _imageUploadHelper = imageUploadHelper;
+    private readonly IImageService _imageService = imageService;
+    private readonly IImageServiceHelper _imageServiceHelper = imageServiceHelper;
+    private readonly ILogger<ProjectsController> _logger = logger;
 
     [Route("")]
     [HttpGet]
@@ -38,7 +41,7 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
     public async Task<IActionResult> Index()
     {
         // Get the projects from the service (assuming it returns a list of Project entities)
-        var projectServiceResult = await _projectService.GetProjectsAsync();
+        var projectServiceResult = await _projectService.GetAllProjectsAsync();
     
         // Use the mapping extension to convert Project entities to ProjectListItemViewModel
         var projectViewModels = projectServiceResult.Result!
@@ -139,38 +142,56 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
             return Json(new { Success = false, Message = "Model is invalid" });
         }
 
-        // Handle image upload using the helper
+        ImageServiceResult? imageServiceResult = null;
+
+        // Handle image upload if a file is provided
         if (model.ProjectImage != null && model.ProjectImage.Length > 0)
         {
-            var imageUrl = await _imageUploadHelper.UploadImageAsync(model.ProjectImage, "projects");
-
-            if (!string.IsNullOrEmpty(imageUrl))
+            var metadata = new ImageFormData
             {
-                model.ImageUrl = imageUrl;
-            }
-        }
-
-        var addProjectFormData = model.MapTo<AddProjectFormData>();
-
-        // Set image entity if we got an image URL
-        if (!string.IsNullOrEmpty(model.ImageUrl))
-        {
-            addProjectFormData.Image = new ImageFormData
-            {
-                ImageUrl = model.ImageUrl,
                 AltText = "Project Image"
             };
+
+            // Upload the image using the ImageServiceHelper
+            imageServiceResult = await _imageServiceHelper.SaveImageAsync(model.ProjectImage, "projects", metadata);
+
+            if (!imageServiceResult.Succeeded || imageServiceResult.Result == null || !imageServiceResult.Result.Any())
+            {
+                return Json(new { Success = false, Message = imageServiceResult.Error ?? "Image upload failed." });
+            }
+
+            // Get the first image from the result and assign its URL
+            var uploadedImage = imageServiceResult.Result.First();
+            model.ImageUrl = uploadedImage.ImageUrl;
         }
 
+        // Map the view model to form data for project creation
+        var addProjectFormData = model.MapTo<AddProjectFormData>();
+
+        // If an image was uploaded, map the image to the project form data
+        if (imageServiceResult?.Result?.Any() == true)
+        {
+            addProjectFormData.Image = imageServiceResult.Result
+                .Select(img => new ImageFormData
+                {
+                    ImageUrl = img.ImageUrl,
+                    AltText = img.AltText
+                })
+                .FirstOrDefault();
+        }
+
+        // Call the project service to create the project
         var result = await _projectService.CreateProjectAsync(addProjectFormData);
 
+        // Handle the result of the project creation
         if (!result.Succeeded)
         {
-            return Json(new { Success = false, Message = result.Error });
+            return Json(new { Success = false, Message = result.Error ?? "Failed to create project" });
         }
 
         return Json(new { Success = true });
     }
+
 
 
     // POST: EditProject

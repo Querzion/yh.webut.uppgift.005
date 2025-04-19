@@ -5,6 +5,7 @@ namespace Domain.Models;
 
 public class User
 {
+    [StringLength(36)]
     public string Id { get; set; } = null!;
 
     [Display(Name = "First Name")]
@@ -27,12 +28,14 @@ public class User
     public DateTime? DateOfBirth { get; set; }
 
     [Display(Name = "Avatar Image")]
+    [StringLength(36)]
     public string? ImageId { get; set; }
-    public virtual Image? Image { get; set; }
+    public Image? Image { get; set; }
     
     [Display(Name = "Address")]
+    [StringLength(36)]
     public string? AddressId { get; set; }
-    public virtual Address? Address { get; set; }
+    public Address? Address { get; set; }
     
-    public virtual ICollection<Project> Projects { get; set; } = [];
+    public ICollection<Project> Projects { get; set; } = [];
 }

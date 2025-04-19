@@ -12,6 +12,7 @@ public class MemberFormData
     
     public ImageFormData? Image { get; set; }
     
+    [StringLength(36)]
     public string? ImageId { get; set; }
     
     
@@ -52,7 +53,9 @@ public class MemberFormData
         ErrorMessage = "Invalid Password")]
     [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
-    
+ 
+    [StringLength(36)]
+    public string? AddressId { get; set; }
     public AddressFormData? Address { get; set; }
     
     public DateTime? DateOfBirth { get; set; }

@@ -4,6 +4,7 @@ namespace Domain.Models;
 
 public class Image
 {
+    [StringLength(36)]
     public string Id { get; set; } = null!;
 
     [Display(Name = "Image URL")]
@@ -16,7 +17,7 @@ public class Image
     [DataType(DataType.DateTime)]
     public DateTime UploadedAt { get; set; }
     
-    public virtual Client? Client { get; set; }
-    public virtual Project? Project { get; set; }
-    public virtual User? User { get; set; }
+    public Client? Client { get; set; }
+    public Project? Project { get; set; }
+    public User? User { get; set; }
 }

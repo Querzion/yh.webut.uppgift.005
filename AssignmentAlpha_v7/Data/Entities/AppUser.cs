@@ -22,10 +22,11 @@ public class AppUser : IdentityUser
     [ProtectedPersonalData]
     [Column(TypeName = "date")]
     public DateTime? DateOfBirth { get; set; }
-
-    [Column(TypeName = "varchar(36)")]
+    
+    
+    // Strict ONE TO ONE RELATIONSHIP
+    [ForeignKey(nameof(Image)), Column(TypeName = "varchar(36)")]
     public string? ImageId { get; set; }
-    [ForeignKey(nameof(ImageId))]
     public virtual ImageEntity? Image { get; set; }
     
     [Column(TypeName = "varchar(36)")]

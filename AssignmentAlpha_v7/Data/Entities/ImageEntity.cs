@@ -20,15 +20,8 @@ public class ImageEntity
     [Column(TypeName = "date")]
     public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
     
-    [Column(TypeName = "varchar(36)")]
-    public string? ClientId { get; set; }
+    // Strict ONE TO ONE RELATIONSHIP
     public virtual ClientEntity? Client { get; set; }
-    
-    [Column(TypeName = "varchar(36)")]
-    public string? ProjectId { get; set; }
     public virtual ProjectEntity? Project { get; set; }
-    
-    [Column(TypeName = "varchar(36)")]
-    public string? UserId { get; set; }
     public virtual AppUser? User { get; set; }
 }

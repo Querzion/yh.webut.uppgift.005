@@ -10,6 +10,9 @@ public class ClientFormData
     [DataType(DataType.Upload)]
     public IFormFile? ClientImage { get; set; }  // File upload for client image
     public ImageFormData? Image { get; set; }
+    
+    [StringLength(36)]
+    public string? ImageId { get; set; }
 
     [Display(Name = "Client Name", Prompt = "Enter client name")]
     [DataType(DataType.Text)]
@@ -32,5 +35,7 @@ public class ClientFormData
     public string? PhoneNumber { get; set; }
 
     // Address-related fields
+    [StringLength(36)]
+    public string? AddressId { get; set; }
     public AddressFormData? Address { get; set; }
 }

@@ -14,7 +14,7 @@ namespace Business.Services;
 public interface IProjectService
 {
     Task<ProjectServiceResult> CreateProjectAsync(AddProjectFormData formData);
-    Task<ProjectServiceResult<IEnumerable<Project>>> GetProjectsAsync();
+    Task<ProjectServiceResult<IEnumerable<Project>>> GetAllProjectsAsync();
     Task<ProjectServiceResult<Project>> GetProjectAsync(string id);
     Task<ProjectServiceResult<Project>> UpdateProjectAsync(EditProjectFormData model);
 }
@@ -51,7 +51,7 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
 
         #region Read
 
-            public async Task<ProjectServiceResult<IEnumerable<Project>>> GetProjectsAsync()
+            public async Task<ProjectServiceResult<IEnumerable<Project>>> GetAllProjectsAsync()
             {
                 var response = await _projectRepository.GetAllAsync
                 ( 
@@ -120,7 +120,7 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
                     var projectEntity = projectEntityResult.Result;
 
                     // Update project properties
-                    projectEntity.ProjectName = model.ProjectName;
+                    projectEntity!.ProjectName = model.ProjectName;
                     projectEntity.Description = model.Description;
                     projectEntity.Budget = model.Budget;
                     projectEntity.StartDate = model.StartDate;

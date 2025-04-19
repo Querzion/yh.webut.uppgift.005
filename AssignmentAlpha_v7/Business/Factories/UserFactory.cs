@@ -93,7 +93,7 @@ public static class UserFactory
             DateOfBirth = entity.DateOfBirth,
             Image = entity.Image != null ? new Image
                 {
-                    Id = entity.Image.Id,
+                    Id = entity.Image.Id!,
                     ImageUrl = entity.Image.ImageUrl,
                     AltText = entity.Image.AltText,
                     UploadedAt = entity.Image.UploadedAt

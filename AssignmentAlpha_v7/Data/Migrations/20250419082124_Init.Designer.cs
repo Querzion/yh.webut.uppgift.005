@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250418230342_Init")]
+    [Migration("20250419082124_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -185,20 +185,11 @@ namespace Data.Migrations
                     b.Property<string>("AltText")
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("ClientId")
-                        .HasColumnType("varchar(36)");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("ProjectId")
-                        .HasColumnType("varchar(36)");
-
                     b.Property<DateTime>("UploadedAt")
                         .HasColumnType("date");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
