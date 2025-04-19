@@ -1,11 +1,11 @@
-@model Client
+@model ClientListItemViewModel
 
 <th class="client-check"><input type="checkbox" /></th>
 <th class="client-info">
-    @if (Model.ClientImage != null && !string.IsNullOrEmpty(Model.ClientImage.ImageUrl))
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
     {
         <div class="client-image">
-            <img src="@Model.ClientImage.ImageUrl" alt="@Model.ClientImage.AltText" />
+            <img src="@Model.ImageUrl" alt="@Model.AltText" />
         </div>
     }
     else

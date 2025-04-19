@@ -1,13 +1,14 @@
-@model User
+@model MemberListItemViewModel
 
 <div class="card member">
     <div class="pos-right">
         <button type="button" data-modal="true" data-target="#editMemberModal" class="btn-edit"></button>
     </div>
-    @if (Model.ProfileImage != null && !string.IsNullOrEmpty(Model.ProfileImage.ImageUrl))
+    
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
     {
         <div class="avatar">
-            <img src="@Model.ProfileImage.ImageUrl" alt="@Model.ProfileImage.AltText" />
+            <img src="@Model.ImageUrl" alt="@Model.AltText" />
         </div>
     }
     else
@@ -16,6 +17,7 @@
             <img src="/images/profiles/user-template-male.svg" alt="Default Avatar" />
         </div>
     }
+
     <h4 class="name">@Model.FirstName @Model.LastName</h4>
     <div class="job-title">@Model.JobTitle</div>
     <div class="email">@Model.Email</div>
@@ -23,7 +25,7 @@
     <div class="role"></div>
     <button class="btn-nocol btn-gray">Message</button>
 
-    <p>Image Path: @Model.ProfileImage?.ImageUrl</p>
-    <p>Exists? @(Model.ProfileImage != null)</p>
-    <p>BirthDate: @Model.DateOfBirth</p>
+    <p>Image Path: @Model.ImageUrl</p>
+    <p>Exists? @(string.IsNullOrEmpty(Model.ImageUrl) ? "No" : "Yes")</p>
+    <p>BirthDate: @Model.DateOfBirth?.ToString("dd-MM-yyyy")</p>
 </div>

@@ -21,6 +21,31 @@ namespace Data.Migrations
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true);
 
+            modelBuilder.Entity("Data.Entities.AddressEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("County")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(8)");
+
+                    b.Property<string>("StreetName")
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("Data.Entities.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -28,6 +53,9 @@ namespace Data.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("AddressId")
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -90,7 +118,10 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId");
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("ImageId")
+                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -105,6 +136,9 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.ClientEntity", b =>
                 {
                     b.Property<string>("Id")
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("AddressId")
                         .HasColumnType("varchar(36)");
 
                     b.Property<string>("ClientName")
@@ -127,17 +161,15 @@ namespace Data.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("varchar(20)");
 
-                    b.Property<string>("UserAddressId")
-                        .HasColumnType("varchar(36)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("ClientName")
                         .IsUnique();
 
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("UserAddressId");
+                    b.HasIndex("ImageId")
+                        .IsUnique();
 
                     b.ToTable("Clients");
                 });
@@ -150,11 +182,20 @@ namespace Data.Migrations
                     b.Property<string>("AltText")
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("ClientId")
+                        .HasColumnType("varchar(36)");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("ProjectId")
+                        .HasColumnType("varchar(36)");
+
                     b.Property<DateTime>("UploadedAt")
                         .HasColumnType("date");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -287,7 +328,8 @@ namespace Data.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("ImageId");
+                    b.HasIndex("ImageId")
+                        .IsUnique();
 
                     b.HasIndex("StatusId");
 
@@ -353,25 +395,6 @@ namespace Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("Data.Entities.UserAddressEntity", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(36)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(8)");
-
-                    b.Property<string>("StreetName")
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -504,26 +527,32 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entities.AppUser", b =>
                 {
+                    b.HasOne("Data.Entities.AddressEntity", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
                     b.HasOne("Data.Entities.ImageEntity", "Image")
-                        .WithMany("Users")
-                        .HasForeignKey("ImageId");
+                        .WithOne("User")
+                        .HasForeignKey("Data.Entities.AppUser", "ImageId");
+
+                    b.Navigation("Address");
 
                     b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Data.Entities.ClientEntity", b =>
                 {
-                    b.HasOne("Data.Entities.ImageEntity", "Image")
-                        .WithMany("Clients")
-                        .HasForeignKey("ImageId");
-
-                    b.HasOne("Data.Entities.UserAddressEntity", "UserAddress")
+                    b.HasOne("Data.Entities.AddressEntity", "Address")
                         .WithMany()
-                        .HasForeignKey("UserAddressId");
+                        .HasForeignKey("AddressId");
+
+                    b.HasOne("Data.Entities.ImageEntity", "Image")
+                        .WithOne("Client")
+                        .HasForeignKey("Data.Entities.ClientEntity", "ImageId");
+
+                    b.Navigation("Address");
 
                     b.Navigation("Image");
-
-                    b.Navigation("UserAddress");
                 });
 
             modelBuilder.Entity("Data.Entities.NotificationDismissedEntity", b =>
@@ -573,8 +602,8 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Data.Entities.ImageEntity", "Image")
-                        .WithMany("Projects")
-                        .HasForeignKey("ImageId");
+                        .WithOne("Project")
+                        .HasForeignKey("Data.Entities.ProjectEntity", "ImageId");
 
                     b.HasOne("Data.Entities.StatusEntity", "Status")
                         .WithMany("Projects")
@@ -612,17 +641,6 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Project");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Data.Entities.UserAddressEntity", b =>
-                {
-                    b.HasOne("Data.Entities.AppUser", "User")
-                        .WithOne("Address")
-                        .HasForeignKey("Data.Entities.UserAddressEntity", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -680,8 +698,6 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entities.AppUser", b =>
                 {
-                    b.Navigation("Address");
-
                     b.Navigation("DismissedNotifications");
 
                     b.Navigation("Projects");
@@ -694,11 +710,11 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Data.Entities.ImageEntity", b =>
                 {
-                    b.Navigation("Clients");
+                    b.Navigation("Client");
 
-                    b.Navigation("Projects");
+                    b.Navigation("Project");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Data.Entities.NotificationEntity", b =>

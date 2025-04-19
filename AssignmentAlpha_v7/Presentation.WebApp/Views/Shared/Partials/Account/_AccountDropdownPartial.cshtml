@@ -6,14 +6,14 @@
     var userResult = await userService.GetUserByIdAsync(userId);
     var user = userResult.Result?.FirstOrDefault(); // Get actual model
 
-    var avatarUrl = user?.ProfileImage?.ImageUrl != null
-        ? Url.Content(user.ProfileImage.ImageUrl)
+    var avatarUrl = user?.Image?.ImageUrl != null
+        ? Url.Content(user.Image.ImageUrl)
         : Url.Content("~/images/profiles/user-template-male.svg");
 }
 
 <div class="account-dropdown-container">
     <img id="account-dropdown-button" data-type="dropdown" data-target="#account-dropdown" src="@avatarUrl" alt="User Avatar" class="account-avatar" />
-    <p>Path: @user?.ProfileImage?.ImageUrl</p>
+    <p>Path: @user?.Image?.ImageUrl</p>
     <div id="account-dropdown" class="account-dropdown">
         <div class="role">
             <div>

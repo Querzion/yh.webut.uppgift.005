@@ -1,29 +1,33 @@
-@model Project
+@model ProjectListItemViewModel
 
-<div class="card member">
+<div class="card project">
     <div class="pos-right">
-        <button type="button" data-modal="true" data-target="#editMemberModal" class="btn-edit"></button>
+        <button type="button" data-modal="true" data-target="#editProjectModal" class="btn-edit"></button>
     </div>
-    @if (Model.ProjectImage != null && !string.IsNullOrEmpty(Model.ProjectImage.ImageUrl))
+
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
     {
         <div class="avatar">
-            <img src="@Model.ProjectImage.ImageUrl" alt="@Model.ProjectImage.AltText" />
+            <img src="@Model.ImageUrl" alt="@Model.ProjectName" />
         </div>
     }
     else
     {
         <div class="avatar">
-            <img src="/images/projects/project-template.svg" alt="Default Image" />
+            <img src="/images/projects/project-template.svg" alt="Default Project Image" />
         </div>
     }
+
     <h4 class="name">@Model.ProjectName</h4>
-    <div class="job-title">@Model.Description</div>
-    <div class="email">@Model.Budget</div>
-    <div class="phone-number">@Model.StartDate</div>
-    <div class="role">@Model.EndDate</div>
+    <div class="description">@Model.Description</div>
+    <div class="budget">@Model.Budget?.ToString("C")</div> <!-- Format budget as currency -->
+    <div class="start-date">@Model.StartDate.ToString("dd-MM-yyyy")</div> <!-- Format date -->
+    <div class="end-date">@Model.EndDate?.ToString("dd-MM-yyyy")</div> <!-- Format date -->
+    <div class="status">@Model.Status</div> <!-- Display status name -->
+
     <button class="btn-nocol btn-gray">Message</button>
 
-    <p>Image Path: @Model.ProjectImage?.ImageUrl</p>
-    <p>Exists? @(Model.ProjectImage != null)</p>
-    <p>BirthDate: @Model.Status</p>
+    <p>Image URL: @Model.ImageUrl</p>
+    <p>Exists? @(string.IsNullOrEmpty(Model.ImageUrl) ? "No" : "Yes")</p>
+    <p>Status: @Model.Status</p>
 </div>

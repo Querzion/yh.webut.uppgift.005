@@ -1,10 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain.Models;
 
 public class Project
 {
     public string Id { get; set; } = null!;
-    
-    public string? Image { get; set; }
     
     public string ProjectName { get; set; } = null!;
     
@@ -16,7 +16,9 @@ public class Project
     
     public decimal? Budget { get; set; }
     
-    public virtual Image? ProjectImage { get; set; }
+    [Display(Name = "Project Image")]
+    public string? ImageId { get; set; }
+    public virtual Image? Image { get; set; }
     
     public virtual Client Client { get; set; } = null!;
     

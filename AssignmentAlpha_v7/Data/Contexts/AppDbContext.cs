@@ -21,7 +21,7 @@ public class AppDbContext(DbContextOptions options) : IdentityDbContext<AppUser>
     public virtual DbSet<StatusEntity> Statuses { get; set; }
     public virtual DbSet<ProjectEntity> Projects { get; set; }
     public virtual DbSet<ProjectMemberEntity> ProjectMembers { get; set; }
-    public virtual DbSet<UserAddressEntity> Addresses { get; set; }
+    public virtual DbSet<AddressEntity> Addresses { get; set; }
     public virtual DbSet<ImageEntity> ImagePaths { get; set; }
     public virtual DbSet<TagEntity> Tags { get; set; }
 }

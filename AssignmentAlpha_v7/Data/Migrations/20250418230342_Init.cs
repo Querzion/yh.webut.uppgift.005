@@ -12,6 +12,22 @@ namespace Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(36)", nullable: false),
+                    StreetName = table.Column<string>(type: "nvarchar(150)", nullable: true),
+                    PostalCode = table.Column<string>(type: "nvarchar(8)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(150)", nullable: true),
+                    County = table.Column<string>(type: "nvarchar(150)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(150)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -32,7 +48,10 @@ namespace Data.Migrations
                     Id = table.Column<string>(type: "varchar(36)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(200)", nullable: true),
                     AltText = table.Column<string>(type: "nvarchar(200)", nullable: true),
-                    UploadedAt = table.Column<DateTime>(type: "date", nullable: false)
+                    UploadedAt = table.Column<DateTime>(type: "date", nullable: false),
+                    ClientId = table.Column<string>(type: "varchar(36)", nullable: true),
+                    ProjectId = table.Column<string>(type: "varchar(36)", nullable: true),
+                    UserId = table.Column<string>(type: "varchar(36)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,6 +141,7 @@ namespace Data.Migrations
                     JobTitle = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "date", nullable: true),
                     ImageId = table.Column<string>(type: "varchar(36)", nullable: true),
+                    AddressId = table.Column<string>(type: "varchar(36)", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -141,7 +161,40 @@ namespace Data.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_AspNetUsers_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_AspNetUsers_ImagePaths_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "ImagePaths",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(36)", nullable: false),
+                    ClientName = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(200)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "varchar(20)", nullable: true),
+                    ImageId = table.Column<string>(type: "varchar(36)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
+                    AddressId = table.Column<string>(type: "varchar(36)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Clients_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Clients_ImagePaths_ImageId",
                         column: x => x.ImageId,
                         principalTable: "ImagePaths",
                         principalColumn: "Id");
@@ -171,26 +224,6 @@ namespace Data.Migrations
                         name: "FK_Notifications_NotificationTypes_NotificationTypeId",
                         column: x => x.NotificationTypeId,
                         principalTable: "NotificationTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Addresses",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
-                    StreetName = table.Column<string>(type: "nvarchar(150)", nullable: true),
-                    PostalCode = table.Column<string>(type: "nvarchar(8)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(150)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Addresses", x => x.UserId);
-                    table.ForeignKey(
-                        name: "FK_Addresses_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -281,60 +314,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DismissedNotifications",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
-                    NotificationId = table.Column<string>(type: "varchar(36)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DismissedNotifications", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DismissedNotifications_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DismissedNotifications_Notifications_NotificationId",
-                        column: x => x.NotificationId,
-                        principalTable: "Notifications",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "varchar(36)", nullable: false),
-                    ClientName = table.Column<string>(type: "nvarchar(200)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(200)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "varchar(20)", nullable: true),
-                    ImageId = table.Column<string>(type: "varchar(36)", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
-                    UserAddressId = table.Column<string>(type: "varchar(36)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Clients_Addresses_UserAddressId",
-                        column: x => x.UserAddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "UserId");
-                    table.ForeignKey(
-                        name: "FK_Clients_ImagePaths_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "ImagePaths",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Projects",
                 columns: table => new
                 {
@@ -374,6 +353,32 @@ namespace Data.Migrations
                         name: "FK_Projects_Statuses_StatusId",
                         column: x => x.StatusId,
                         principalTable: "Statuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DismissedNotifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<string>(type: "varchar(36)", nullable: false),
+                    NotificationId = table.Column<string>(type: "varchar(36)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DismissedNotifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DismissedNotifications_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DismissedNotifications_Notifications_NotificationId",
+                        column: x => x.NotificationId,
+                        principalTable: "Notifications",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -436,15 +441,26 @@ namespace Data.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_AddressId",
+                table: "AspNetUsers",
+                column: "AddressId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_ImageId",
                 table: "AspNetUsers",
-                column: "ImageId");
+                column: "ImageId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_AddressId",
+                table: "Clients",
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_ClientName",
@@ -455,12 +471,8 @@ namespace Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_ImageId",
                 table: "Clients",
-                column: "ImageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clients_UserAddressId",
-                table: "Clients",
-                column: "UserAddressId");
+                column: "ImageId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_DismissedNotifications_NotificationId",
@@ -500,7 +512,8 @@ namespace Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_ImageId",
                 table: "Projects",
-                column: "ImageId");
+                column: "ImageId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_StatusId",
@@ -568,6 +581,9 @@ namespace Data.Migrations
                 name: "NotificationTypes");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
@@ -575,9 +591,6 @@ namespace Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Addresses");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "ImagePaths");

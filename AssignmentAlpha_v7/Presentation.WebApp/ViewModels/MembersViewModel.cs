@@ -2,6 +2,7 @@ using Domain.Models;
 using Presentation.WebApp.ViewModels.Adds;
 using Presentation.WebApp.ViewModels.Authentications;
 using Presentation.WebApp.ViewModels.Edits;
+using Presentation.WebApp.ViewModels.ListItems;
 
 namespace Presentation.WebApp.ViewModels;
 
@@ -11,7 +12,7 @@ namespace Presentation.WebApp.ViewModels;
     {
         public string Title { get; set; } = null!;
 
-        public IEnumerable<User>? Members { get; set; } = [];
+        public IEnumerable<MemberListItemViewModel>? Members { get; set; } = [];
         
         public AddMemberViewModel AddMember { get; set; } = new();
         

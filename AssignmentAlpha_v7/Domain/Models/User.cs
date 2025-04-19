@@ -26,9 +26,13 @@ public class User
     [DataType(DataType.Date)]
     public DateTime? DateOfBirth { get; set; }
 
-    [Display(Name = "Profile Image")]
-    public virtual Image? ProfileImage { get; set; }
+    [Display(Name = "Avatar Image")]
+    public string? ImageId { get; set; }
+    public virtual Image? Image { get; set; }
     
     [Display(Name = "Address")]
-    public virtual UserAddress? Address { get; set; }
+    public string? AddressId { get; set; }
+    public virtual Address? Address { get; set; }
+    
+    public virtual ICollection<Project> Projects { get; set; } = [];
 }

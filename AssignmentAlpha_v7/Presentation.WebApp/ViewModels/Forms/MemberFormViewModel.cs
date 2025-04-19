@@ -45,7 +45,7 @@ public class MemberFormViewModel
     public string? PhoneNumber { get; set; }
     
     
-    public UserAddressFormData? Address { get; set; }
+    public AddressFormData? Address { get; set; }
     
     public int? SelectedDay { get; set; }
     public int? SelectedMonth { get; set; }

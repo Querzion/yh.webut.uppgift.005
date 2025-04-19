@@ -28,16 +28,22 @@ public class ClientFormViewModel
     [StringLength(200, ErrorMessage = "Email cannot exceed 200 characters.")]
     public string Email { get; set; } = null!;
 
-    [Display(Name = "Location", Prompt = "Enter location")]
-    [DataType(DataType.Text)]
-    public string? Location { get; set; } // This will hold the combined address
-
     [Display(Name = "Phone Number", Prompt = "Enter phone number")]
     [DataType(DataType.PhoneNumber)]
     [RegularExpression(@"^\+?\d{1,4}\s?\d{2,4}(\s?-?\s?\d{2,4}){2,3}$", 
         ErrorMessage = "Invalid phone number format.")]
     public string? PhoneNumber { get; set; }
 
-    // Address-related fields with validation
-    public UserAddressFormData? Address { get; set; }
+    public AddressFormData? Address { get; set; }
+    
+    [Display(Name = "Location", Prompt = "Enter location")]
+    [DataType(DataType.Text)]
+    public string? Location =>
+        Address == null ? null :
+            string.Join(", ", new[]
+            {
+                Address.StreetName,
+                Address.PostalCode,
+                Address.City
+            }.Where(part => !string.IsNullOrWhiteSpace(part)));
 }

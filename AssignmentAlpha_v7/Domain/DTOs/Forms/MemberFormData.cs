@@ -53,7 +53,7 @@ public class MemberFormData
     [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
     
-    public UserAddressFormData? Address { get; set; }
+    public AddressFormData? Address { get; set; }
     
     public DateTime? DateOfBirth { get; set; }
 }

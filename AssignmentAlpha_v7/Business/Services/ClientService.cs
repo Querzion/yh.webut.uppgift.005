@@ -62,8 +62,8 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
                     if (form.Address != null)
                     {
-                        var addressEntity = form.Address.MapTo<UserAddressEntity>();
-                        entity.UserAddress = addressEntity;
+                        var addressEntity = form.Address.MapTo<AddressEntity>();
+                        entity.Address = addressEntity;
                     }
 
                     var createResult = await _clientRepository.AddAsync(entity);

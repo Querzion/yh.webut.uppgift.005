@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Presentation.WebApp.Helpers;
+using Presentation.WebApp.Mappings;
 using Presentation.WebApp.ViewModels;
 using Presentation.WebApp.ViewModels.Adds;
 using Presentation.WebApp.ViewModels.Edits;
@@ -16,24 +17,30 @@ using Presentation.WebApp.ViewModels.Edits;
 namespace Presentation.WebApp.Controllers;
 
 [Authorize(Policy = "Admins")]
-public class MembersController(AppDbContext context, IUserService userService, IImageUploadHelper imageUploadHelper) : Controller
+public class MembersController(AppDbContext context, IUserService userService, IImageUploadHelper imageUploadHelper, ILogger<MembersController> logger) : Controller
 {
     private readonly IUserService _userService = userService;
     private readonly IImageUploadHelper _imageUploadHelper = imageUploadHelper;
+    private readonly ILogger<MembersController> _logger = logger;
+    
     
     [Route("admin/members")]
     public async Task<IActionResult> Index()
     {
         var userServiceResult = await _userService.GetUsersAsync();
-        
+    
+        // Use the mapping extension to convert User entities to MemberListItemViewModels
+        var memberViewModels = userServiceResult.Result!
+            .ToViewModelList();
+    
         var viewModel = new MembersViewModel
         {
             Title = "Team Members",
             AddMember = new AddMemberViewModel(),
             EditMember = new EditMemberViewModel(),
-            Members = userServiceResult.Result
+            Members = memberViewModels // Use mapped list here
         };
-        
+    
         return View(viewModel);
     }
     
@@ -67,65 +74,137 @@ public class MembersController(AppDbContext context, IUserService userService, I
     //     return Ok(new { success = true });
     // }
     
+    // [HttpPost]
+    // public async Task<IActionResult> AddMember(AddMemberViewModel formData)
+    // {
+    //     if (!ModelState.IsValid)
+    //     {
+    //         var errors = ModelState
+    //             .Where(x => x.Value?.Errors.Count > 0)
+    //             .ToDictionary(
+    //                 kvp => kvp.Key,
+    //                 kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray()
+    //             );
+    //
+    //         return BadRequest(new { success = false, errors });
+    //     }
+    //
+    //     // Handle image upload using the helper
+    //     if (formData.UserImage != null && formData.UserImage.Length > 0)
+    //     {
+    //         var imageUrl = await _imageUploadHelper.UploadImageAsync(formData.UserImage, "members");
+    //
+    //         if (!string.IsNullOrEmpty(imageUrl))
+    //         {
+    //             formData.ImageUrl = imageUrl;
+    //         }
+    //     }
+    //
+    //     // Compose the DateOfBirth from dropdowns
+    //     formData.ComposeDateOfBirth();
+    //
+    //     // Map to domain model
+    //     var formMapped = formData.MapTo<AddMemberFormData>();
+    //
+    //     // Set address
+    //     formMapped.Address = new AddressFormData
+    //     {
+    //         StreetName = formData.Address.StreetName,
+    //         PostalCode = formData.Address.PostalCode,
+    //         City = formData.Address.City
+    //     };
+    //
+    //     // Set image entity if uploaded
+    //     if (!string.IsNullOrEmpty(formData.ImageUrl))
+    //     {
+    //         formMapped.Image = new ImageFormData
+    //         {
+    //             ImageUrl = formData.ImageUrl,
+    //             AltText = "Avatar"
+    //         };
+    //     }
+    //
+    //     var result = await _userService.CreateUserAsync(formMapped);
+    //
+    //     if (result.Succeeded)
+    //     {
+    //         return Ok(new { success = true });
+    //     }
+    //
+    //     return Problem("Unable to submit data.");
+    // }
+    
     [HttpPost]
     public async Task<IActionResult> AddMember(AddMemberViewModel formData)
     {
-        if (!ModelState.IsValid)
+        try
         {
-            var errors = ModelState
-                .Where(x => x.Value?.Errors.Count > 0)
-                .ToDictionary(
-                    kvp => kvp.Key,
-                    kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray()
-                );
-
-            return BadRequest(new { success = false, errors });
-        }
-
-        // Handle image upload using the helper
-        if (formData.UserImage != null && formData.UserImage.Length > 0)
-        {
-            var imageUrl = await _imageUploadHelper.UploadImageAsync(formData.UserImage, "members");
-
-            if (!string.IsNullOrEmpty(imageUrl))
+            if (!ModelState.IsValid)
             {
-                formData.ImageUrl = imageUrl;
+                var errors = ModelState
+                    .Where(x => x.Value?.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { success = false, errors });
             }
-        }
 
-        // Compose the DateOfBirth from dropdowns
-        formData.ComposeDateOfBirth();
-
-        // Map to domain model
-        var formMapped = formData.MapTo<AddMemberFormData>();
-
-        // Set address
-        formMapped.Address = new UserAddressFormData
-        {
-            StreetName = formData.Address!.StreetName,
-            PostalCode = formData.Address!.PostalCode,
-            City = formData.Address!.City
-        };
-
-        // Set image entity if uploaded
-        if (!string.IsNullOrEmpty(formData.ImageUrl))
-        {
-            formMapped.Image = new ImageFormData
+            // Handle image upload using the helper
+            if (formData.UserImage != null && formData.UserImage.Length > 0)
             {
-                ImageUrl = formData.ImageUrl,
-                AltText = "Avatar"
+                var imageUrl = await _imageUploadHelper.UploadImageAsync(formData.UserImage, "members");
+
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    formData.ImageUrl = imageUrl;
+                }
+            }
+
+            // Compose the DateOfBirth from dropdowns
+            formData.ComposeDateOfBirth();
+
+            // Map to domain model
+            var formMapped = formData.MapTo<AddMemberFormData>();
+
+            // Set address
+            formMapped.Address = new AddressFormData
+            {
+                StreetName = formData.Address.StreetName,
+                PostalCode = formData.Address.PostalCode,
+                City = formData.Address.City
             };
+
+            // Set image entity if uploaded
+            if (!string.IsNullOrEmpty(formData.ImageUrl))
+            {
+                formMapped.Image = new ImageFormData
+                {
+                    ImageUrl = formData.ImageUrl,
+                    AltText = "Avatar"
+                };
+            }
+
+            var result = await _userService.CreateUserAsync(formMapped);
+
+            if (result.Succeeded)
+            {
+                return Ok(new { success = true });
+            }
+
+            return Problem("Unable to submit data.");
         }
-
-        var result = await _userService.CreateUserAsync(formMapped);
-
-        if (result.Succeeded)
+        catch (Exception ex)
         {
-            return Ok(new { success = true });
-        }
+            // Log the exception
+            _logger.LogError(ex, "Error while processing AddMember request");
 
-        return Problem("Unable to submit data.");
+            // Return a 500 with more detailed error information
+            return StatusCode(500, new { success = false, error = ex.Message });
+        }
     }
+
     
     [HttpPost]
     public async Task<IActionResult> EditMember(EditMemberViewModel viewModel)
@@ -178,7 +257,7 @@ public class MembersController(AppDbContext context, IUserService userService, I
             Address = (!string.IsNullOrEmpty(viewModel.Address!.StreetName) ||
                        !string.IsNullOrEmpty(viewModel.Address!.PostalCode) ||
                        !string.IsNullOrEmpty(viewModel.Address!.City))
-                ? new UserAddressFormData
+                ? new AddressFormData
                 {
                     StreetName = viewModel.Address!.StreetName,
                     PostalCode = viewModel.Address!.PostalCode,

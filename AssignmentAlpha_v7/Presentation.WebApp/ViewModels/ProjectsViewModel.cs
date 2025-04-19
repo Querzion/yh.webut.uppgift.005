@@ -4,6 +4,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Presentation.WebApp.ViewModels.Adds;
 using Presentation.WebApp.ViewModels.Edits;
+using Presentation.WebApp.ViewModels.ListItems;
 
 namespace Presentation.WebApp.ViewModels;
 
@@ -14,7 +15,7 @@ public class ProjectsViewModel(IClientService clientService)
     public string Title { get; set; } = null!;
     
     public ProjectEntity? SelectedProject { get; set; }
-    public IEnumerable<Project> Projects { get; set; } = []; // Initialize with new List
+    public IEnumerable<ProjectListItemViewModel> Projects { get; set; } = []; // Initialize with new List
     public IEnumerable<SelectListItem> ClientOptions { get; set; } = new List<SelectListItem>(); // Initialize with new List
     public AddProjectViewModel AddProject { get; set; } = new AddProjectViewModel();
     public EditProjectViewModel EditProject { get; set; } = new EditProjectViewModel();

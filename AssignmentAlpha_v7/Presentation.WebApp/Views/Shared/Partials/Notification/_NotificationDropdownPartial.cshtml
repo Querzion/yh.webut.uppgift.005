@@ -22,7 +22,7 @@
             
             @foreach (var notification in notifications)
             {
-                <div class="notification-item" data-id="">
+                <div class="notification-item" data-id="@notification.Id">
                     <img class="image" src="@notification.Icon" alt="Icon" />
                     <div class="message">@notification.Message</div>
                     <div class="time" data-created="@notification.Created.ToString("s")">@notification.Created</div>

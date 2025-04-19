@@ -13,10 +13,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Presentation.WebApp.Helpers;
+using Presentation.WebApp.Mappings;
 using Presentation.WebApp.ViewModels;
 using Presentation.WebApp.ViewModels.Adds;
 using Presentation.WebApp.ViewModels.Edits;
 using Presentation.WebApp.ViewModels.Forms;
+using Presentation.WebApp.ViewModels.ListItems;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Presentation.WebApp.Controllers;
@@ -32,18 +34,25 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
 
     [Route("")]
     [HttpGet]
+    // [Route("admin/projects")]
     public async Task<IActionResult> Index()
     {
+        // Get the projects from the service (assuming it returns a list of Project entities)
         var projectServiceResult = await _projectService.GetProjectsAsync();
-        
+    
+        // Use the mapping extension to convert Project entities to ProjectListItemViewModel
+        var projectViewModels = projectServiceResult.Result!
+            .ToViewModelList();
+
+        // Prepare the view model
         var viewModel = new ProjectsViewModel(_clientService)
         {
             Title = "Projects",
             AddProject = new AddProjectViewModel(),
             EditProject = new EditProjectViewModel(),
-            Projects = projectServiceResult.Result!
+            Projects = projectViewModels // Use mapped list here
         };
-        
+
         return View(viewModel);
     }
     

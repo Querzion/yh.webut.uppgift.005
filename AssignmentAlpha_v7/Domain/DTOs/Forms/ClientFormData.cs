@@ -32,5 +32,5 @@ public class ClientFormData
     public string? PhoneNumber { get; set; }
 
     // Address-related fields
-    public UserAddressFormData? Address { get; set; }
+    public AddressFormData? Address { get; set; }
 }

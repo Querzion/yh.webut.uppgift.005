@@ -23,12 +23,16 @@ public class AppUser : IdentityUser
     [Column(TypeName = "date")]
     public DateTime? DateOfBirth { get; set; }
 
-    [ForeignKey(nameof(Image))]
     [Column(TypeName = "varchar(36)")]
     public string? ImageId { get; set; }
+    [ForeignKey(nameof(ImageId))]
     public virtual ImageEntity? Image { get; set; }
     
-    public virtual UserAddressEntity? Address { get; set; }
+    [Column(TypeName = "varchar(36)")]
+    public string? AddressId { get; set; }
+
+    [ForeignKey(nameof(AddressId))]
+    public virtual AddressEntity? Address { get; set; }
 
     public virtual ICollection<ProjectEntity> Projects { get; set; } = [];
     public virtual ICollection<NotificationDismissedEntity> DismissedNotifications { get; set; } = [];

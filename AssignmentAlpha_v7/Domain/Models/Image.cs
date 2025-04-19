@@ -15,9 +15,8 @@ public class Image
     [Display(Name = "Uploaded At")]
     [DataType(DataType.DateTime)]
     public DateTime UploadedAt { get; set; }
-
-    // If each image is only related to one client, project, or user
-    public Client? ClientId { get; set; }
-    public Project? ProjectId { get; set; }
-    public User? UserId { get; set; }
+    
+    public virtual Client? Client { get; set; }
+    public virtual Project? Project { get; set; }
+    public virtual User? User { get; set; }
 }
