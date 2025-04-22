@@ -10,9 +10,9 @@ public class ClientFormViewModel
     [DataType(DataType.Upload)]
     public IFormFile? ClientImage { get; set; }
 
+    [StringLength(36)]
+    public string? ImageId { get; set; }
     public ImageFormData? Image { get; set; }
-    
-    public string? ImageUrl { get; set; }
 
     [Display(Name = "Client Name", Prompt = "Enter client name")]
     [DataType(DataType.Text)]

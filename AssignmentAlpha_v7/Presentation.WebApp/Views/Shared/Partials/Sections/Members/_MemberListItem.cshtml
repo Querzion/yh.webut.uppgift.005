@@ -2,7 +2,8 @@
 
 <div class="card member">
     <div class="pos-right">
-        <button type="button" data-modal="true" data-target="#editMemberModal" class="btn-edit"></button>
+        <button type="button" class="btn-menu-toggle btn-edit" data-type="dropdown" data-target="#memberItemDropdown-@Model.Id"></button>
+        <partial name="Partials/Sections/Members/_MemberItemDropdownPartial" model="Model" />
     </div>
     
     @if (!string.IsNullOrEmpty(Model.ImageUrl))

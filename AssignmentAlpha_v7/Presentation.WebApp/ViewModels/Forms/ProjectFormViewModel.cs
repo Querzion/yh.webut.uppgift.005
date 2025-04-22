@@ -11,8 +11,9 @@ public class ProjectFormViewModel
     [DataType(DataType.Upload)]
     public IFormFile? ProjectImage { get; set; }
     
+    [StringLength(36)]
+    public string? ImageId { get; set; }
     public ImageFormData? Image { get; set; }
-    public string? ImageUrl { get; set; }
 
     [Required(ErrorMessage = "Project name is required.")]
     [Display(Name = "Project Name", Prompt = "Enter the project name")]

@@ -10,10 +10,9 @@ public class MemberFormData
     [DataType(DataType.Upload)]
     public IFormFile? UserImage { get; set; }
     
-    public ImageFormData? Image { get; set; }
-    
     [StringLength(36)]
     public string? ImageId { get; set; }
+    public ImageFormData? Image { get; set; }
     
     
     [Required(ErrorMessage = "Required")]

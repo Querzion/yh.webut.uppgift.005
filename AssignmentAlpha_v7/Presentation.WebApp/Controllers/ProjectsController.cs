@@ -162,7 +162,7 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
 
             // Get the first image from the result and assign its URL
             var uploadedImage = imageServiceResult.Result.First();
-            model.ImageUrl = uploadedImage.ImageUrl;
+            model.ImageId = uploadedImage.Id;
         }
 
         // Map the view model to form data for project creation

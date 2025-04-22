@@ -132,8 +132,9 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
             var result = entity.MapTo<TModel>();
             return new RepositoryResult<TModel> { Succeeded = true, StatusCode = 200, Result = result };
         }
-        
-        public virtual async Task<RepositoryResult<TEntity>> GetEntityAsync(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes)
+
+        public virtual async Task<RepositoryResult<TEntity>> GetEntityAsync(Expression<Func<TEntity, bool>> where,
+            params Expression<Func<TEntity, object>>[] includes)
         {
             IQueryable<TEntity> query = _table;
 
@@ -145,21 +146,12 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
 
             var entity = await query.FirstOrDefaultAsync(where);
             if (entity == null)
-                return new RepositoryResult<TEntity> { Succeeded = false, StatusCode = 404, Error = "Entity not found." };
+                return new RepositoryResult<TEntity>
+                    { Succeeded = false, StatusCode = 404, Error = "Entity not found." };
 
             return new RepositoryResult<TEntity> { Succeeded = true, StatusCode = 200, Result = entity };
         }
-        
-        
-        public virtual async Task<RepositoryResult<bool>> ExistsAsync(Expression<Func<TEntity, bool>> findBy)
-        {
-            var exists = await _table.AnyAsync(findBy);
-            return !exists
-                ? new RepositoryResult<bool> { Succeeded = false, StatusCode = 404, Error = "Entity not found." }
-                : new RepositoryResult<bool> { Succeeded = true, StatusCode = 200 };
-        }
 
-        
         public virtual async Task<RepositoryResult<bool>> UpdateAsync(TEntity entity)
         {
             if (entity == null)
@@ -198,6 +190,46 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
         }
 
     #endregion
+    
+    public virtual async Task<RepositoryResult<TEntity?>> FindEntityAsync(Expression<Func<TEntity, bool>> findBy)
+    {
+        var entity = await _table.FirstOrDefaultAsync(findBy);
+        if (entity == null)
+            return new RepositoryResult<TEntity?> { Succeeded = false, StatusCode = 404, Error = "Entity not found." };
+
+        return new RepositoryResult<TEntity?> { Succeeded = true, StatusCode = 200, Result = entity };
+    }
+    
+    public virtual async Task<RepositoryResult<bool>> ExistsAsync(Expression<Func<TEntity, bool>> findBy)
+    {
+        var exists = await _table.AnyAsync(findBy);
+        return !exists
+            ? new RepositoryResult<bool> { Succeeded = false, StatusCode = 404, Error = "Entity not found." }
+            : new RepositoryResult<bool> { Succeeded = true, StatusCode = 200 };
+    }
+    
+    public virtual async Task<RepositoryResult<bool>> SaveChangesAsync()
+    {
+        try
+        {
+            var changes = await _context.SaveChangesAsync();
+            return new RepositoryResult<bool>
+            {
+                Succeeded = changes > 0,
+                StatusCode = changes > 0 ? 200 : 204
+            };
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            return new RepositoryResult<bool>
+            {
+                Succeeded = false,
+                StatusCode = 500,
+                Error = ex.Message
+            };
+        }
+    }
     
     #region Transaction Management Methods
 

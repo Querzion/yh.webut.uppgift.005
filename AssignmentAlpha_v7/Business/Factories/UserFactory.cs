@@ -31,18 +31,23 @@ public static class UserFactory
             UserName = form.Email,
             PhoneNumber = form.PhoneNumber,
             JobTitle = form.JobTitle,
-            Address = form.Address != null ? new AddressEntity
+        
+            Address = form.AddressId != null ? null : new AddressEntity
             {
-                StreetName = form.Address.StreetName,
-                City = form.Address.City,
-                PostalCode = form.Address.PostalCode,
-            } : null,
+                StreetName = form.Address?.StreetName,
+                City = form.Address?.City,
+                PostalCode = form.Address?.PostalCode,
+            },
+
+            AddressId = form.AddressId,
+
             Image = form.Image != null ? new ImageEntity
             {
                 ImageUrl = form.Image.ImageUrl,
                 AltText = form.Image.AltText,
                 UploadedAt = DateTime.UtcNow
             } : null,
+
             ImageId = form.ImageId,
             DateOfBirth = form.DateOfBirth
         };

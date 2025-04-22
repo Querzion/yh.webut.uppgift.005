@@ -1,3 +1,4 @@
+using Business.Models;
 using Business.Services;
 using Domain.DTOs.Adds;
 using Domain.DTOs.Edits;
@@ -47,6 +48,7 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
     {
         _logger.LogInformation("Received AddClient request with data: {@ViewModel}", viewModel);
 
+        // Check if the form model is valid
         if (!ModelState.IsValid)
         {
             var errors = ModelState
@@ -60,61 +62,72 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
             return BadRequest(new { success = false, errors });
         }
 
-        // Handle image upload (if any)
+        // Handle image upload if any image is provided
         if (viewModel.ClientImage is { Length: > 0 })
         {
-            try
+            var imageUploadResult = await HandleImageUploadAsync(viewModel.ClientImage, viewModel.ClientName);
+            if (!imageUploadResult.Succeeded)
             {
-                var imageUploadResult = await _imageServiceHelper.SaveImageAsync(viewModel.ClientImage, "clients", new ImageFormData
-                {
-                    AltText = $"{viewModel.ClientName}'s Avatar"
-                });
+                return BadRequest(new { success = false, error = imageUploadResult.Error ?? "Image upload failed." });
+            }
 
-                if (imageUploadResult.Succeeded && imageUploadResult.Result?.Any() == true)
-                {
-                    // Directly assign the image URL from the result after upload
-                    viewModel.ImageUrl = imageUploadResult.Result.First().ImageUrl;
-                }
-                else
-                {
-                    _logger.LogWarning("Image upload failed or returned no result.");
-                    return BadRequest(new { success = false, error = "Image upload failed." });
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while uploading the client image.");
-                return Problem("An error occurred while uploading the image.");
-            }
+            // Assign the uploaded image URL to the view model
+            viewModel.ImageId = imageUploadResult.Result!.Last().Id;
         }
 
         // Map view model to form data
         var formMapped = viewModel.MapTo<AddClientFormData>();
 
-        // Assign Address (if present)
+        // Handle Address (if provided)
         if (viewModel.Address is not null)
         {
-            formMapped.Address = viewModel.Address?.MapTo<AddressFormData>();
+            formMapped.Address = viewModel.Address.MapTo<AddressFormData>();
         }
 
-        // Now handle the form submission as usual
+        // Attempt to create the client
         try
         {
             var result = await _clientService.CreateClientAsync(formMapped);
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("Client created successfully.");
+                _logger.LogInformation("Client created successfully with ID: {ClientId}", result.Result);
                 return Ok(new { success = true });
             }
 
-            _logger.LogWarning("Client creation failed.");
+            _logger.LogWarning("Client creation failed with error: {Error}", result.Error);
             return BadRequest(new { success = false, error = result.Error });
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "An unexpected error occurred while creating the client.");
             return Problem("An unexpected error occurred while creating the client.");
+        }
+    }
+
+    private async Task<ImageServiceResult> HandleImageUploadAsync(IFormFile clientImage, string clientName)
+    {
+        try
+        {
+            var imageUploadResult = await _imageServiceHelper.SaveImageAsync(clientImage, "clients", new ImageFormData
+            {
+                AltText = $"{clientName}'s Avatar"
+            });
+
+            if (imageUploadResult.Succeeded && imageUploadResult.Result?.Any() == true)
+            {
+                return imageUploadResult; // Return the result if upload succeeded
+            }
+            else
+            {
+                _logger.LogWarning("Image upload failed or returned no result.");
+                return new ImageServiceResult { Succeeded = false, Error = "Image upload failed." };
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while uploading the client image.");
+            return new ImageServiceResult { Succeeded = false, Error = "An error occurred while uploading the image." };
         }
     }
 
@@ -149,7 +162,7 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
         if (viewModel.ClientImage != null && viewModel.ClientImage.Length > 0)
         {
             // Delete old image if present
-            if (!string.IsNullOrEmpty(client.Image?.ImageUrl))
+            if (client.Image != null && !string.IsNullOrEmpty(client.Image.ImageUrl))
             {
                 await _imageService.DeleteImageAsync(client.Image.ImageUrl);
             }
@@ -163,7 +176,7 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
             if (imageUploadResult.Succeeded && imageUploadResult.Result?.Any() == true)
             {
                 var uploadedImage = imageUploadResult.Result.First();
-                viewModel.ImageUrl = uploadedImage.ImageUrl;
+                viewModel.ImageId = uploadedImage.Id;
             }
             else
             {
@@ -179,11 +192,11 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
         formMapped.Address = viewModel.Address?.MapTo<AddressFormData>();
 
         // Image mapping
-        if (!string.IsNullOrWhiteSpace(viewModel.ImageUrl))
+        if (client.Image != null)
         {
             formMapped.Image = new ImageFormData
             {
-                ImageUrl = viewModel.ImageUrl,
+                ImageUrl = client.Image.ImageUrl, // Use Image.ImageUrl here
                 AltText = $"{viewModel.ClientName}'s Avatar"
             };
         }

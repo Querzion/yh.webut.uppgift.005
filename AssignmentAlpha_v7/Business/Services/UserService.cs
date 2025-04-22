@@ -19,18 +19,19 @@ public interface IUserService
     Task<UserServiceResult> AddUserToRole(string userId, string roleName);
     Task<UserServiceResult> CreateUserAsync(SignUpFormData formData, string roleName = "User");
 
-    Task<UserServiceResult> CreateUserAsync(AddMemberFormData formData, string roleName = "User", string password = "BytMig123!");
+    Task<UserServiceResult> AddUserAsync(AddMemberFormData formData, string roleName = "User", string password = "BytMig123!");
     Task<UserServiceResult> GetUserByEmailAsync(string email);
     Task<UserServiceResult> GetUserByIdAsync(string id);
     Task<UserServiceResult> UpdateUserAsync(string userId, EditMemberFormData formDataData);
     Task<string> GetDisplayNameAsync(string? username);
 }
 
-public class UserService(IUserRepository userRepository, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager) : IUserService
+public class UserService(IUserRepository userRepository, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IAddressRepository addressRepository) : IUserService
 {
     private readonly IUserRepository _userRepository = userRepository;
     private readonly UserManager<AppUser> _userManager = userManager;
     private readonly RoleManager<IdentityRole> _roleManager = roleManager;
+    private readonly IAddressRepository _addressRepository = addressRepository;
 
     #region CRUD
 
@@ -171,12 +172,11 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                     }
                 }
                 
-                public async Task<UserServiceResult> CreateUserAsync(AddMemberFormData formData, string roleName = "User", string password = "BytMig123!")
+               public async Task<UserServiceResult> AddUserAsync(AddMemberFormData formData, string roleName = "User", string password = "BytMig123!")
                 {
-                    if (formData == null!)
+                    if (formData == null)
                         return new UserServiceResult { Succeeded = false, StatusCode = 400, Error = "Form data cannot be null." };
 
-                    // Check if email already exists
                     var existsResult = await _userRepository.ExistsAsync(u => u.NormalizedEmail == formData.Email.ToUpperInvariant());
                     if (existsResult.Succeeded)
                         return new UserServiceResult { Succeeded = false, StatusCode = 409, Error = "Email already exists." };
@@ -185,49 +185,34 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                     {
                         await _userRepository.BeginTransactionAsync();
 
+                        // 🏗 Build user entity using factory
                         var userEntity = UserFactory.CreateFromAddMemberForm(formData);
                         userEntity.UserName = formData.Email;
 
-                        // Attach the image if present
-                        if (formData.Image != null)
-                        {
-                            if (string.IsNullOrEmpty(formData.Image.ImageUrl))
-                            {
-                                await _userRepository.RollbackTransactionAsync();
-                                return new UserServiceResult
-                                {
-                                    Succeeded = false,
-                                    StatusCode = 400,
-                                    Error = "Image data is incomplete: ImageUrl is missing."
-                                };
-                            }
-
-                            userEntity.Image = new ImageEntity
-                            {
-                                ImageUrl = formData.Image.ImageUrl,
-                                AltText = $"{formData.FirstName} {formData.LastName}'s profile picture"
-                            };
-                        }
-                        
-                        // Attach AddressId if set (coming from controller)
-                        if (!string.IsNullOrEmpty(formData.AddressId))
-                        {
-                            userEntity.AddressId = formData.AddressId;
-                        }
-
-                        var result = await _userManager.CreateAsync(userEntity, password);
-                        if (!result.Succeeded)
+                        // 👤 Create user in Identity
+                        var createResult = await _userManager.CreateAsync(userEntity, password);
+                        if (!createResult.Succeeded)
                         {
                             await _userRepository.RollbackTransactionAsync();
-                            return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "Unable to create user." };
+                            return new UserServiceResult
+                            {
+                                Succeeded = false,
+                                StatusCode = 500,
+                                Error = "Unable to create user."
+                            };
                         }
 
-                        // Assign role
+                        // 👥 Assign role
                         var addToRoleResult = await _userManager.AddToRoleAsync(userEntity, roleName);
                         if (!addToRoleResult.Succeeded)
                         {
                             await _userRepository.RollbackTransactionAsync();
-                            return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = "User created, but not added to role." };
+                            return new UserServiceResult
+                            {
+                                Succeeded = false,
+                                StatusCode = 500,
+                                Error = "User created, but not added to role."
+                            };
                         }
 
                         await _userRepository.CommitTransactionAsync();
@@ -237,7 +222,12 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                     {
                         await _userRepository.RollbackTransactionAsync();
                         Debug.WriteLine(ex.Message);
-                        return new UserServiceResult { Succeeded = false, StatusCode = 500, Error = ex.Message };
+                        return new UserServiceResult
+                        {
+                            Succeeded = false,
+                            StatusCode = 500,
+                            Error = ex.Message
+                        };
                     }
                 }
                 

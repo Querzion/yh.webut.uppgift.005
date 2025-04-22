@@ -27,12 +27,13 @@ public class AppUser : IdentityUser
     // Strict ONE TO ONE RELATIONSHIP
     [ForeignKey(nameof(Image)), Column(TypeName = "varchar(36)")]
     public string? ImageId { get; set; }
+    
     public virtual ImageEntity? Image { get; set; }
     
-    [Column(TypeName = "varchar(36)")]
+    
+    [ForeignKey(nameof(Address)), Column(TypeName = "varchar(36)")]
     public string? AddressId { get; set; }
-
-    [ForeignKey(nameof(AddressId))]
+    
     public virtual AddressEntity? Address { get; set; }
 
     public virtual ICollection<ProjectEntity> Projects { get; set; } = [];

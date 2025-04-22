@@ -89,6 +89,10 @@
       <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-19].[12ad2710-4625-4aea-b296-cd4a547a4a32].png" />
       <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-19].[3ed1df5f-3248-4c6e-b1fe-60144527d7a6].png" />
       <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-19].[beea88f6-daa3-49b0-9dc1-131fda45e19a].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\members\[2025-04-19].[2627372e-cbbe-4858-b873-4305d6b7100e].jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\members\[2025-04-19].[2b2bc1fa-0826-4f6a-b0fe-94aa92e56db7].jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\members\[2025-04-19].[5084fd15-87b1-4bd1-b81e-c63d5f732824].jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\members\[2025-04-19].[baedfa49-569d-4632-9a7b-f96f08505439].jpg" />
     </ItemGroup>
 
     <ItemGroup>

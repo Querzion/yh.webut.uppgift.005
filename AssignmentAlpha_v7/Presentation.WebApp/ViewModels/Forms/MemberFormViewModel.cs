@@ -9,8 +9,9 @@ public class MemberFormViewModel
     [DataType(DataType.Upload)]
     public IFormFile? UserImage { get; set; }
     
+    [StringLength(36)]
+    public string? ImageId { get; set; }
     public ImageFormData? Image { get; set; }
-    public string? ImageUrl { get; set; }
     
     
     [Required(ErrorMessage = "Required")]

@@ -27,7 +27,7 @@ builder.Services.AddScoped<IImageServiceHelper, ImageServiceHelper>();
 
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
-builder.Services.AddScoped<IAddressService, AddressService>();
+// builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IStatusService, StatusService>();

@@ -18,9 +18,7 @@ namespace Data.Migrations
                     Id = table.Column<string>(type: "varchar(36)", nullable: false),
                     StreetName = table.Column<string>(type: "nvarchar(150)", nullable: true),
                     PostalCode = table.Column<string>(type: "nvarchar(8)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(150)", nullable: true),
-                    County = table.Column<string>(type: "nvarchar(150)", nullable: true),
-                    Country = table.Column<string>(type: "nvarchar(150)", nullable: true)
+                    City = table.Column<string>(type: "nvarchar(150)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -440,7 +438,8 @@ namespace Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_AddressId",
                 table: "AspNetUsers",
-                column: "AddressId");
+                column: "AddressId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_ImageId",
@@ -457,7 +456,8 @@ namespace Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_AddressId",
                 table: "Clients",
-                column: "AddressId");
+                column: "AddressId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Clients_ClientName",

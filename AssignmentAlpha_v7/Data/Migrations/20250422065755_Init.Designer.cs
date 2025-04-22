@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250419082124_Init")]
+    [Migration("20250422065755_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -30,12 +30,6 @@ namespace Data.Migrations
                         .HasColumnType("varchar(36)");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("County")
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("PostalCode")
@@ -121,7 +115,8 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.HasIndex("ImageId")
                         .IsUnique();
@@ -166,7 +161,8 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.HasIndex("ClientName")
                         .IsUnique();
@@ -522,8 +518,8 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.AppUser", b =>
                 {
                     b.HasOne("Data.Entities.AddressEntity", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                        .WithOne("User")
+                        .HasForeignKey("Data.Entities.AppUser", "AddressId");
 
                     b.HasOne("Data.Entities.ImageEntity", "Image")
                         .WithOne("User")
@@ -537,8 +533,8 @@ namespace Data.Migrations
             modelBuilder.Entity("Data.Entities.ClientEntity", b =>
                 {
                     b.HasOne("Data.Entities.AddressEntity", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                        .WithOne("Client")
+                        .HasForeignKey("Data.Entities.ClientEntity", "AddressId");
 
                     b.HasOne("Data.Entities.ImageEntity", "Image")
                         .WithOne("Client")
@@ -688,6 +684,13 @@ namespace Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Data.Entities.AddressEntity", b =>
+                {
+                    b.Navigation("Client");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Data.Entities.AppUser", b =>

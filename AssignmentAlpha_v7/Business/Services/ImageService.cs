@@ -75,13 +75,13 @@ public class ImageService(IImageRepository imageRepository) : IImageService
         }
     }
     
-    public async Task<ImageServiceResult> DeleteImageAsync(string imageUrl)
+    public async Task<ImageServiceResult> DeleteImageAsync(string imageId)
     {
         var result = new ImageServiceResult();
 
-        // Try to find the image
+        // Try to find the image using the ImageId
         var imageResult = await _imageRepository.GetEntityAsync(
-            x => x.ImageUrl == imageUrl
+            x => x.Id == imageId
         );
 
         if (!imageResult.Succeeded || imageResult.Result == null)
@@ -107,7 +107,7 @@ public class ImageService(IImageRepository imageRepository) : IImageService
         // Return success with the deleted image in Result
         result.Succeeded = true;
         result.StatusCode = 200;
-        result.Result = new List<Image> { imageEntity.MapTo<Image>() };
+        result.Result = new List<Image> { imageEntity.MapTo<Image>() }; // Map to a domain model if needed
         return result;
     }
 }

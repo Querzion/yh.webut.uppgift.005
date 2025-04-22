@@ -18,12 +18,4 @@ public class AddressFormData
     [DataType(DataType.Text)]
     [Required(ErrorMessage = "City is required")]
     public string City { get; set; } = null!;
-
-    [Display(Name = "County", Prompt = "Enter county (optional)")]
-    [DataType(DataType.Text)]
-    public string? County { get; set; }
-
-    [Display(Name = "Country", Prompt = "Enter country (optional)")]
-    [DataType(DataType.Text)]
-    public string? Country { get; set; }
 }
