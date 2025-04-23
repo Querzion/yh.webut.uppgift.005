@@ -22,36 +22,42 @@ public static class UserFactory
     }
 
     public static AppUser CreateFromAddMemberForm(AddMemberFormData form)
+{
+    var user = new AppUser
     {
-        return new AppUser
+        FirstName = form.FirstName,
+        LastName = form.LastName,
+        Email = form.Email,
+        UserName = form.Email,
+        PhoneNumber = form.PhoneNumber,
+        JobTitle = form.JobTitle,
+        DateOfBirth = form.DateOfBirth,
+        Address = form.AddressId != null ? null : new AddressEntity
         {
-            FirstName = form.FirstName,
-            LastName = form.LastName,
-            Email = form.Email,
-            UserName = form.Email,
-            PhoneNumber = form.PhoneNumber,
-            JobTitle = form.JobTitle,
-        
-            Address = form.AddressId != null ? null : new AddressEntity
-            {
-                StreetName = form.Address?.StreetName,
-                City = form.Address?.City,
-                PostalCode = form.Address?.PostalCode,
-            },
+            StreetName = form.Address?.StreetName,
+            City = form.Address?.City,
+            PostalCode = form.Address?.PostalCode,
+        },
+        AddressId = form.AddressId
+    };
 
-            AddressId = form.AddressId,
-
-            Image = form.Image != null ? new ImageEntity
-            {
-                ImageUrl = form.Image.ImageUrl,
-                AltText = form.Image.AltText,
-                UploadedAt = DateTime.UtcNow
-            } : null,
-
-            ImageId = form.ImageId,
-            DateOfBirth = form.DateOfBirth
+    if (form.ImageId != null)
+    {
+        user.ImageId = form.ImageId;
+        user.Image = null; // don’t assign the nav property
+    }
+    else if (form.Image != null)
+    {
+        user.Image = new ImageEntity
+        {
+            ImageUrl = form.Image.ImageUrl,
+            AltText = form.Image.AltText,
+            UploadedAt = DateTime.UtcNow
         };
     }
+
+    return user;
+}
 
     public static void UpdateFromEditMemberForm(AppUser existingUser, EditMemberFormData formData)
     {
@@ -78,8 +84,7 @@ public static class UserFactory
             {
                 ImageUrl = formData.Image.ImageUrl,
                 AltText = formData.Image.AltText,
-                UploadedAt = DateTime.UtcNow,
-                // UserId = formData.Image.UserId
+                UploadedAt = DateTime.UtcNow
             };
             existingUser.ImageId = formData.ImageId; // Ensure ImageId is updated if provided
         }

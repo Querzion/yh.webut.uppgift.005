@@ -19,7 +19,7 @@ public interface IUserService
     Task<UserServiceResult> AddUserToRole(string userId, string roleName);
     Task<UserServiceResult> CreateUserAsync(SignUpFormData formData, string roleName = "User");
 
-    Task<UserServiceResult> AddUserAsync(AddMemberFormData formData, string roleName = "User", string password = "BytMig123!");
+    Task<UserServiceResult> AddUserAsync(AddMemberFormData formData, string roleName = "User", string password = "!Scam2014");
     Task<UserServiceResult> GetUserByEmailAsync(string email);
     Task<UserServiceResult> GetUserByIdAsync(string id);
     Task<UserServiceResult> UpdateUserAsync(string userId, EditMemberFormData formDataData);
@@ -172,7 +172,7 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                     }
                 }
                 
-               public async Task<UserServiceResult> AddUserAsync(AddMemberFormData formData, string roleName = "User", string password = "BytMig123!")
+               public async Task<UserServiceResult> AddUserAsync(AddMemberFormData formData, string roleName = "User", string password = "!Scam2014")
                 {
                     if (formData == null)
                         return new UserServiceResult { Succeeded = false, StatusCode = 400, Error = "Form data cannot be null." };

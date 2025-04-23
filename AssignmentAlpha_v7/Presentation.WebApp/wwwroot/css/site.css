@@ -40,6 +40,7 @@
     --font-size-small: .9em; /* 14.4px */
     --font-size-xsmall: .8em; /* 12.8px */
     --font-size-or: .75em; /* 12px */
+    --font-size-dropdown: .9375em; /* 15px */
 
     /* img sizes - not correct sizes */
     --img-width-default: 48px;
@@ -200,6 +201,13 @@
     --btn-gray-border-hover-color: var(--white-200);
     --btn-gray-background-color: var(--white-200);
     --btn-gray-background-hover-color: var(--gray-300);
+    
+    --btn-red-text-color: var(--red);
+    --btn-red-text-hover-color: var(--red-dark);
+    --btn-red-border-color: transparent;
+    --btn-red-border-hover-color: var(--red-semilight);
+    --btn-red-background-color: transparent;
+    --btn-red-background-hover-color: var(--red-light);
 
     /* links */
     --link-color: var(--blue);
@@ -553,12 +561,6 @@ a {
     gap: 1rem;
 }
 
-.pos-right {
-    position: relative;
-    right: 0;
-    top: 0;
-}
-
 .dome-left {
     display: flex;
     justify-content: left;
@@ -753,22 +755,90 @@ h6, .h6 {
     }
 }
 
-.btn-edit {
+.btn-edit-menu {
     background-color: transparent;
+    color: var(--gray-800);
     border: none;
     display: block;
     justify-self: flex-start;
-    position: relative;
-    left: 0;
-    top: 0;
+    /*position: relative;*/
+    /*left: 0;*/
+    /*top: 0;*/
     justify-content: center;
     gap: .5rem;
 
     &::before {
-        content: "··";
-        font-family: var(--font-standard), sans-serif;
-        font-size: 2rem;
+        content: "\F517 " " \F517";
+        font-family: var(--font-bootstrap), sans-serif;
+        display: inline-block;
+        transform: scale(0.5);
+        transform-origin: center;
     }
+}
+
+.btn-delete,
+.btn-edit {
+    display: flex; /* instead of block */
+    align-items: center; /* for vertical centering */
+    justify-content: flex-start; /* if you want items aligned left */
+    gap: .5rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    -webkit-transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+    -moz-transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+    -ms-transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+    -o-transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+    transition: background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, color 0.1s ease-in-out;
+    outline: none;
+    border-radius: var(--btn-border-radius);
+    font-size: var(--font-size-dropdown);
+    font-weight: var(--font-weight-semibold);
+    font-family: var(--font-standard), sans-serif;
+    text-decoration: none;
+    padding: var(--btn-padding);
+    width: 100%;
+    text-align: start;
+
+    i {
+        font-size: var(--font-size-h6);
+    }
+}
+
+.btn-edit {
+    color: var(--btn-gray-text-color);
+    border-color: var(--btn-gray-border-color);
+    background-color: var(--btn-gray-background-color);
+
+    &:hover {
+        color: var(--btn-gray-text-hover-color);
+        border-color: var(--btn-gray-border-hover-color);
+        background-color: var(--btn-gray-background-hover-color);
+    }
+}
+
+.fa-duotone.fa-pen-line {
+    --fa-primary-color: var(--gray-800);
+    --fa-secondary-color: var(--gray-500);
+    --fa-secondary-opacity: 0.6;
+}
+
+.btn-delete {
+    color: var(--btn-red-text-color);
+    border-color: var(--btn-red-border-color);
+    background-color: var(--btn-red-background-color);
+
+    &:hover {
+        color: var(--btn-red-text-hover-color);
+        border-color: var(--btn-red-border-hover-color);
+        background-color: var(--btn-red-background-hover-color);
+    }
+}
+
+.fa-duotone.fa-trash {
+    --fa-primary-color: var(--red);
+    --fa-secondary-color: var(--red-semilight);
+    --fa-secondary-opacity: 0.6;
 }
 
 .btn-nocol {
@@ -811,6 +881,18 @@ h6, .h6 {
         color: var(--btn-gray-text-hover-color);
         border-color: var(--btn-gray-border-hover-color);
         background-color: var(--btn-gray-background-hover-color);
+    }
+}
+
+.btn-red {
+    color: var(--btn-red-text-color);
+    border-color: var(--btn-red-border-color);
+    background-color: var(--btn-red-background-color);
+
+    &:hover {
+        color: var(--btn-red-text-hover-color);
+        border-color: var(--btn-red-border-hover-color);
+        background-color: var(--btn-red-background-hover-color);
     }
 }
 
@@ -1929,26 +2011,15 @@ input:checked + .slider:before {
     top: 40px;
     background-color: white;
     border-radius: 6px;
+    border: none;
     box-shadow: var(--box-shadow);
     padding: 10px;
     z-index: 2000;
-    min-width: 160px;
+    min-width: 230px;
 }
 
 .dropdown-menu.show {
     display: block;
-}
-
-.dropdown-menu button,
-.dropdown-menu form button {
-    display: block;
-    width: 100%;
-    /*text-align: left;*/
-    /*background: none;*/
-    border: none;
-    /*padding: 8px 12px;*/
-    /*font-size: 14px;*/
-    cursor: pointer;
 }
 
 .dropdown-menu .or-separator {
@@ -2070,6 +2141,8 @@ input:checked + .slider:before {
         width: 550px;
     }
 }
+
+
 
 #projects {
 
@@ -2266,8 +2339,14 @@ input:checked + .slider:before {
         .member {
             text-align: center;
 
+            .pos-right {
+                position: absolute;
+                right: 1.5rem;
+                top: 1.2rem;
+            }
 
             .avatar {
+                margin-top: 1rem;
                 margin-bottom: 1rem;
             }
 

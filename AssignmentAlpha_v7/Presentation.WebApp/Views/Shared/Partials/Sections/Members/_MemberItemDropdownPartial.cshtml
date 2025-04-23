@@ -1,12 +1,18 @@
 <div id="memberItemDropdown-@Model.Id" class="dropdown-menu">
     <div class="dropdown-menu-container">
-        <button type="button" data-modal="true" data-target="#editMemberModal" class="btn">Edit</button>
+        <button type="button" data-modal="true" data-target="#editMemberModal" class="btn-edit">
+            <i class="fa-duotone fa-solid fa-pen-line"></i>
+            <span>Edit</span>
+        </button>
     
         <div class="or-separator"><span>or</span></div>
     
         <form method="post" asp-controller="Members" asp-action="DeleteMember">
             <input type="hidden" name="id" value="@Model.Id" />
-            <button type="submit" class="varning">Delete</button>
+            <button type="submit" class="btn-delete">
+                <i class="fa-duotone fa-trash"></i>
+                <span>Delete Member</span>
+            </button>
         </form>
     </div>
 </div>

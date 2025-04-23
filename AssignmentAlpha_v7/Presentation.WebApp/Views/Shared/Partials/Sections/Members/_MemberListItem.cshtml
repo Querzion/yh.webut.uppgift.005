@@ -2,7 +2,7 @@
 
 <div class="card member">
     <div class="pos-right">
-        <button type="button" class="btn-menu-toggle btn-edit" data-type="dropdown" data-target="#memberItemDropdown-@Model.Id"></button>
+        <button type="button" class="btn-menu-toggle btn-edit-menu" data-type="dropdown" data-target="#memberItemDropdown-@Model.Id"></button>
         <partial name="Partials/Sections/Members/_MemberItemDropdownPartial" model="Model" />
     </div>
     
@@ -29,4 +29,5 @@
     <p>Image Path: @Model.ImageUrl</p>
     <p>Exists? @(string.IsNullOrEmpty(Model.ImageUrl) ? "No" : "Yes")</p>
     <p>BirthDate: @Model.DateOfBirth?.ToString("dd-MM-yyyy")</p>
+    <p>StreetName: @Model.Address</p>
 </div>
