@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Business.Factories;
 using Business.Models;
 using Data.Entities;
 using Data.Interfaces;
@@ -6,12 +7,13 @@ using Domain.DTOs.Adds;
 using Domain.DTOs.Edits;
 using Domain.Extensions;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Services;
 
 public interface IClientService
 {
-    Task<ClientServiceResult> CreateClientAsync(AddClientFormData form);
+    Task<ClientServiceResult> AddClientAsync(AddClientFormData form);
     Task<ClientServiceResult> GetClientsAsync();
     Task<ClientServiceResult> GetAllClientsAsync();
     Task<ClientServiceResult> GetClientByIdAsync(string id);
@@ -29,66 +31,43 @@ public class ClientService(IClientRepository clientRepository) : IClientService
 
         #region Create
 
-            public async Task<ClientServiceResult> CreateClientAsync(AddClientFormData form)
+            public async Task<ClientServiceResult> AddClientAsync(AddClientFormData formData)
             {
-                if (form == null)
-                {
-                    return new ClientServiceResult
-                    {
-                        Succeeded = false,
-                        StatusCode = 400,
-                        Error = "Client form is required."
-                    };
-                }
+                if (formData == null)
+                    return new ClientServiceResult { Succeeded = false, StatusCode = 400, Error = "Form data cannot be null." };
 
-                await _clientRepository.BeginTransactionAsync();
+                // Search for existing client by ClientName (case-insensitive using LIKE)
+                var existsResult = await _clientRepository.ExistsAsync(c => EF.Functions.Like(c.ClientName, formData.ClientName));
+                if (existsResult.Succeeded)
+                    return new ClientServiceResult { Succeeded = false, StatusCode = 409, Error = "Client name already exists." };
 
                 try
                 {
-                    var existsResult = await _clientRepository.ExistsAsync(x => x.ClientName == form.ClientName);
+                    await _clientRepository.BeginTransactionAsync();
 
-                    if (existsResult.Succeeded && existsResult.Result)
+                    var clientEntity = ClientFactory.CreateFromAddClientForm(formData);
+
+                    var addResult = await _clientRepository.AddAsync(clientEntity);
+                    if (!addResult.Succeeded)
                     {
-                        await _clientRepository.RollbackTransactionAsync();
-                        return new ClientServiceResult
-                        {
-                            Succeeded = false,
-                            StatusCode = 409,
-                            Error = "A client with that name already exists."
-                        };
-                    }
-
-                    var entity = form.MapTo<ClientEntity>();
-
-                    if (form.Address != null)
-                    {
-                        var addressEntity = form.Address.MapTo<AddressEntity>();
-                        entity.Address = addressEntity;
-                    }
-
-                    var createResult = await _clientRepository.AddAsync(entity);
-
-                    if (!createResult.Succeeded || !createResult.Result)
-                    {
-                        await _clientRepository.RollbackTransactionAsync();
+                        await _clientRepository.RollbackTransactionAsync(); // Rollback transaction if adding client fails
                         return new ClientServiceResult
                         {
                             Succeeded = false,
                             StatusCode = 500,
-                            Error = "Failed to create client."
+                            Error = "Unable to add client."
                         };
                     }
 
                     await _clientRepository.CommitTransactionAsync();
-                    return new ClientServiceResult
-                    {
-                        Succeeded = true,
-                        StatusCode = 201
-                    };
+
+                    return new ClientServiceResult { Succeeded = true, StatusCode = 201 };
                 }
                 catch (Exception ex)
                 {
                     await _clientRepository.RollbackTransactionAsync();
+                 
+                    Debug.WriteLine(ex.Message);
                     return new ClientServiceResult
                     {
                         Succeeded = false,
@@ -150,10 +129,10 @@ public class ClientService(IClientRepository clientRepository) : IClientService
                 {
                     Succeeded = true,
                     StatusCode = 200,
-                    Result = new[] { repoResult.Result }
+                    Result = [repoResult.Result]
                 };
             }
-            
+
             public async Task<ClientServiceResult> GetClientByNameAsync(string clientName)
             {
                 if (string.IsNullOrWhiteSpace(clientName))
@@ -182,9 +161,10 @@ public class ClientService(IClientRepository clientRepository) : IClientService
                 {
                     Succeeded = true,
                     StatusCode = 200,
-                    Result = new[] { repoResult.Result }
+                    Result = [repoResult.Result]
                 };
             }
+
             
             public async Task<ClientServiceResult> GetClientByEmailAsync(string email)
             {
@@ -214,7 +194,7 @@ public class ClientService(IClientRepository clientRepository) : IClientService
                 {
                     Succeeded = true,
                     StatusCode = 200,
-                    Result = new[] { repoResult.Result }
+                    Result = [repoResult.Result]
                 };
             }
 
@@ -302,33 +282,52 @@ public class ClientService(IClientRepository clientRepository) : IClientService
                     };
                 }
 
-                var entityResult = await _clientRepository.GetEntityAsync(x => x.Id == id);
-
-                if (!entityResult.Succeeded || entityResult.Result == null)
-                {
-                    return new ClientServiceResult
-                    {
-                        Succeeded = false,
-                        StatusCode = 404,
-                        Error = "Client not found."
-                    };
-                }
+                // Start a transaction
+                await _clientRepository.BeginTransactionAsync();
 
                 try
                 {
+                    // Get the client entity to be deleted
+                    var entityResult = await _clientRepository.GetEntityAsync(x => x.Id == id);
+
+                    if (!entityResult.Succeeded || entityResult.Result == null)
+                    {
+                        await _clientRepository.RollbackTransactionAsync();  // Rollback transaction if client not found
+                        return new ClientServiceResult
+                        {
+                            Succeeded = false,
+                            StatusCode = 404,
+                            Error = "Client not found."
+                        };
+                    }
+
+                    // Call DeleteAsync from the repository to delete the client
                     var deleteResult = await _clientRepository.DeleteAsync(entityResult.Result);
+
+                    if (!deleteResult.Succeeded)
+                    {
+                        await _clientRepository.RollbackTransactionAsync();  // Rollback transaction if delete fails
+                        return new ClientServiceResult
+                        {
+                            Succeeded = false,
+                            StatusCode = 500,
+                            Error = "Failed to delete client."
+                        };
+                    }
+
+                    // Commit the transaction if delete is successful
+                    await _clientRepository.CommitTransactionAsync();
 
                     return new ClientServiceResult
                     {
-                        Succeeded = deleteResult.Succeeded && deleteResult.Result,
-                        StatusCode = deleteResult.Succeeded
-                            ? deleteResult.Result ? 200 : 500
-                            : 500,
-                        Error = deleteResult.Succeeded && deleteResult.Result ? null : "Failed to delete client."
+                        Succeeded = true,
+                        StatusCode = 200
                     };
                 }
                 catch (Exception ex)
                 {
+                    // Rollback transaction in case of an exception
+                    await _clientRepository.RollbackTransactionAsync();
                     return new ClientServiceResult
                     {
                         Succeeded = false,

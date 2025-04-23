@@ -1,5 +1,7 @@
 using Business.Models;
 using Business.Services;
+using Data.Entities;
+using Data.Interfaces;
 using Domain.DTOs.Adds;
 using Domain.DTOs.Edits;
 using Domain.DTOs.Forms;
@@ -16,9 +18,10 @@ using Presentation.WebApp.ViewModels.ListItems;
 namespace Presentation.WebApp.Controllers;
 
 [Authorize(Policy = "Managers")]
-public class ClientsController(IClientService clientService, ILogger<ClientsController> logger, IImageServiceHelper imageServiceHelper, IImageService imageService) : Controller
+public class ClientsController(IClientService clientService, ILogger<ClientsController> logger, IImageServiceHelper imageServiceHelper, IImageService imageService, IAddressRepository addressRepository) : Controller
 {
     private readonly IClientService _clientService = clientService;
+    private readonly IAddressRepository _addressRepository = addressRepository;
     private readonly IImageService _imageService = imageService;
     private readonly IImageServiceHelper _imageServiceHelper = imageServiceHelper;
     private readonly ILogger<ClientsController> _logger = logger;
@@ -46,96 +49,111 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
     [HttpPost]
     public async Task<IActionResult> AddClient(AddClientViewModel viewModel)
     {
-        _logger.LogInformation("Received AddClient request with data: {@ViewModel}", viewModel);
-
-        // Check if the form model is valid
+        // Validate model
         if (!ModelState.IsValid)
         {
             var errors = ModelState
                 .Where(x => x.Value?.Errors.Count > 0)
                 .ToDictionary(
                     kvp => kvp.Key,
-                    kvp => kvp.Value?.Errors.Select(e => e.ErrorMessage).ToArray()
+                    kvp => new
+                    {
+                        Messages = kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray(),
+                        Exception = kvp.Value?.Errors.Select(x => x.Exception?.Message).ToArray()
+                    }
                 );
 
-            _logger.LogWarning("Validation failed for AddClient request. Errors: {@Errors}", errors);
             return BadRequest(new { success = false, errors });
         }
 
-        // Handle image upload if any image is provided
+        // Handle image upload
         if (viewModel.ClientImage is { Length: > 0 })
         {
-            var imageUploadResult = await HandleImageUploadAsync(viewModel.ClientImage, viewModel.ClientName);
-            if (!imageUploadResult.Succeeded)
+            var imageServiceResult = await _imageServiceHelper.SaveImageAsync(viewModel.ClientImage, "clients", new ImageFormData
             {
-                return BadRequest(new { success = false, error = imageUploadResult.Error ?? "Image upload failed." });
-            }
-
-            // Assign the uploaded image URL to the view model
-            viewModel.ImageId = imageUploadResult.Result!.Last().Id;
-        }
-
-        // Map view model to form data
-        var formMapped = viewModel.MapTo<AddClientFormData>();
-
-        // Handle Address (if provided)
-        if (viewModel.Address is not null)
-        {
-            formMapped.Address = viewModel.Address.MapTo<AddressFormData>();
-        }
-
-        // Attempt to create the client
-        try
-        {
-            var result = await _clientService.CreateClientAsync(formMapped);
-
-            if (result.Succeeded)
-            {
-                _logger.LogInformation("Client created successfully with ID: {ClientId}", result.Result);
-                return Ok(new { success = true });
-            }
-
-            _logger.LogWarning("Client creation failed with error: {Error}", result.Error);
-            return BadRequest(new { success = false, error = result.Error });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An unexpected error occurred while creating the client.");
-            return Problem("An unexpected error occurred while creating the client.");
-        }
-    }
-
-    private async Task<ImageServiceResult> HandleImageUploadAsync(IFormFile clientImage, string clientName)
-    {
-        try
-        {
-            var imageUploadResult = await _imageServiceHelper.SaveImageAsync(clientImage, "clients", new ImageFormData
-            {
-                AltText = $"{clientName}'s Avatar"
+                AltText = $"{viewModel.ClientName} Logo"
             });
 
-            if (imageUploadResult.Succeeded && imageUploadResult.Result?.Any() == true)
+            if (imageServiceResult.Succeeded && imageServiceResult.Result!.Any())
             {
-                return imageUploadResult; // Return the result if upload succeeded
+                var uploadedImage = imageServiceResult.Result!.Last();
+                viewModel.ImageId = uploadedImage.Id;
             }
             else
             {
-                _logger.LogWarning("Image upload failed or returned no result.");
-                return new ImageServiceResult { Succeeded = false, Error = "Image upload failed." };
+                ModelState.AddModelError("ClientImage", "Image upload failed.");
+                return BadRequest(new { success = false, error = "Image upload failed." });
             }
         }
-        catch (Exception ex)
+
+        // Handle address resolution or creation
+        if (viewModel.Address != null)
         {
-            _logger.LogError(ex, "An error occurred while uploading the client image.");
-            return new ImageServiceResult { Succeeded = false, Error = "An error occurred while uploading the image." };
+            var street = CapitalizeFirstLetter(viewModel.Address.StreetName.Trim());
+            var postal = viewModel.Address.PostalCode.Trim();
+            var city = CapitalizeFirstLetter(viewModel.Address.City.Trim());
+
+            var existingAddressResult = await _addressRepository.FindEntityAsync(a =>
+                a.StreetName == street &&
+                a.PostalCode == postal &&
+                a.City == city
+            );
+
+            if (existingAddressResult.Succeeded && existingAddressResult.Result != null)
+            {
+                viewModel.AddressId = existingAddressResult.Result.Id;
+                viewModel.Address = null;
+            }
+            else
+            {
+                var newAddress = new AddressEntity
+                {
+                    StreetName = street,
+                    PostalCode = postal,
+                    City = city
+                };
+
+                var addResult = await _addressRepository.AddAsync(newAddress);
+                if (addResult.Succeeded)
+                {
+                    viewModel.AddressId = newAddress.Id;
+                    viewModel.Address = null;
+                }
+                else
+                {
+                    return BadRequest(new { success = false, error = "Failed to create address." });
+                }
+            }
         }
+        else
+        {
+            viewModel.AddressId = null;
+            viewModel.Address = null;
+        }
+
+        var formData = viewModel.MapTo<AddClientFormData>();
+
+        var result = await _clientService.AddClientAsync(formData);
+
+        if (result.Succeeded)
+        {
+            return Ok(new { success = true });
+        }
+
+        return BadRequest(new { success = false, error = result.Error ?? "Unable to submit data." });
+    }
+
+    private string CapitalizeFirstLetter(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+            return input;
+
+        return char.ToUpper(input[0]) + input.Substring(1).ToLowerInvariant();
     }
 
     [HttpPost]
     public async Task<IActionResult> EditClient(EditClientViewModel viewModel)
     {
-        _logger.LogInformation("Received EditClient request with data: {@ViewModel}", viewModel);
-
         if (!ModelState.IsValid)
         {
             var errors = ModelState
@@ -145,7 +163,6 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
                     kvp => kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray()
                 );
 
-            _logger.LogWarning("Validation failed for EditClient request. Errors: {@Errors}", errors);
             return BadRequest(new { success = false, errors });
         }
 
@@ -154,12 +171,11 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
 
         if (client == null)
         {
-            _logger.LogWarning("Client with ID {ClientId} not found.", viewModel.Id);
             return NotFound(new { success = false, error = "Client not found." });
         }
 
         // Handle image upload if provided
-        if (viewModel.ClientImage != null && viewModel.ClientImage.Length > 0)
+        if (viewModel.ClientImage is { Length: > 0 })
         {
             // Delete old image if present
             if (client.Image != null && !string.IsNullOrEmpty(client.Image.ImageUrl))
@@ -180,7 +196,6 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
             }
             else
             {
-                _logger.LogWarning("Image upload failed or returned no result.");
                 return BadRequest(new { success = false, error = "Image upload failed." });
             }
         }
@@ -203,21 +218,48 @@ public class ClientsController(IClientService clientService, ILogger<ClientsCont
 
         try
         {
+            // Update client in the service
             var result = await _clientService.UpdateClientAsync(viewModel.Id, formMapped);
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("Client with ID {ClientId} updated successfully.", viewModel.Id);
                 return Ok(new { success = true });
             }
 
-            _logger.LogWarning("Failed to update client with ID {ClientId}. Error: {Error}", viewModel.Id, result.Error);
             return Problem("Unable to update client.");
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            _logger.LogError(ex, "An error occurred while updating the client with ID {ClientId}", viewModel.Id);
             return Problem("An error occurred while processing your request.");
         }
+    }
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteClient(string id)
+    {
+        if (string.IsNullOrWhiteSpace(id))
+        {
+            return BadRequest(new ClientServiceResult
+            {
+                Succeeded = false,
+                StatusCode = 400,
+                Error = "Client ID is required."
+            });
+        }
+
+        var serviceResult = await _clientService.DeleteClientAsync(id);
+
+        if (!serviceResult.Succeeded)
+        {
+            if (serviceResult.StatusCode == 404)
+            {
+                return NotFound(serviceResult);
+            }
+
+            return StatusCode(serviceResult.StatusCode, serviceResult);
+        }
+
+        return RedirectToAction("Index");
     }
 }

@@ -1,30 +1,34 @@
 @model ClientListItemViewModel
 
-<th class="client-check"><input type="checkbox" /></th>
-<th class="client-info">
-    @if (!string.IsNullOrEmpty(Model.ImageUrl))
-    {
-        <div class="client-image">
-            <img src="@Model.ImageUrl" alt="@Model.AltText" />
+<div>
+    <th class="client-check"><input type="checkbox" /></th>
+    <th class="client-info">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div class="client-image">
+                <img src="@Model.ImageUrl" alt="@Model.AltText" />
+            </div>
+        }
+        else
+        {
+            <div class="client-image">
+                <img src="/images/profiles/user-template-male.svg" alt="Default Image" />
+            </div>
+        }
+        <div class="client-name">@Model.ClientName</div>
+        <div class="client-email">@Model.Email</div>
+    </th>
+    <th class="client-location">@Model.Location</th>
+    <th class="client-phone">@Model.PhoneNumber</th>
+    <th class="client-date">@Model.Date.ToString("dd-MM-yy")</th>
+    <th class="client-status">
+        <div class="badge @(Model.IsActive ? "success" : "inactive")">
+            @(Model.IsActive ? "active" : "inactive")
         </div>
-    }
-    else
-    {
-        <div class="client-image">
-            <img src="/images/profiles/user-template-male.svg" alt="Default Image" />
-        </div>
-    }
-    <div class="client-name">@Model.ClientName</div>
-    <div class="client-email">@Model.Email</div>
-</th>
-<th class="client-location">@Model.Location</th>
-<th class="client-phone">@Model.PhoneNumber</th>
-<th class="client-date">@Model.Date.ToString("dd-MM-yy")</th>
-<th class="client-status">
-    <div class="badge @(Model.IsActive ? "success" : "inactive")">
-        @(Model.IsActive ? "active" : "inactive")
-    </div>
-</th>
-<th class="client-actions">
-    <i class="fa-regular fa-ellipsis" data-modal="true" data-target="#editClientModal"></i>
-</th>
+    </th>
+    <th class="client-actions">
+        @* <i class="fa-regular fa-ellipsis" data-modal="true" data-target="#editClientModal"></i> *@
+        <button type="button" class="btn-menu-toggle btn-edit-menu" data-type="dropdown" data-target="#clientItemDropdown-@Model.Id"></button>
+        <partial name="Partials/Sections/Clients/_ClientItemDropdownPartial" model="Model" />
+    </th>
+</div>

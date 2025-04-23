@@ -755,7 +755,7 @@ h6, .h6 {
     }
 }
 
-.btn-edit-menu {
+.pos-right .btn-edit-menu {
     background-color: transparent;
     color: var(--gray-800);
     border: none;
@@ -1245,8 +1245,13 @@ h6, .h6 {
 
         .client-image {
             grid-area: image;
-            width: 48px;
-            height: 48px;
+            max-width: 48px;
+            max-height: 48px;
+            
+            img {
+                width: 48px;
+                height: 48px;
+            }
         }
 
         .client-name {
@@ -1264,6 +1269,33 @@ h6, .h6 {
 
 .client-actions {
     cursor: pointer;
+    position: relative;
+}
+.client-actions .btn-edit-menu {
+    background-color: transparent;
+    color: var(--gray-800);
+    border: none;
+    display: flex;
+    justify-self: flex-start;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+
+    &::before {
+        content: "\F517 " " \F517";
+        font-family: var(--font-bootstrap), sans-serif;
+        display: flex;
+        transform: scale(0.5);
+        transform-origin: center;
+    }
+    
+    /*&::after {*/
+    /*    content: "\F517";*/
+    /*    font-family: var(--font-bootstrap), sans-serif;*/
+    /*    display: flex;*/
+    /*    transform: scale(0.5);*/
+    /*    transform-origin: center;*/
+    /*}*/
 }
 
 /* tables */
@@ -2004,7 +2036,7 @@ input:checked + .slider:before {
     pointer-events: auto;
 }
 
-.dropdown-menu {
+.member-dropdown-menu {
     display: none;
     position: absolute;
     right: 0;
@@ -2018,11 +2050,61 @@ input:checked + .slider:before {
     min-width: 230px;
 }
 
-.dropdown-menu.show {
+.member-dropdown-menu.show {
     display: block;
 }
 
-.dropdown-menu .or-separator {
+.member-dropdown-menu .or-separator {
+    text-align: center;
+    margin: 5px 0;
+    font-size: 12px;
+    color: #888;
+}
+
+.client-dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background-color: white;
+    border-radius: 6px;
+    border: none;
+    box-shadow: var(--box-shadow);
+    padding: 10px;
+    z-index: 2000;
+    min-width: 230px;
+}
+
+.client-dropdown-menu.show {
+    display: block;
+}
+
+.client-dropdown-menu .or-separator {
+    text-align: center;
+    margin: 5px 0;
+    font-size: 12px;
+    color: #888;
+}
+
+.project-dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background-color: white;
+    border-radius: 6px;
+    border: none;
+    box-shadow: var(--box-shadow);
+    padding: 10px;
+    z-index: 2000;
+    min-width: 230px;
+}
+
+.project-dropdown-menu.show {
+    display: block;
+}
+
+.project-dropdown-menu .or-separator {
     text-align: center;
     margin: 5px 0;
     font-size: 12px;

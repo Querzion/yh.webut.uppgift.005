@@ -27,7 +27,7 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
         {
             if (entity == null)
                 return new RepositoryResult<bool> { Succeeded = false, StatusCode = 400, Error = "Entity cannot be null" };
-
+        
             try
             {
                 _table.Add(entity);
@@ -40,7 +40,6 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
                 return new RepositoryResult<bool> { Succeeded = false, StatusCode = 500, Error = ex.Message };
             }
         }
-
         
         public virtual async Task<RepositoryResult<IEnumerable<TModel>>> GetAllAsync( bool orderByDecending = false, Expression<Func<TEntity, object>>? sortBy = null, Expression<Func<TEntity, bool>>? where = null, params Expression<Func<TEntity, object>>[] includes )
         {
@@ -189,6 +188,7 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
             }
         }
 
+
     #endregion
     
     public virtual async Task<RepositoryResult<TEntity?>> FindEntityAsync(Expression<Func<TEntity, bool>> findBy)
@@ -237,6 +237,7 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
         {
             _transaction ??= await _context.Database.BeginTransactionAsync();
         }
+    
 
         public virtual async Task CommitTransactionAsync()
         {
