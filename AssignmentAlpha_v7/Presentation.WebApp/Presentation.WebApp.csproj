@@ -106,6 +106,7 @@
       <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-23].[ec41bda5-5dfe-47b3-ac91-6b1fcbfd8a2e].png" />
       <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-23].[ed41c969-ee1f-4e69-bb11-2ce17c2b024a].png" />
       <_ContentIncludedByDefault Remove="wwwroot\uploads\clients\[2025-04-23].[f0fc50ce-5f6f-49b9-b518-9817f50dec72].png" />
+      <_ContentIncludedByDefault Remove="wwwroot\uploads\members\[2025-04-23].[4116cec5-8c19-45da-b249-be2c5d3a53c7].jpg" />
     </ItemGroup>
 
     <ItemGroup>
