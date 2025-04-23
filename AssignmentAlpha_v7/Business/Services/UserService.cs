@@ -23,6 +23,7 @@ public interface IUserService
     Task<UserServiceResult> GetUserByEmailAsync(string email);
     Task<UserServiceResult> GetUserByIdAsync(string id);
     Task<UserServiceResult> UpdateUserAsync(string userId, EditMemberFormData formDataData);
+    Task<UserServiceResult> DeleteUserAsync(string userId);
     Task<string> GetDisplayNameAsync(string? username);
 }
 

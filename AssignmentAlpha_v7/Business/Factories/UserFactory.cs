@@ -22,42 +22,37 @@ public static class UserFactory
     }
 
     public static AppUser CreateFromAddMemberForm(AddMemberFormData form)
-{
-    var user = new AppUser
     {
-        FirstName = form.FirstName,
-        LastName = form.LastName,
-        Email = form.Email,
-        UserName = form.Email,
-        PhoneNumber = form.PhoneNumber,
-        JobTitle = form.JobTitle,
-        DateOfBirth = form.DateOfBirth,
-        Address = form.AddressId != null ? null : new AddressEntity
+        var user = new AppUser
         {
-            StreetName = form.Address?.StreetName,
-            City = form.Address?.City,
-            PostalCode = form.Address?.PostalCode,
-        },
-        AddressId = form.AddressId
-    };
-
-    if (form.ImageId != null)
-    {
-        user.ImageId = form.ImageId;
-        user.Image = null; // don’t assign the nav property
-    }
-    else if (form.Image != null)
-    {
-        user.Image = new ImageEntity
-        {
-            ImageUrl = form.Image.ImageUrl,
-            AltText = form.Image.AltText,
-            UploadedAt = DateTime.UtcNow
+            FirstName = form.FirstName,
+            LastName = form.LastName,
+            Email = form.Email,
+            UserName = form.Email,
+            PhoneNumber = form.PhoneNumber,
+            JobTitle = form.JobTitle,
+            DateOfBirth = form.DateOfBirth,
+            Address = form.AddressId != null ? null : new AddressEntity
+            {
+                StreetName = form.Address?.StreetName,
+                City = form.Address?.City,
+                PostalCode = form.Address?.PostalCode,
+            },
+            AddressId = form.AddressId,
+            // ImageId and Image handling within the initialization
+            ImageId = form.ImageId ?? null, // Set ImageId from form (if provided)
+            Image = form.ImageId == null && form.Image != null 
+                ? new ImageEntity
+                {
+                    ImageUrl = form.Image.ImageUrl,
+                    AltText = form.Image.AltText,
+                    UploadedAt = DateTime.UtcNow
+                }
+                : null
         };
-    }
 
-    return user;
-}
+        return user;
+    }
 
     public static void UpdateFromEditMemberForm(AppUser existingUser, EditMemberFormData formData)
     {

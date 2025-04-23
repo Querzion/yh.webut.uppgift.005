@@ -561,6 +561,27 @@ public class MembersController(IUserService userService, IImageServiceHelper ima
         return BadRequest(new { success = false, error = updateResult.Error ?? "Unable to update user data.", statusCode = 400 });
     }
 
+    #region Delete Member - ChatGPT
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteMember(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                return BadRequest("Member ID is required.");
+
+            var result = await _userService.DeleteUserAsync(id);
+
+            if (!result.Succeeded)
+            {
+                return StatusCode(result.StatusCode, result.Error);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+    #endregion
+    
         
     [HttpGet]
     public async Task<JsonResult> SearchUsers(string term)
