@@ -8,10 +8,12 @@ using Domain.DTOs.Adds;
 using Domain.DTOs.Edits;
 using Domain.DTOs.Forms;
 using Domain.Extensions;
+using Domain.Handlers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+// using Presentation.WebApp.Handlers;
 using Presentation.WebApp.Helpers;
 using Presentation.WebApp.Mappings;
 using Presentation.WebApp.ViewModels;
@@ -21,7 +23,7 @@ using Presentation.WebApp.ViewModels.Edits;
 namespace Presentation.WebApp.Controllers;
 
 [Authorize(Policy = "Admins")]
-public class MembersController(IUserService userService, IImageServiceHelper imageServiceHelper, AppDbContext context, IAddressRepository addressRepository, IImageService imageService) : Controller
+public class MembersController(IUserService userService, IImageServiceHelper imageServiceHelper, AppDbContext context, IAddressRepository addressRepository, IImageService imageService, IFileHandler fileHandler) : Controller
 {
     private readonly IUserService _userService = userService;
     private readonly IAddressRepository _addressRepository = addressRepository;
@@ -29,6 +31,7 @@ public class MembersController(IUserService userService, IImageServiceHelper ima
     private readonly IImageService _imageService = imageService;
     private readonly AppDbContext _context = context;
     // private readonly ILogger<MembersController> _logger;
+    private readonly IFileHandler _fileHandler = fileHandler;
     
     
     [Route("admin/members")]
@@ -50,117 +53,273 @@ public class MembersController(IUserService userService, IImageServiceHelper ima
     
         return View(viewModel);
     }
-    
-    
-    [HttpPost]
-    public async Task<IActionResult> AddMember(AddMemberViewModel formData)
-    {
-        if (!ModelState.IsValid)
+
+    #region AddMember (HttpResponse)
+
+        // [HttpPost]
+        // public async Task<IActionResult> AddMember(AddMemberViewModel formData)
+        // {
+        //     if (!ModelState.IsValid)
+        //     {
+        //         var errors = ModelState
+        //             .Where(x => x.Value?.Errors.Count > 0)
+        //             .ToDictionary(
+        //                 kvp => kvp.Key,
+        //                 kvp => new
+        //                 {
+        //                     Messages = kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray(),
+        //                     Exception = kvp.Value?.Errors.Select(x => x.Exception?.Message).ToArray()
+        //                 }
+        //             );
+        //
+        //         Console.WriteLine("ModelState Errors: " + JsonConvert.SerializeObject(errors));
+        //         return BadRequest(new { success = false, errors });
+        //     }
+        //     
+        //     // // Handle image upload 
+        //     // if (formData.UserImage is { Length: > 0 })
+        //     // {
+        //     //     var imageServiceResult = await _imageServiceHelper.SaveImageAsync(formData.UserImage, "members", new ImageFormData
+        //     //     {
+        //     //         AltText = $"{formData.FirstName} {formData.LastName}'s Avatar"
+        //     //     });
+        //     //
+        //     //     if (imageServiceResult.Succeeded && imageServiceResult.Result!.Any())
+        //     //     {
+        //     //         var uploadedImage = imageServiceResult.Result!.Last();
+        //     //         formData.ImageId = uploadedImage.Id;
+        //     //     }
+        //     //     else
+        //     //     {
+        //     //         Console.WriteLine("Image upload failed. Result: " + JsonConvert.SerializeObject(imageServiceResult));
+        //     //         ModelState.AddModelError("UserImage", "Image upload failed.");
+        //     //         return BadRequest(new { success = false, error = "Image upload failed." });
+        //     //     }
+        //     // }
+        //     
+        //     // Bypassing the local image upload, to Azure blob storage, bypassing the whole imageService, since it wouldn't add the imageId anyways.
+        //     if (formData.UserImage is { Length: > 0 })
+        //     {
+        //         // 1. Upload the file to Azure
+        //         var imageFileUri = await _fileHandler.UploadFileAsync(formData.UserImage!);
+        //
+        //         if (string.IsNullOrEmpty(imageFileUri))
+        //         {
+        //             ModelState.AddModelError("UserImage", "Image upload failed.");
+        //             return BadRequest(new { success = false, error = "Image upload failed." });
+        //         }
+        //
+        //         // 2. Create ImageFormData instead of ImageEntity (metadata)
+        //         var imageFormData = new ImageFormData
+        //         {
+        //             ImageUrl = imageFileUri,
+        //             AltText = $"{formData.FirstName} {formData.LastName}'s Avatar"
+        //         };
+        //
+        //         // 3. Save the image using ImageServiceHelper and pass ImageFormData
+        //         var imageServiceResult = await _imageService.SaveImageAsync(imageFormData);
+        //
+        //         if (imageServiceResult.Succeeded && imageServiceResult.Result!.Any())
+        //         {
+        //             var uploadedImage = imageServiceResult.Result!.First();  // Get the first image
+        //             formData.ImageId = uploadedImage.Id;  // Assign the uploaded image Id to form data
+        //         }
+        //         else
+        //         {
+        //             Console.WriteLine("Image save failed. Result: " + JsonConvert.SerializeObject(imageServiceResult));
+        //             ModelState.AddModelError("UserImage", "Saving image info to database failed.");
+        //             return BadRequest(new { success = false, error = "Saving image info to database failed." });
+        //         }
+        //     }
+        //
+        //     // Handle address creation or retrieval
+        //     if (formData.Address != null)
+        //     {
+        //         var street = CapitalizeFirstLetter(formData.Address.StreetName.Trim());
+        //         var postal = formData.Address.PostalCode.Trim();
+        //         var city   = CapitalizeFirstLetter(formData.Address.City.Trim());
+        //
+        //         var existingAddressResult = await _addressRepository.FindEntityAsync(a =>
+        //             a.StreetName == street &&
+        //             a.PostalCode == postal &&
+        //             a.City == city
+        //         );
+        //
+        //         if (existingAddressResult.Succeeded && existingAddressResult.Result != null)
+        //         {
+        //             formData.AddressId = existingAddressResult.Result.Id;
+        //             formData.Address = null; // ✅ Prevents the factory from creating a new AddressEntity
+        //         }
+        //         else
+        //         {
+        //             var newAddress = new AddressEntity
+        //             {
+        //                 StreetName = street,
+        //                 PostalCode = postal,
+        //                 City = city
+        //             };
+        //
+        //             var addResult = await _addressRepository.AddAsync(newAddress);
+        //             if (addResult.Succeeded)
+        //             {
+        //                 formData.AddressId = newAddress.Id;
+        //                 formData.Address = null; // ✅ Prevents the factory from creating another one
+        //             }
+        //             else
+        //             {
+        //                 return BadRequest(new { success = false, error = "Failed to create address." });
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         formData.AddressId = null;
+        //         formData.Address = null; // ✅ Clear it just in case
+        //     }
+        //     
+        //
+        //     // Compose DateOfBirth from the dropdown values
+        //     formData.ComposeDateOfBirth();
+        //
+        //     // Map the view model to the domain model for processing
+        //     var formMapped = formData.MapTo<AddMemberFormData>();
+        //
+        //     // Create the user via the UserService
+        //     var result = await _userService.AddUserAsync(formMapped);
+        //
+        //     Console.WriteLine("User creation result: " + JsonConvert.SerializeObject(result));
+        //
+        //     if (result.Succeeded)
+        //     {
+        //         return Ok(new { success = true });
+        //     }
+        //
+        //     return BadRequest(new { success = false, error = result.Error ?? "Unable to submit data." });
+        // }
+
+    #endregion
+
+    #region AddMember (JSON) - ChatGPT Rewrite
+
+        [HttpPost]
+        public async Task<IActionResult> AddMember(AddMemberViewModel formData)
         {
-            var errors = ModelState
-                .Where(x => x.Value?.Errors.Count > 0)
-                .ToDictionary(
-                    kvp => kvp.Key,
-                    kvp => new
-                    {
-                        Messages = kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray(),
-                        Exception = kvp.Value?.Errors.Select(x => x.Exception?.Message).ToArray()
-                    }
-                );
-
-            Console.WriteLine("ModelState Errors: " + JsonConvert.SerializeObject(errors));
-            return BadRequest(new { success = false, errors });
-        }
-
-        // Handle image upload
-        if (formData.UserImage is { Length: > 0 })
-        {
-            var imageServiceResult = await _imageServiceHelper.SaveImageAsync(formData.UserImage, "members", new ImageFormData
+            if (!ModelState.IsValid)
             {
-                AltText = $"{formData.FirstName} {formData.LastName}'s Avatar"
-            });
+                var errors = ModelState
+                    .Where(x => x.Value?.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => new
+                        {
+                            Messages = kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray(),
+                            Exception = kvp.Value?.Errors.Select(x => x.Exception?.Message).ToArray()
+                        }
+                    );
 
-            if (imageServiceResult.Succeeded && imageServiceResult.Result!.Any())
-            {
-                var uploadedImage = imageServiceResult.Result!.Last();
-                formData.ImageId = uploadedImage.Id;
+                Console.WriteLine("ModelState Errors: " + JsonConvert.SerializeObject(errors));
+                return Json(new { success = false, errors });
             }
-            else
+            
+            // Handle image upload
+            if (formData.UserImage is { Length: > 0 })
             {
-                Console.WriteLine("Image upload failed. Result: " + JsonConvert.SerializeObject(imageServiceResult));
-                ModelState.AddModelError("UserImage", "Image upload failed.");
-                return BadRequest(new { success = false, error = "Image upload failed." });
-            }
-        }
+                // 1. Upload the file to Azure
+                var imageFileUri = await _fileHandler.UploadFileAsync(formData.UserImage!);
 
-        // Handle address creation or retrieval
-        if (formData.Address != null)
-        {
-            var street = CapitalizeFirstLetter(formData.Address.StreetName.Trim());
-            var postal = formData.Address.PostalCode.Trim();
-            var city   = CapitalizeFirstLetter(formData.Address.City.Trim());
-
-            var existingAddressResult = await _addressRepository.FindEntityAsync(a =>
-                a.StreetName == street &&
-                a.PostalCode == postal &&
-                a.City == city
-            );
-
-            if (existingAddressResult.Succeeded && existingAddressResult.Result != null)
-            {
-                formData.AddressId = existingAddressResult.Result.Id;
-                formData.Address = null; // ✅ Prevents the factory from creating a new AddressEntity
-            }
-            else
-            {
-                var newAddress = new AddressEntity
+                if (string.IsNullOrEmpty(imageFileUri))
                 {
-                    StreetName = street,
-                    PostalCode = postal,
-                    City = city
+                    return Json(new { success = false, error = "Image upload failed." });
+                }
+
+                // 2. Create ImageFormData instead of ImageEntity (metadata)
+                var imageFormData = new ImageFormData
+                {
+                    ImageUrl = imageFileUri,
+                    AltText = $"{formData.FirstName} {formData.LastName}'s Avatar"
                 };
 
-                var addResult = await _addressRepository.AddAsync(newAddress);
-                if (addResult.Succeeded)
+                // 3. Save the image using ImageServiceHelper and pass ImageFormData
+                var imageServiceResult = await _imageService.SaveImageAsync(imageFormData);
+
+                if (imageServiceResult.Succeeded && imageServiceResult.Result!.Any())
                 {
-                    formData.AddressId = newAddress.Id;
-                    formData.Address = null; // ✅ Prevents the factory from creating another one
+                    var uploadedImage = imageServiceResult.Result!.First();  // Get the first image
+                    formData.ImageId = uploadedImage.Id;  // Assign the uploaded image Id to form data
                 }
                 else
                 {
-                    return BadRequest(new { success = false, error = "Failed to create address." });
+                    Console.WriteLine("Image save failed. Result: " + JsonConvert.SerializeObject(imageServiceResult));
+                    return Json(new { success = false, error = "Saving image info to database failed." });
                 }
             }
+
+            // Handle address creation or retrieval
+            if (formData.Address != null)
+            {
+                var street = CapitalizeFirstLetter(formData.Address.StreetName.Trim());
+                var postal = formData.Address.PostalCode.Trim();
+                var city   = CapitalizeFirstLetter(formData.Address.City.Trim());
+
+                var existingAddressResult = await _addressRepository.FindEntityAsync(a =>
+                    a.StreetName == street &&
+                    a.PostalCode == postal &&
+                    a.City == city
+                );
+
+                if (existingAddressResult.Succeeded && existingAddressResult.Result != null)
+                {
+                    formData.AddressId = existingAddressResult.Result.Id;
+                    formData.Address = null; // ✅ Prevents the factory from creating a new AddressEntity
+                }
+                else
+                {
+                    var newAddress = new AddressEntity
+                    {
+                        StreetName = street,
+                        PostalCode = postal,
+                        City = city
+                    };
+
+                    var addResult = await _addressRepository.AddAsync(newAddress);
+                    if (addResult.Succeeded)
+                    {
+                        formData.AddressId = newAddress.Id;
+                        formData.Address = null; // ✅ Prevents the factory from creating another one
+                    }
+                    else
+                    {
+                        return Json(new { success = false, error = "Failed to create address." });
+                    }
+                }
+            }
+            else
+            {
+                formData.AddressId = null;
+                formData.Address = null; // ✅ Clear it just in case
+            }
+            
+            // Compose DateOfBirth from the dropdown values
+            formData.ComposeDateOfBirth();
+
+            // Map the view model to the domain model for processing
+            var formMapped = formData.MapTo<AddMemberFormData>();
+
+            // Create the user via the UserService
+            var result = await _userService.AddUserAsync(formMapped);
+
+            Console.WriteLine("User creation result: " + JsonConvert.SerializeObject(result));
+
+            if (result.Succeeded)
+            {
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false, error = result.Error ?? "Unable to submit data." });
         }
-        else
-        {
-            formData.AddressId = null;
-            formData.Address = null; // ✅ Clear it just in case
-        }
-        
 
-        // Compose DateOfBirth from the dropdown values
-        formData.ComposeDateOfBirth();
-
-        // Map the view model to the domain model for processing
-        var formMapped = formData.MapTo<AddMemberFormData>();
-
-        // Create the user via the UserService
-        var result = await _userService.AddUserAsync(formMapped);
-
-        Console.WriteLine("User creation result: " + JsonConvert.SerializeObject(result));
-
-        if (result.Succeeded)
-        {
-            return Ok(new { success = true });
-        }
-
-        return BadRequest(new { success = false, error = result.Error ?? "Unable to submit data." });
-    }
-
+    #endregion
     
-    
-
     #region Old AddMember
 
         // [HttpPost]
@@ -438,128 +597,132 @@ public class MembersController(IUserService userService, IImageServiceHelper ima
         // }
 
     #endregion
-    
-    [HttpPost]
-    public async Task<IActionResult> EditMember(EditMemberViewModel viewModel)
-    {
-        // Check if the form model is valid
-        if (!ModelState.IsValid)
+
+    #region EditMember (HttpResponse) - Does NOT work yet.
+
+        [HttpPost]
+        public async Task<IActionResult> EditMember(EditMemberViewModel viewModel)
         {
-            var errors = ModelState
-                .Where(x => x.Value?.Errors.Count > 0)
-                .ToDictionary(
-                    kvp => kvp.Key,
-                    kvp => new
-                    {
-                        Messages = kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray(),
-                        Exception = kvp.Value?.Errors.Select(x => x.Exception?.Message).ToArray()
-                    }
+            // Check if the form model is valid
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(x => x.Value?.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => new
+                        {
+                            Messages = kvp.Value?.Errors.Select(x => x.ErrorMessage).ToArray(),
+                            Exception = kvp.Value?.Errors.Select(x => x.Exception?.Message).ToArray()
+                        }
+                    );
+
+                Console.WriteLine("ModelState Errors: " + JsonConvert.SerializeObject(errors));
+                return BadRequest(new { success = false, errors });
+            }
+
+            // Retrieve the user by ID
+            var userResult = await _userService.GetUserByIdAsync(viewModel.Id);
+            if (!userResult.Succeeded || userResult.Result == null)
+            {
+                return NotFound(new { success = false, error = "User not found.", statusCode = 404 });
+            }
+
+            // Handle image upload (if provided)
+            if (viewModel.UserImage is { Length: > 0 })
+            {
+                // First, upload the new image
+                var imageServiceResult = await _imageServiceHelper.SaveImageAsync(viewModel.UserImage, "members", new ImageFormData
+                {
+                    AltText = $"{viewModel.FirstName} {viewModel.LastName}'s Avatar"
+                });
+
+                // Check if the upload was successful
+                if (!imageServiceResult.Succeeded || imageServiceResult.Result?.Any() != true)
+                {
+                    return BadRequest(new { success = false, error = imageServiceResult.Error ?? "Image upload failed." });
+                }
+
+                // Now that the new image is successfully uploaded, delete the old image (if any)
+                // if (!string.IsNullOrEmpty(userResult.Result.ImageId))
+                // {
+                //     var deleteImageResult = await _imageService.DeleteImageAsync(userResult.Result.ImageId);
+                //     if (!deleteImageResult.Succeeded)
+                //     {
+                //         return BadRequest(new { success = false, error = deleteImageResult.Error ?? "Failed to delete old image." });
+                //     }
+                // }
+
+                // Assign the new image ID to the viewModel
+                viewModel.ImageId = imageServiceResult.Result.Last().Id;
+            }
+
+            // Handle address creation or retrieval (Directly in the controller, no AddressService)
+            string? addressId = null;
+            if (viewModel.Address != null)
+            {
+                var existingAddressResult = await _addressRepository.GetEntityAsync(a =>
+                    a.StreetName!.Trim().ToLower() == viewModel.Address.StreetName.Trim().ToLower() &&
+                    a.PostalCode!.Trim().ToLower() == viewModel.Address.PostalCode.Trim().ToLower() &&
+                    a.City!.Trim().ToLower() == viewModel.Address.City.Trim().ToLower()
                 );
 
-            Console.WriteLine("ModelState Errors: " + JsonConvert.SerializeObject(errors));
-            return BadRequest(new { success = false, errors });
-        }
-
-        // Retrieve the user by ID
-        var userResult = await _userService.GetUserByIdAsync(viewModel.Id);
-        if (!userResult.Succeeded || userResult.Result == null)
-        {
-            return NotFound(new { success = false, error = "User not found.", statusCode = 404 });
-        }
-
-        // Handle image upload (if provided)
-        if (viewModel.UserImage is { Length: > 0 })
-        {
-            // First, upload the new image
-            var imageServiceResult = await _imageServiceHelper.SaveImageAsync(viewModel.UserImage, "members", new ImageFormData
-            {
-                AltText = $"{viewModel.FirstName} {viewModel.LastName}'s Avatar"
-            });
-
-            // Check if the upload was successful
-            if (!imageServiceResult.Succeeded || imageServiceResult.Result?.Any() != true)
-            {
-                return BadRequest(new { success = false, error = imageServiceResult.Error ?? "Image upload failed." });
-            }
-
-            // Now that the new image is successfully uploaded, delete the old image (if any)
-            // if (!string.IsNullOrEmpty(userResult.Result.ImageId))
-            // {
-            //     var deleteImageResult = await _imageService.DeleteImageAsync(userResult.Result.ImageId);
-            //     if (!deleteImageResult.Succeeded)
-            //     {
-            //         return BadRequest(new { success = false, error = deleteImageResult.Error ?? "Failed to delete old image." });
-            //     }
-            // }
-
-            // Assign the new image ID to the viewModel
-            viewModel.ImageId = imageServiceResult.Result.Last().Id;
-        }
-
-        // Handle address creation or retrieval (Directly in the controller, no AddressService)
-        string? addressId = null;
-        if (viewModel.Address != null)
-        {
-            var existingAddressResult = await _addressRepository.GetEntityAsync(a =>
-                a.StreetName!.Trim().ToLower() == viewModel.Address.StreetName.Trim().ToLower() &&
-                a.PostalCode!.Trim().ToLower() == viewModel.Address.PostalCode.Trim().ToLower() &&
-                a.City!.Trim().ToLower() == viewModel.Address.City.Trim().ToLower()
-            );
-
-            if (existingAddressResult.Succeeded && existingAddressResult.Result != null)
-            {
-                addressId = existingAddressResult.Result.Id;
-            }
-            else
-            {
-                var newAddress = new AddressEntity
+                if (existingAddressResult.Succeeded && existingAddressResult.Result != null)
                 {
-                    Id = Guid.NewGuid().ToString(),  // Ensure this is being set
-                    StreetName = CapitalizeFirstLetter(viewModel.Address.StreetName),
-                    PostalCode = viewModel.Address.PostalCode,
-                    City = CapitalizeFirstLetter(viewModel.Address.City)
-                };
-
-                var addAddressResult = await _addressRepository.AddAsync(newAddress);
-                await _addressRepository.SaveChangesAsync();
-
-                if (addAddressResult.Succeeded)
-                {
-                    addressId = newAddress.Id;
+                    addressId = existingAddressResult.Result.Id;
                 }
                 else
                 {
-                    ModelState.AddModelError("Address", "Failed to add address.");
-                    return BadRequest(new { success = false, error = "Address creation failed.", statusCode = 400 });
+                    var newAddress = new AddressEntity
+                    {
+                        Id = Guid.NewGuid().ToString(),  // Ensure this is being set
+                        StreetName = CapitalizeFirstLetter(viewModel.Address.StreetName),
+                        PostalCode = viewModel.Address.PostalCode,
+                        City = CapitalizeFirstLetter(viewModel.Address.City)
+                    };
+
+                    var addAddressResult = await _addressRepository.AddAsync(newAddress);
+                    await _addressRepository.SaveChangesAsync();
+
+                    if (addAddressResult.Succeeded)
+                    {
+                        addressId = newAddress.Id;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Address", "Failed to add address.");
+                        return BadRequest(new { success = false, error = "Address creation failed.", statusCode = 400 });
+                    }
                 }
             }
+
+            // Compose DateOfBirth from parts
+            viewModel.ComposeDateOfBirth();
+
+            // Map the view model to the domain model for updating the user
+            var form = new EditMemberFormData
+            {
+                Id = viewModel.Id,
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
+                JobTitle = viewModel.JobTitle,
+                Email = viewModel.Email,
+                PhoneNumber = viewModel.PhoneNumber,
+                DateOfBirth = viewModel.DateOfBirth,
+                AddressId = addressId
+            };
+
+            // Call the update method to save changes
+            var updateResult = await _userService.UpdateUserAsync(viewModel.Id, form);
+            if (updateResult.Succeeded)
+            {
+                return Ok(new { success = true, statusCode = 200 });
+            }
+
+            return BadRequest(new { success = false, error = updateResult.Error ?? "Unable to update user data.", statusCode = 400 });
         }
 
-        // Compose DateOfBirth from parts
-        viewModel.ComposeDateOfBirth();
-
-        // Map the view model to the domain model for updating the user
-        var form = new EditMemberFormData
-        {
-            Id = viewModel.Id,
-            FirstName = viewModel.FirstName,
-            LastName = viewModel.LastName,
-            JobTitle = viewModel.JobTitle,
-            Email = viewModel.Email,
-            PhoneNumber = viewModel.PhoneNumber,
-            DateOfBirth = viewModel.DateOfBirth,
-            AddressId = addressId
-        };
-
-        // Call the update method to save changes
-        var updateResult = await _userService.UpdateUserAsync(viewModel.Id, form);
-        if (updateResult.Succeeded)
-        {
-            return Ok(new { success = true, statusCode = 200 });
-        }
-
-        return BadRequest(new { success = false, error = updateResult.Error ?? "Unable to update user data.", statusCode = 400 });
-    }
+    #endregion
 
     #region Delete Member - ChatGPT
 

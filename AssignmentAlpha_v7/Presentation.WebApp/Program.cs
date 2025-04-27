@@ -4,17 +4,24 @@ using Data.Contexts;
 using Data.Entities;
 using Data.Interfaces;
 using Data.Repositories;
+using Domain.Handlers;
+using Infrastructure.Handlers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Hubs;
+// using Presentation.WebApp.Handlers;
 using Presentation.WebApp.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 
+var connectionString = builder.Configuration.GetConnectionString("AzureBlobStorage");
+var containerName = "images";
+
+builder.Services.AddScoped<IFileHandler>(_ => new AzureFileHandler(connectionString!, containerName));
 
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();

@@ -139,7 +139,7 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
     {
         if (!ModelState.IsValid)
         {
-            return Json(new { Success = false, Message = "Model is invalid" });
+            return Json(new { success = false, message = "Model is invalid" });
         }
 
         ImageServiceResult? imageServiceResult = null;
@@ -157,10 +157,10 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
 
             if (!imageServiceResult.Succeeded || imageServiceResult.Result == null || !imageServiceResult.Result.Any())
             {
-                return Json(new { Success = false, Message = imageServiceResult.Error ?? "Image upload failed." });
+                return Json(new { success = false, message = imageServiceResult.Error ?? "Image upload failed." });
             }
 
-            // Get the first image from the result and assign its URL
+            // Get the first image from the result and assign its ID
             var uploadedImage = imageServiceResult.Result.First();
             model.ImageId = uploadedImage.Id;
         }
@@ -186,10 +186,10 @@ public class ProjectsController(IProjectService projectService, AppDbContext con
         // Handle the result of the project creation
         if (!result.Succeeded)
         {
-            return Json(new { Success = false, Message = result.Error ?? "Failed to create project" });
+            return Json(new { success = false, message = result.Error ?? "Failed to create project" });
         }
 
-        return Json(new { Success = true });
+        return Json(new { success = true });
     }
 
 

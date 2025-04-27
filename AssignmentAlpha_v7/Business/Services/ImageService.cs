@@ -11,6 +11,7 @@ namespace Business.Services;
 public interface IImageService
 {
     Task<ImageServiceResult> ProcessImageAsync(ImageFormData metadata);
+    Task<ImageServiceResult> SaveImageAsync(ImageFormData formData);
     Task<ImageServiceResult> DeleteImageAsync(string imageId);
 }
 
@@ -73,6 +74,48 @@ public class ImageService(IImageRepository imageRepository) : IImageService
                 Error = ex.Message
             };
         }
+    }
+
+    public async Task<ImageServiceResult> SaveImageAsync(ImageFormData formData)
+    {
+        var result = new ImageServiceResult();
+
+        try
+        {
+            if (formData == null)
+            {
+                result.Succeeded = false;
+                result.Error = "Image form data is null.";
+                result.StatusCode = 400;
+                return result;
+            }
+
+            // 1. Create ImageEntity from ImageFormData
+            var newImageEntity = new ImageEntity
+            {
+                ImageUrl = formData.ImageUrl,
+                AltText = formData.AltText
+            };
+
+            // 2. Save the ImageEntity into the database
+            await _imageRepository.AddAsync(newImageEntity);
+            await _imageRepository.SaveChangesAsync();
+
+            // 3. Map to Image model (or any other return type)
+            var mappedImage = newImageEntity.MapTo<Image>();
+
+            result.Succeeded = true;
+            result.Result = new List<Image> { mappedImage };
+            result.StatusCode = 200;
+        }
+        catch (Exception ex)
+        {
+            result.Succeeded = false;
+            result.Error = ex.Message;
+            result.StatusCode = 500;
+        }
+
+        return result;
     }
     
     public async Task<ImageServiceResult> DeleteImageAsync(string imageId)

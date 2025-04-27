@@ -111,6 +111,7 @@
 
     <ItemGroup>
       <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="9.2.0" />
+      <PackageReference Include="Azure.Storage.Blobs" Version="12.24.0" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="9.0.4" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="9.0.4" />
       <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="9.0.4" />

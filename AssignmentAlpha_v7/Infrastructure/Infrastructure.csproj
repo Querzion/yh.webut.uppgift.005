@@ -7,7 +7,18 @@
     </PropertyGroup>
     
     <ItemGroup>
+        <PackageReference Include="Azure.Storage.Blobs" Version="12.24.0" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.2.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Reference Include="Azure.Storage.Blobs">
+        <HintPath>..\..\..\..\.nuget\packages\azure.storage.blobs\12.24.0\lib\net8.0\Azure.Storage.Blobs.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>
