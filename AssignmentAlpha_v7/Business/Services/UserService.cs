@@ -15,7 +15,7 @@ namespace Business.Services;
 
 public interface IUserService
 {
-    Task<UserServiceResult> GetAllUsersAsync();
+    Task<UserServiceResult> GetAllUsersAsync(int page = 1, int pageSize = 6);
     Task<UserServiceResult> AddUserToRole(string userId, string roleName);
     Task<UserServiceResult> CreateUserAsync(SignUpFormData formData, string roleName = "User");
 
@@ -324,16 +324,22 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
             //     return result.MapTo<UserServiceResult>();
             // }
             
-            public async Task<UserServiceResult> GetAllUsersAsync()
+            public async Task<UserServiceResult> GetAllUsersAsync(int page = 1, int pageSize = 6)
             {
+                // Calculate the number of records to skip for paging
+                int skip = (page - 1) * pageSize;
+
                 var response = await _userRepository.GetAllAsync(
                     orderByDecending: true,
                     sortBy: s => s.FirstName!,
                     where: null,
-                    includes: [
+                    includes: new Expression<Func<AppUser, object>>[]
+                    {
                         x => x.Image!,
                         x => x.Address!
-                    ]
+                    },
+                    skip: skip, 
+                    take: pageSize // Limit the number of results based on pageSize
                 );
 
                 var users = response.Result?.Select(appUser => appUser.MapTo<User>()).ToList();

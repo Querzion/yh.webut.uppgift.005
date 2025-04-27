@@ -1,4 +1,6 @@
+using System.Linq.Expressions;
 using System.Text.Json;
+using Business.Factories;
 using Business.Models;
 using Data.Contexts;
 using Data.Entities;
@@ -53,20 +55,53 @@ public class ProjectService(IProjectRepository projectRepository, IStatusService
 
             public async Task<ProjectServiceResult<IEnumerable<Project>>> GetAllProjectsAsync()
             {
-                var response = await _projectRepository.GetAllAsync
-                ( 
-                    orderByDecending: true, 
-                    sortBy: s => s.Created, 
+                // Call the repository to get the data
+                var response = await _projectRepository.GetAllAsync<ProjectEntity>(
+                    selector: p => p, // Select the entire ProjectEntity (adjust selector as needed)
+                    orderByDecending: true,
+                    sortBy: s => s.Created,
                     where: null, 
-                    include => include.User, 
-                    include => include.Status, 
-                    include => include.Client 
+                    skip: 0,    // Add skip if necessary for pagination
+                    take: 0,    // Add take if necessary for pagination
+                    includes:
+                    [
+                        p => p.User, 
+                        p => p.Status, 
+                        p => p.Client,
+                        p => p.ProjectMembers // Ensure ProjectMembers are included
+                    ]
                 );
 
-                // return response.MapTo<ProjectServiceResult<IEnumerable<Project>>>();
-                // or
-                return new ProjectServiceResult<IEnumerable<Project>> { Succeeded = true, StatusCode = 200, Result = response.Result };
+                // Map the response using the ProjectFactory
+                var projects = response.Result!.Select(ProjectFactory.Create).ToList();
+
+                // Return the response
+                return new ProjectServiceResult<IEnumerable<Project>> 
+                { 
+                    Succeeded = true, 
+                    StatusCode = 200, 
+                    Result = projects 
+                };
             }
+
+
+        
+            // public async Task<ProjectServiceResult<IEnumerable<Project>>> GetAllProjectsAsync()
+            // {
+            //     var response = await _projectRepository.GetAllAsync
+            //     ( 
+            //         orderByDecending: true, 
+            //         sortBy: s => s.Created, 
+            //         where: null, 
+            //         include => include.User, 
+            //         include => include.Status, 
+            //         include => include.Client 
+            //     );
+            //
+            //     // return response.MapTo<ProjectServiceResult<IEnumerable<Project>>>();
+            //     // or
+            //     return new ProjectServiceResult<IEnumerable<Project>> { Succeeded = true, StatusCode = 200, Result = response.Result };
+            // }
 
             public async Task<ProjectServiceResult<Project>> GetProjectAsync(string id)
             {

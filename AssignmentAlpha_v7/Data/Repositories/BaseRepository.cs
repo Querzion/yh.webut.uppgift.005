@@ -41,77 +41,240 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
             }
         }
         
-        public virtual async Task<RepositoryResult<IEnumerable<TModel>>> GetAllAsync( bool orderByDecending = false, Expression<Func<TEntity, object>>? sortBy = null, Expression<Func<TEntity, bool>>? where = null, params Expression<Func<TEntity, object>>[] includes )
-        {
-            /* GetAllAsync(settings) SQL equalent ex.
-             *  SELECT
-             *  * (All) or something like this
-             *      Projects.Id,
-             *      Projects.ProjectName,
-             *      Statuses.StatusName
-             *  FORM table (Projects)
-             *  WHERE StatusId = 1
-             *  ORDER BY DESC
-             *  SORT BY Created/Started/Completed
-             *
-             *  JOIN Clients ON ...
-             *  JOIN Statuses ON ...
-             *  JOIN AspNetUsers ON ...
-             */
-            
-            IQueryable<TEntity> query = _table;
-            if (where != null)
-                query = query.Where(where);
-            
-            if (includes != null && includes.Length != 0)
-                foreach (var include in includes)
-                    query = query.Include(include);
-            
-            if (sortBy != null)
-                query = orderByDecending
-                    ? query.OrderByDescending(sortBy)
-                    : query.OrderBy(sortBy);
-            
-            var entities = await query.ToListAsync();
-            var result = entities.Select(entity => entity.MapTo<TModel>());
-            return new RepositoryResult<IEnumerable<TModel>> { Succeeded = true, StatusCode = 200, Result = result };
-        }
+        #region Optimized Get All
+
+            public virtual async Task<RepositoryResult<IEnumerable<TModel>>> GetAllAsync(
+                bool orderByDecending = false,
+                Expression<Func<TEntity, object>>? sortBy = null,
+                Expression<Func<TEntity, bool>>? where = null,
+                int skip = 0,        // Add skip parameter
+                int take = 0,        // Add take parameter
+                params Expression<Func<TEntity, object>>[] includes)
+            {
+                IQueryable<TEntity> query = _table;
+
+                // Apply filter if 'where' condition is provided
+                if (where != null)
+                    query = query.Where(where);
+
+                // Apply included navigation properties
+                if (includes != null && includes.Length != 0)
+                    foreach (var include in includes)
+                        query = query.Include(include);
+
+                // Apply sorting if 'sortBy' is provided
+                if (sortBy != null)
+                    query = orderByDecending
+                        ? query.OrderByDescending(sortBy)
+                        : query.OrderBy(sortBy);
+
+                // Apply pagination if 'skip' and 'take' are provided
+                if (skip > 0)
+                    query = query.Skip(skip);
+
+                if (take > 0)
+                    query = query.Take(take);
+
+                // Execute the query and map entities to models
+                var entities = await query.ToListAsync();
+                var result = entities.Select(entity => entity.MapTo<TModel>());
+
+                // Return the result with success status
+                return new RepositoryResult<IEnumerable<TModel>> { Succeeded = true, StatusCode = 200, Result = result };
+            }
+
+            public virtual async Task<RepositoryResult<IEnumerable<TSelect>>> GetAllAsync<TSelect>(
+                Expression<Func<TEntity, TSelect>> selector,
+                bool orderByDecending = false,
+                Expression<Func<TEntity, object>>? sortBy = null,
+                Expression<Func<TEntity, bool>>? where = null,
+                int skip = 0,        // Add skip parameter
+                int take = 0,        // Add take parameter
+                params Expression<Func<TEntity, object>>[] includes)
+            {
+                IQueryable<TEntity> query = _table;
+
+                // Apply filter if 'where' condition is provided
+                if (where != null)
+                    query = query.Where(where);
+
+                // Apply included navigation properties
+                if (includes != null && includes.Length != 0)
+                    foreach (var include in includes)
+                        query = query.Include(include);
+
+                // Apply sorting if 'sortBy' is provided
+                if (sortBy != null)
+                    query = orderByDecending
+                        ? query.OrderByDescending(sortBy)
+                        : query.OrderBy(sortBy);
+
+                // Apply pagination if 'skip' and 'take' are provided
+                if (skip > 0)
+                    query = query.Skip(skip);
+
+                if (take > 0)
+                    query = query.Take(take);
+
+                // Execute the query and select only the fields defined by 'selector'
+                var entities = await query.Select(selector).ToListAsync();
+                var result = entities.Select(entity => entity!.MapTo<TSelect>());
+
+                // Return the result with success status
+                return new RepositoryResult<IEnumerable<TSelect>> { Succeeded = true, StatusCode = 200, Result = result };
+            }
+
+        #endregion
         
-        public virtual async Task<RepositoryResult<IEnumerable<TSelect>>> GetAllAsync<TSelect>(Expression<Func<TEntity, TSelect>> selector, bool orderByDecending = false, Expression<Func<TEntity, object>>? sortBy = null, Expression<Func<TEntity, bool>>? where = null, params Expression<Func<TEntity, object>>[] includes )
-        {
-            /* GetAllAsync(settings) SQL equalent ex.
-             *  SELECT
-             *  * (All) or something like this
-             *      Projects.Id,
-             *      Projects.ProjectName,
-             *      Statuses.StatusName
-             *  FORM table (Projects)
-             *  WHERE StatusId = 1
-             *  ORDER BY DESC
-             *  SORT BY Created/Started/Completed
-             *
-             *  JOIN Clients ON ...
-             *  JOIN Statuses ON ...
-             *  JOIN AspNetUsers ON ...
-             */
-            
-            IQueryable<TEntity> query = _table;
-            if (where != null)
-                query = query.Where(where);
-            
-            if (includes != null && includes.Length != 0)
-                foreach (var include in includes)
-                    query = query.Include(include);
-            
-            if (sortBy != null)
-                query = orderByDecending
-                    ? query.OrderByDescending(sortBy)
-                    : query.OrderBy(sortBy);
-            
-            var entities = await query.Select(selector).ToListAsync();
-            var result = entities.Select(entity => entity!.MapTo<TSelect>());
-            return new RepositoryResult<IEnumerable<TSelect>> { Succeeded = true, StatusCode = 200, Result = result };
-        }
+        #region New Get All
+        
+            // public virtual async Task<RepositoryResult<IEnumerable<TModel>>> GetAllAsync(
+            //     bool orderByDecending = false, 
+            //     Expression<Func<TEntity, object>>? sortBy = null, 
+            //     Expression<Func<TEntity, bool>>? where = null, 
+            //     int skip = 0,        // Add skip parameter
+            //     int take = 0,        // Add take parameter
+            //     params Expression<Func<TEntity, object>>[] includes)
+            // {
+            //     IQueryable<TEntity> query = _table;
+            //
+            //     if (where != null)
+            //         query = query.Where(where);
+            //
+            //     if (includes != null && includes.Length != 0)
+            //         foreach (var include in includes)
+            //             query = query.Include(include);
+            //
+            //     if (sortBy != null)
+            //         query = orderByDecending
+            //             ? query.OrderByDescending(sortBy)
+            //             : query.OrderBy(sortBy);
+            //
+            //     // Apply pagination if skip and take are provided
+            //     if (skip > 0)
+            //         query = query.Skip(skip);
+            //
+            //     if (take > 0)
+            //         query = query.Take(take);
+            //
+            //     var entities = await query.ToListAsync();
+            //     var result = entities.Select(entity => entity.MapTo<TModel>());
+            //     return new RepositoryResult<IEnumerable<TModel>> { Succeeded = true, StatusCode = 200, Result = result };
+            // }
+            //
+            // public virtual async Task<RepositoryResult<IEnumerable<TSelect>>> GetAllAsync<TSelect>(
+            //     Expression<Func<TEntity, TSelect>> selector, 
+            //     bool orderByDecending = false, 
+            //     Expression<Func<TEntity, object>>? sortBy = null, 
+            //     Expression<Func<TEntity, bool>>? where = null, 
+            //     int skip = 0,        // Add skip parameter
+            //     int take = 0,        // Add take parameter
+            //     params Expression<Func<TEntity, object>>[] includes)
+            // {
+            //     IQueryable<TEntity> query = _table;
+            //
+            //     if (where != null)
+            //         query = query.Where(where);
+            //
+            //     if (includes != null && includes.Length != 0)
+            //         foreach (var include in includes)
+            //             query = query.Include(include);
+            //
+            //     if (sortBy != null)
+            //         query = orderByDecending
+            //             ? query.OrderByDescending(sortBy)
+            //             : query.OrderBy(sortBy);
+            //
+            //     // Apply pagination if skip and take are provided
+            //     if (skip > 0)
+            //         query = query.Skip(skip);
+            //
+            //     if (take > 0)
+            //         query = query.Take(take);
+            //
+            //     var entities = await query.Select(selector).ToListAsync();
+            //     var result = entities.Select(entity => entity!.MapTo<TSelect>());
+            //     return new RepositoryResult<IEnumerable<TSelect>> { Succeeded = true, StatusCode = 200, Result = result };
+            // }
+
+        
+        #endregion
+        
+        #region OG Get All
+        
+            // public virtual async Task<RepositoryResult<IEnumerable<TModel>>> GetAllAsync( bool orderByDecending = false, Expression<Func<TEntity, object>>? sortBy = null, Expression<Func<TEntity, bool>>? where = null, params Expression<Func<TEntity, object>>[] includes )
+            // {
+            //     /* GetAllAsync(settings) SQL equalent ex.
+            //      *  SELECT
+            //      *  * (All) or something like this
+            //      *      Projects.Id,
+            //      *      Projects.ProjectName,
+            //      *      Statuses.StatusName
+            //      *  FORM table (Projects)
+            //      *  WHERE StatusId = 1
+            //      *  ORDER BY DESC
+            //      *  SORT BY Created/Started/Completed
+            //      *
+            //      *  JOIN Clients ON ...
+            //      *  JOIN Statuses ON ...
+            //      *  JOIN AspNetUsers ON ...
+            //      */
+            //     
+            //     IQueryable<TEntity> query = _table;
+            //     if (where != null)
+            //         query = query.Where(where);
+            //     
+            //     if (includes != null && includes.Length != 0)
+            //         foreach (var include in includes)
+            //             query = query.Include(include);
+            //     
+            //     if (sortBy != null)
+            //         query = orderByDecending
+            //             ? query.OrderByDescending(sortBy)
+            //             : query.OrderBy(sortBy);
+            //     
+            //     var entities = await query.ToListAsync();
+            //     var result = entities.Select(entity => entity.MapTo<TModel>());
+            //     return new RepositoryResult<IEnumerable<TModel>> { Succeeded = true, StatusCode = 200, Result = result };
+            // }
+            //
+            // public virtual async Task<RepositoryResult<IEnumerable<TSelect>>> GetAllAsync<TSelect>(Expression<Func<TEntity, TSelect>> selector, bool orderByDecending = false, Expression<Func<TEntity, object>>? sortBy = null, Expression<Func<TEntity, bool>>? where = null, params Expression<Func<TEntity, object>>[] includes )
+            // {
+            //     /* GetAllAsync(settings) SQL equalent ex.
+            //      *  SELECT
+            //      *  * (All) or something like this
+            //      *      Projects.Id,
+            //      *      Projects.ProjectName,
+            //      *      Statuses.StatusName
+            //      *  FORM table (Projects)
+            //      *  WHERE StatusId = 1
+            //      *  ORDER BY DESC
+            //      *  SORT BY Created/Started/Completed
+            //      *
+            //      *  JOIN Clients ON ...
+            //      *  JOIN Statuses ON ...
+            //      *  JOIN AspNetUsers ON ...
+            //      */
+            //     
+            //     IQueryable<TEntity> query = _table;
+            //     if (where != null)
+            //         query = query.Where(where);
+            //     
+            //     if (includes != null && includes.Length != 0)
+            //         foreach (var include in includes)
+            //             query = query.Include(include);
+            //     
+            //     if (sortBy != null)
+            //         query = orderByDecending
+            //             ? query.OrderByDescending(sortBy)
+            //             : query.OrderBy(sortBy);
+            //     
+            //     var entities = await query.Select(selector).ToListAsync();
+            //     var result = entities.Select(entity => entity!.MapTo<TSelect>());
+            //     return new RepositoryResult<IEnumerable<TSelect>> { Succeeded = true, StatusCode = 200, Result = result };
+            // }
+        
+        #endregion
 
         
         public virtual async Task<RepositoryResult<TModel>> GetAsync(Expression<Func<TEntity, bool>>? where = null, params Expression<Func<TEntity, object>>[] includes)

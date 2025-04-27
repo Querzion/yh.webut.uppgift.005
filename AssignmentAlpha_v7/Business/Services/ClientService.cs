@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq.Expressions;
 using Business.Factories;
 using Business.Models;
 using Data.Entities;
@@ -16,6 +17,7 @@ public interface IClientService
     Task<ClientServiceResult> AddClientAsync(AddClientFormData form);
     Task<ClientServiceResult> GetClientsAsync();
     Task<ClientServiceResult> GetAllClientsAsync();
+    Task<ClientServiceResult> GetAllClientsAsync(int page = 1, int pageSize = 6);
     Task<ClientServiceResult> GetClientByIdAsync(string id);
     Task<ClientServiceResult> GetClientByNameAsync(string clientName);
     Task<ClientServiceResult> GetClientByEmailAsync(string email);
@@ -99,6 +101,26 @@ public class ClientService(IClientRepository clientRepository) : IClientService
                     Error = repoResult.Error,
                     Result = repoResult.Result
                 };
+            }
+            
+            public async Task<ClientServiceResult> GetAllClientsAsync(int page = 1, int pageSize = 6)
+            {
+                // Calculate the number of records to skip for paging
+                int skip = (page - 1) * pageSize;
+
+                var result = await _clientRepository.GetAllAsync(
+                    orderByDecending: true,
+                    sortBy: s => s.ClientName!,
+                    where: null,
+                    includes: new Expression<Func<ClientEntity, object>>[]
+                    {
+                        x => x.Address!
+                    },
+                    skip: skip,
+                    take: pageSize
+                );
+
+                return result.MapTo<ClientServiceResult>();
             }
             
             public async Task<ClientServiceResult> GetClientByIdAsync(string id)

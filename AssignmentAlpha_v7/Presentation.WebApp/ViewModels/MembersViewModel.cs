@@ -21,6 +21,12 @@ namespace Presentation.WebApp.ViewModels;
         public SignInViewModel Login { get; set; } = new();
        
         public SignUpViewModel RegistrationForm { get; set; } = new();
+        
+        // Pages
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
+        public int PageSize { get; set; }
+        public IEnumerable<int> PageSizeOptions { get; } = [2, 3, 4, 5, 6];
     }
 
 #endregion

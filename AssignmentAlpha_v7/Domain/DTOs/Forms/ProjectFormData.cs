@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Domain.DTOs.Adds;
+using Domain.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace Domain.DTOs.Forms;
@@ -52,4 +53,6 @@ public class ProjectFormData
     [Required(ErrorMessage = "Status is required")]
     [StringLength(36)]
     public int StatusId { get; set; }
+    
+    public List<ProjectMemberDto>? ProjectMembers { get; set; }
 }
