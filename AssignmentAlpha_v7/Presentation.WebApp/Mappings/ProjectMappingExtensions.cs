@@ -18,7 +18,7 @@ public static class ProjectMappingExtensions
             ImageUrl = project.Image?.ImageUrl,
             ClientName = project.Client.ClientName, // Assuming you want the client name
             Status = project.Status.StatusName, // Assuming the status has a Name property
-            UserName = project.User?.FirstName + " " + project.User?.LastName // Assuming full name
+            UserName = project.User?.FirstName + " " + project.User?.LastName, // Assuming full name
         };
     }
 

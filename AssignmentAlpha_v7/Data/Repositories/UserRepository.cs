@@ -8,5 +8,5 @@ namespace Data.Repositories;
 
 public class UserRepository(AppDbContext context) : BaseRepository<AppUser, User>(context), IUserRepository
 {
-    
+    public async Task<int> GetUserCountAsync() => await CountAsync();
 }

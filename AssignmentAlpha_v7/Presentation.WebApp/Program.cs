@@ -154,7 +154,7 @@ app.UseAuthorization();
         #region Create Administrator Account
 
             var userManagerAdmin = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            var adminUser = new AppUser { FirstName = "System", LastName = "Administrator", UserName = "admin@domain.com", Email = "admin@domain.com" };
+            var adminUser = new AppUser { FirstName = "System", LastName = "Administrator", UserName = "admin@domain.com", Email = "admin@domain.com", JobTitle = "System Administrator"};
 
             var adminExists = await userManagerAdmin.Users.AnyAsync(u => u.Email == adminUser.Email);
             if (!adminExists)
@@ -169,7 +169,7 @@ app.UseAuthorization();
         #region Create Manager Account
 
             var userManagerManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            var managerUser = new AppUser { FirstName = "System", LastName = "Manager", UserName = "manager@domain.com", Email = "manager@domain.com" };
+            var managerUser = new AppUser { FirstName = "Platform", LastName = "Manager", UserName = "manager@domain.com", Email = "manager@domain.com", JobTitle = "System Manager"};
 
             var managerExists = await userManagerManager.Users.AnyAsync(u => u.Email == managerUser.Email);
             if (!managerExists)
@@ -184,7 +184,7 @@ app.UseAuthorization();
         #region Create User Account
 
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-            var user = new AppUser { FirstName = "Test", LastName = "User", UserName = "user@domain.com", Email = "user@domain.com" };
+            var user = new AppUser { FirstName = "Platform", LastName = "Account", UserName = "user@domain.com", Email = "user@domain.com", JobTitle = "Platform Test User"};
 
             var userExists = await userManager.Users.AnyAsync(u => u.Email == user.Email);
             if (!userExists)

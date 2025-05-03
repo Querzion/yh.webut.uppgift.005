@@ -45,6 +45,8 @@ public interface IBaseRepository<TEntity, TModel> where TEntity : class
     //     int take = 0, // Add take parameter
     //     params Expression<Func<TEntity, object>>[] includes);
     
+    Task<int> CountAsync(Expression<Func<TEntity, bool>>? where = null);
+    
     Task<RepositoryResult<TModel>> GetAsync(Expression<Func<TEntity, bool>>? where = null, params Expression<Func<TEntity, object>>[] includes);
     Task<RepositoryResult<TEntity>> GetEntityAsync(Expression<Func<TEntity, bool>> where, params Expression<Func<TEntity, object>>[] includes);
     Task<RepositoryResult<bool>> UpdateAsync(TEntity entity);

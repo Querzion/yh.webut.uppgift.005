@@ -19,6 +19,8 @@ public interface IUserService
     Task<UserServiceResult> AddUserToRole(string userId, string roleName);
     Task<UserServiceResult> CreateUserAsync(SignUpFormData formData, string roleName = "User");
 
+    Task<int> GetUserCountAsync();
+
     Task<UserServiceResult> AddUserAsync(AddMemberFormData formData, string roleName = "User", string password = "!Scam2014");
     Task<UserServiceResult> GetUserByEmailAsync(string email);
     Task<UserServiceResult> GetUserByIdAsync(string id);
@@ -352,6 +354,11 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                 };
             }
 
+            public async Task<int> GetUserCountAsync()
+            {
+                return await _userRepository.CountAsync(); // or GetUserCountAsync if you added that shortcut
+            }
+            
             public async Task<UserServiceResult> GetUserByEmailAsync(string email)
             {
                 var result = await _userRepository.GetAsync(u => u.Email == email);

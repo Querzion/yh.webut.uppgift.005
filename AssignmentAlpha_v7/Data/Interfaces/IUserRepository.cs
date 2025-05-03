@@ -5,5 +5,5 @@ namespace Data.Interfaces;
 
 public interface IUserRepository : IBaseRepository<AppUser, User>
 {
-    
+    Task<int> GetUserCountAsync();
 }

@@ -48,7 +48,7 @@
             <div class="form-group">
                 <label asp-for="Description"></label>
                 <div class="wysiwyg">
-                    <textarea class="hide"></textarea>
+                    <textarea asp-for="Description" class="hide"></textarea>
                     <div id="project-wysiwyg-editor" class="wysiwyg-editor"></div>
                     <div id="project-wysiwyg-toolbar" class="wysiwyg-toolbar">
                         <span class="ql-formats">
@@ -115,48 +115,51 @@
         </form>
         
     </div>
+    
+    
 </div>
 
-@* <script> *@
-@*     document.addEventListener('DOMContentLoaded', function() { *@
-@*         initWysiwyg('#project-wysiwyg-editor', '#project-wysiwyg-toolbar', '#RichTextContent', '@Html.Raw(ViewBag.Description ?? "")') *@
-@*     }) *@
-@* *@
-@*     function initWysiwyg(wysiwygEditorId, wysiwygToolbarId, textareaId, content) { *@
-@*             const textarea = document.querySelector(textareaId) *@
-@* *@
-@*             const quill = new Quill(wysiwygEditorId, { *@
-@*             modules: { *@
-@*             syntax: true, *@
-@*             toolbar: wysiwygToolbarId *@
-@*         }, *@
-@*             placeholder: 'Type something', *@
-@*             theme: 'snow' *@
-@*         }) *@
-@* *@
-@*             if (content) *@
-@*             quill.root.innerHTML = content; *@
-@* *@
-@*             quill.on('text-change', () => { *@
-@*             textarea.value = quill.root.innerHTML; *@
-@*         }) *@
-@*     } *@
-@* *@
-@*     const preSelectedUsers = @Html.Raw(selectedUsersJson); *@
-@* *@
-@*         initTagSelector({ *@
-@*             containerId: 'tagged-users', *@
-@*             inputId: 'user-search', *@
-@*             resultsId: 'user-search-results', *@
-@*             searchUrl: (query) => '@Url.Action("SearchUsers", "Members")' + '?term=' + encodeURIComponent(query), *@
-@*             displayProperty: 'fullName', *@
-@*             tagClass: 'user-tag', *@
-@*             avatarFolder: '/images/uploads/users/', *@
-@*             emptyMessage: 'No users found.', *@
-@*             preSelectedTags: preSelectedUsers, *@
-@*             selectedInputIds: 'SelectedUserIds' *@
-@*         }); *@
-@* *@
-@* </script> *@
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initWysiwyg('#project-wysiwyg-editor', '#project-wysiwyg-toolbar', '#RichTextContent', '@Html.Raw(ViewBag.Description ?? "")')
+    })
 
-@* @await Html.PartialAsync("_ValidationScripts") *@
+    function initWysiwyg(wysiwygEditorId, wysiwygToolbarId, textareaId, content) {
+            const textarea = document.querySelector(textareaId)
+
+            const quill = new Quill(wysiwygEditorId, {
+            modules: {
+            syntax: true,
+            toolbar: wysiwygToolbarId
+        },
+            placeholder: 'Type something',
+            theme: 'snow'
+        })
+
+            if (content)
+            quill.root.innerHTML = content;
+
+            quill.on('text-change', () => {
+            textarea.value = quill.root.innerHTML;
+        })
+    }
+
+    @* // const preSelectedUsers = @Html.Raw(selectedUsersJson); *@
+    @* // *@
+    @* //     initTagSelector({ *@
+    @* //         containerId: 'tagged-users', *@
+    @* //         inputId: 'user-search', *@
+    @* //         resultsId: 'user-search-results', *@
+    @* //         searchUrl: (query) => '@Url.Action("SearchUsers", "Members")' + '?term=' + encodeURIComponent(query), *@
+    @* //         displayProperty: 'fullName', *@
+    @* //         tagClass: 'user-tag', *@
+    @* //         avatarFolder: '/images/uploads/users/', *@
+    @* //         emptyMessage: 'No users found.', *@
+    @* //         preSelectedTags: preSelectedUsers, *@
+    @* //         selectedInputIds: 'SelectedUserIds' *@
+    @* //     }); *@
+
+</script>
+
+@await Html.PartialAsync("_ValidationScripts")
+

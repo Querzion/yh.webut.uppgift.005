@@ -126,6 +126,14 @@ public abstract class BaseRepository<TEntity, TModel> : IBaseRepository<TEntity,
 
         #endregion
         
+        public virtual async Task<int> CountAsync(Expression<Func<TEntity, bool>>? where = null)
+        {
+            if (where != null)
+                return await _table.CountAsync(where);
+    
+            return await _table.CountAsync();
+        }
+        
         #region New Get All
         
             // public virtual async Task<RepositoryResult<IEnumerable<TModel>>> GetAllAsync(

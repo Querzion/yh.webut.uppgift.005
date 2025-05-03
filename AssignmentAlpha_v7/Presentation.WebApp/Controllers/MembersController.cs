@@ -19,6 +19,7 @@ using Presentation.WebApp.Mappings;
 using Presentation.WebApp.ViewModels;
 using Presentation.WebApp.ViewModels.Adds;
 using Presentation.WebApp.ViewModels.Edits;
+using Presentation.WebApp.ViewModels.ListItems;
 
 namespace Presentation.WebApp.Controllers;
 
@@ -34,23 +35,62 @@ public class MembersController(IUserService userService, IImageServiceHelper ima
     private readonly IFileHandler _fileHandler = fileHandler;
     
     
+    // [Route("admin/members")]
+    // public async Task<IActionResult> Index(int page = 1, int pageSize = 6)
+    // {
+    //     var userServiceResult = await _userService.GetAllUsersAsync(page, pageSize);
+    //     var totalUsers = await _userService.GetUserCountAsync();
+    //     var totalPages = (int)Math.Ceiling(totalUsers / (double)pageSize);
+    //
+    //     // Use the mapping extension to convert User entities to MemberListItemViewModels
+    //     var memberViewModels = userServiceResult.Result!
+    //         .ToViewModelList();
+    //
+    //     var viewModel = new MembersViewModel
+    //     {
+    //         Title = "Team Members",
+    //         AddMember = new AddMemberViewModel(),
+    //         EditMember = new EditMemberViewModel(),
+    //         Members = memberViewModels
+    //     };
+    //
+    //     return View(viewModel);
+    // }
+    
+    
     [Route("admin/members")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 6)
     {
-        var userServiceResult = await _userService.GetAllUsersAsync();
-    
-        // Use the mapping extension to convert User entities to MemberListItemViewModels
-        var memberViewModels = userServiceResult.Result!
-            .ToViewModelList();
-    
+        var userServiceResult = await _userService.GetAllUsersAsync(page, pageSize);
+        var totalUsers = await _userService.GetUserCountAsync();
+        var totalPages = (int)Math.Ceiling(totalUsers / (double)pageSize);
+
+        if (!userServiceResult.Succeeded || userServiceResult.Result == null)
+        {
+            // Optionally return an error view or empty state
+            return View(new MembersViewModel
+            {
+                Title = "Team Members",
+                AddMember = new AddMemberViewModel(),
+                EditMember = new EditMemberViewModel(),
+                Members = new List<MemberListItemViewModel>(),
+                CurrentPage = page,
+                TotalPages = totalPages
+            });
+        }
+
+        var memberViewModels = userServiceResult.Result.ToViewModelList();
+
         var viewModel = new MembersViewModel
         {
             Title = "Team Members",
             AddMember = new AddMemberViewModel(),
             EditMember = new EditMemberViewModel(),
-            Members = memberViewModels
+            Members = memberViewModels,
+            CurrentPage = page,
+            TotalPages = totalPages
         };
-    
+
         return View(viewModel);
     }
 
@@ -728,7 +768,7 @@ public class MembersController(IUserService userService, IImageServiceHelper ima
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteMember(string id)
+        public async Task<IActionResult> DeleteMember(string id, int pageSize = 6)
         {
             if (string.IsNullOrWhiteSpace(id))
                 return BadRequest("Member ID is required.");
@@ -740,7 +780,7 @@ public class MembersController(IUserService userService, IImageServiceHelper ima
                 return StatusCode(result.StatusCode, result.Error);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { pageSize });
         }
 
     #endregion
