@@ -9,6 +9,12 @@ public class OverviewController : Controller
     [Route("admin/overview")]
     public IActionResult Index()
     {
+        Response.Cookies.Append("SessionCookie", "Essential", new CookieOptions
+        {
+            IsEssential = true,
+            Expires = DateTimeOffset.UtcNow.AddYears(1)
+        });
+        
         return View();
     }
 }

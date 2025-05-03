@@ -10,12 +10,12 @@
 <body>
 
     <div class="wrapper-portal">
-        
+            
         <div class="sidebar">
             <div class="logotype">
                 <partial name="Partials/Components/_AlphaLogoType"/>
             </div>
-            
+                
             <partial name="Partials/Components/_NavLinks"/>
         </div>
 
@@ -29,7 +29,12 @@
         <main class="main">
             @RenderBody()
         </main>
+        
+        <div class="cookie-consent">
+            <partial name="Partials/_CookieConsentPartial"/>
+        </div>
     </div>
+
 
     <partial name="_LibsBottom"/>
     @await RenderSectionAsync("Scripts", required: false)

@@ -8,6 +8,13 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
+        // Example SessionCookie
+        // Response.Cookies.Append("SessionCookie", "Essential", new CookieOptions
+        // {
+        //     IsEssential = true,
+        //     Expires = DateTimeOffset.UtcNow.AddYears(1)
+        // });
+        
         return View();
     }
 }

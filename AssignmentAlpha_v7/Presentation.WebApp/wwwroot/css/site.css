@@ -305,10 +305,13 @@
 
     /* dark theme colors */
     --text-color: var(--white-100);
+    --card-text-color: var(--white-100);
     --headline-color: var(--white-100);
     --background-color: var(--dark-200);
     --auth-background-color: var(--dark-300);
+    --card-background-color: var(--dark-200);
     --border-color: var(--dark-600);
+    --card-border-color: var(--dark-600);
 
     /* dark buttons */
     --btn-blue-border-color: var(--heading-color);
@@ -882,6 +885,10 @@ h6, .h6 {
         border-color: var(--btn-gray-border-hover-color);
         background-color: var(--btn-gray-background-hover-color);
     }
+}
+
+.btn-dark {
+    
 }
 
 .btn-red {
@@ -2204,10 +2211,95 @@ input:checked + .slider:before {
     margin-bottom: 3rem;
 }
 
+.pagination-wrapper {
+    display: flex;
+    justify-content: space-between;
+    
+    .pagination {
+        
+        a {
+            color: var(--text-color);
+            background-color: var(--gray-100);
+        }
+    }
+}
+
+.memberlist-selection {
+    max-width: max-content;
+}
+
 .card-header {
     text-align: start;
     background-color: var(--white-100);
     margin-bottom: 1rem;
+}
+
+#cookieModal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #0000009d;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    
+    .card {
+        width: 55%;
+        display: grid;
+        grid-template-columns: 5fr 3fr;
+        border-radius: var(--border-radius-default);
+        overflow: hidden;
+        position: relative;
+    
+        .content {
+            padding: 3rem 5rem;
+        }
+        
+        h3 {
+            margin-bottom: 3rem;
+            font-weight: var(--font-weight-light)
+        }
+    }
+    
+    h4 {
+        margin-bottom: 2rem;
+    }
+}
+
+.settings {
+    background-color: #FFE4A3;
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-rows: auto 2fr auto;
+    
+    .buttons {
+        display: grid;
+        gap: 1rem;
+        margin-top: 4rem;
+    }
+    
+    .options {
+        
+        .option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            font-weight: var(--font-weight-regular);
+            font-size: 1.1rem;
+        }
+        
+        .switch-label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+    }
 }
 
 #addMemberModal {
@@ -2437,6 +2529,7 @@ input:checked + .slider:before {
             }
 
             .job-title {
+                color: var(--text-color);
                 background-color: var(--white-400);
                 border-radius: var(--border-radius-m);
                 display: inline-block;

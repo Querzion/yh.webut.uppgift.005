@@ -1,0 +1,69 @@
+<section id="cookieModal">
+    <div class="card">
+        <div class="content">
+            <h3>Cookie Consent - You have the power.</h3>
+            <p>This is an assignment application. I personally have no interest in your data. However, upon using Alternative logins I no longer have 'full' control over the data that is logged.</p>
+            <p>The cookies that are implemented is a baseline; for a better experience. Such as no login for a set period of time after the first login or up until a manual logout occur. Wherein you'll have to login manually again, in order to reach the content on the webapp/site again.</p>
+            <p>Code is in use, that controls dark mode/light mode based on the settings on your computers preferences. Apparently I have also implemented code that is used for statistics of usage, or one of the 'partners' might have done this.</p>
+            <p>By pressing "I Accept" you give consent for these features to run smoothly.</p>
+            <p>You have the right to restrict this at any time by retracting your consent fully or in partial, by clicking on the icon which is located in the lower left corner, and change the settings.</p>
+            <p>Click on the link in order to dive deeper into what the cookies and other technologies that is implemented, are used for, and how your personal data is harvested(collected) and processed(handled).</p>
+            <p><a href="#">Read more here.</a></p>
+        </div>
+        
+        <form id="cookieConsentForm" class="settings">
+            <h4>Cookies</h4>
+            <div class="options">
+                <div class="option">
+                    <label class="switch-label" for="cookieEssential">
+                        <i class="fa-solid fa-chevron-down"></i>
+                        Essential (always active)
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="cookieEssential" name="essential" checked disabled>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="option">
+                    <label class="switch-label" for="cookieFunctional">
+                        <i class="fa-solid fa-chevron-down"></i>
+                        Functional
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="cookieFunctional" name="functional">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="option">
+                    <label class="switch-label" for="cookieAnalytics">
+                        <i class="fa-solid fa-chevron-down"></i>
+                        Analysis & Statistics
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="cookieAnalytics" name="analytics">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="option">
+                    <label class="switch-label" for="cookieMarketing">
+                        <i class="fa-solid fa-chevron-down"></i>
+                        Marketing
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="cookieMarketing" name="marketing">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                
+                <div class="buttons">
+                    <button type="button" class="btn btn-gray" onclick="acceptAll()">ACCEPT ALL</button>
+                    <button type="button" class="btn btn-gray" onclick="acceptSelected()">SAVE CONSENTED SETTINGS</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<div class="cookieConsentIcon" onclick="showCookieModal()">
+    <i class="fa-solid fa-cookie-bite"></i>
+</div>

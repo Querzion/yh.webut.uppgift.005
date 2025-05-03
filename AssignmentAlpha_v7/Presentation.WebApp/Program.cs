@@ -16,6 +16,17 @@ using Presentation.WebApp.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+
+#region CookieConsent
+
+    builder.Services.Configure<CookiePolicyOptions>(options =>
+    {
+        options.CheckConsentNeeded = context => !context.Request.Cookies.ContainsKey("cookieConsent");
+        options.MinimumSameSitePolicy = SameSiteMode.Lax;
+    });
+
+#endregion
+
 builder.Services.AddSignalR();
 
 var connectionString = builder.Configuration.GetConnectionString("AzureBlobStorage");
@@ -122,6 +133,7 @@ app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseCookiePolicy();
 app.UseAuthentication();
 app.UseAuthorization();
 
